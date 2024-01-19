@@ -51,7 +51,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
             ),
           ),
           SizedBox(
-            height: context.screenHeight * 0.4,
+            height: context.screenHeight * 0.39,
             width: context.screenWidth,
             child: Gif(
               controller: _heartBeatGifController,
