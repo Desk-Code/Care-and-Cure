@@ -16,7 +16,7 @@ Widget loginDash({
         margin: EdgeInsets.symmetric(horizontal: context.screenWidth * 0.1),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: ConstarinColor.bgAppBarColor,
+          color: ConstrainColor.bgAppBarColor,
           border: Border.all(
             color: Colors.white,
             width: 4,

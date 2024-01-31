@@ -19,7 +19,7 @@ class _BoardingScreenPageState extends State<BoardingScreenPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ConstarinColor.bgAppBarColor,
+        backgroundColor: ConstrainColor.bgAppBarColor,
         title: Text(
           ConstrainData.appName,
           style: GoogleFonts.lato(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ConstarinColor {
+class ConstrainColor {
   //app bar background color
   static final Color bgAppBarColor = Colors.cyan.shade50;
 

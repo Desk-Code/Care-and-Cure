@@ -10,7 +10,7 @@ Widget loginInfo(BuildContext context) => AnimatedContainer(
         seconds: 10,
       ),
       decoration: const BoxDecoration(
-          color: ConstarinColor.bgColor,
+          color: ConstrainColor.bgColor,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),

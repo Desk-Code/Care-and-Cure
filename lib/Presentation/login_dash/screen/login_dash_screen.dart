@@ -1,3 +1,4 @@
+import 'package:care_and_cure/Presentation/PresentationPatient/PatientLoginScreen/patient_login_screen.dart';
 import 'package:care_and_cure/Presentation/login_dash/widgets/login_dashes.dart';
 import 'package:care_and_cure/Presentation/login_dash/widgets/login_info.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
@@ -16,9 +17,9 @@ class _LoginDashScreenState extends State<LoginDashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ConstarinColor.bgAppColor,
+      backgroundColor: ConstrainColor.bgAppColor,
       appBar: AppBar(
-        backgroundColor: ConstarinColor.bgAppBarColor,
+        backgroundColor: ConstrainColor.bgAppBarColor,
         title: Text(
           ConstrainData.appName,
           style: GoogleFonts.lato(
@@ -53,12 +54,12 @@ class _LoginDashScreenState extends State<LoginDashScreen> {
             context: context,
             nameOfLogin: ConstrainData.patientLogin,
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const PatientLoginScreen(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const PatientLoginScreen(),
+                ),
+              );
             },
           ),
           loginDash(
