@@ -1,3 +1,5 @@
+import 'package:care_and_cure/Presentation/PresentationDoctor/DoctorLoginScreen/doctor_login_screen.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/HospitalLoginSceen/hospital_login_screen.dart';
 import 'package:care_and_cure/Presentation/PresentationPatient/PatientLoginScreen/patient_login_screen.dart';
 import 'package:care_and_cure/Presentation/login_dash/widgets/login_dashes.dart';
 import 'package:care_and_cure/Presentation/login_dash/widgets/login_info.dart';
@@ -66,24 +68,24 @@ class _LoginDashScreenState extends State<LoginDashScreen> {
             context: context,
             nameOfLogin: ConstrainData.doctorLogin,
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const DoctorLoginScreen(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DoctorLoginScreen(),
+                ),
+              );
             },
           ),
           loginDash(
             context: context,
             nameOfLogin: ConstrainData.hospitalLogin,
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const HospitalLoginScreen(),
-              //   ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HospitalLoginScreen(),
+                ),
+              );
             },
           ),
         ],
