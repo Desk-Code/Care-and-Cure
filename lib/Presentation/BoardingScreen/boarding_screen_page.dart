@@ -1,7 +1,6 @@
 import 'package:care_and_cure/Presentation/BoardingScreen/controller/boarding_screen.controller.dart';
 import 'package:care_and_cure/Presentation/login_dash/screen/login_dash_screen.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
-import 'package:care_and_cure/Util/constrain_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,10 +17,11 @@ class _BoardingScreenPageState extends State<BoardingScreenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ConstrainColor.bgColor,
       appBar: AppBar(
         backgroundColor: ConstrainColor.bgAppBarColor,
         title: Text(
-          ConstrainData.appName,
+          'appName'.tr,
           style: GoogleFonts.lato(
             color: Colors.black,
             fontSize: 25,
@@ -54,7 +54,7 @@ class _BoardingScreenPageState extends State<BoardingScreenPage> {
                         duration: const Duration(milliseconds: 400),
                         curve: Curves.easeIn);
                   },
-                  child: const Text("Previous"),
+                  child:  Text('previous'.tr),
                 ),
                 SmoothPageIndicator(
                   controller: BoardingController.pageController,
@@ -67,7 +67,7 @@ class _BoardingScreenPageState extends State<BoardingScreenPage> {
                             const LoginDashScreen(),
                           );
                         },
-                        child: const Text("Start"),
+                        child:  Text('start'.tr),
                       )
                     : ElevatedButton(
                         onPressed: () {
@@ -76,7 +76,7 @@ class _BoardingScreenPageState extends State<BoardingScreenPage> {
                             curve: Curves.easeIn,
                           );
                         },
-                        child: const Text("Next"),
+                        child:  Text('next'.tr),
                       ),
               ],
             ),

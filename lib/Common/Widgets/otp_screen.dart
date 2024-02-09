@@ -1,7 +1,7 @@
-import 'package:care_and_cure/Common/common_values.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
-import 'package:care_and_cure/Util/constrain_data.dart';
+import 'package:care_and_cure/Util/common_values.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
@@ -25,7 +25,7 @@ Widget otpScreen(
             ),
           ),
           Text(
-            ConstrainData.otpVerification,
+            'otpVerification'.tr,
             style: GoogleFonts.lato(
               color: Colors.black,
               fontSize: 21,
@@ -33,7 +33,7 @@ Widget otpScreen(
             ),
           ),
           Text(
-            ConstrainData.otpSend,
+            'otpSend'.tr,
             textAlign: TextAlign.center,
             style: GoogleFonts.lato(
               color: Colors.black,
@@ -60,7 +60,7 @@ Widget otpScreen(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                ConstrainData.otpNotRecieve,
+                'otpNotRecieve'.tr,
                 style: GoogleFonts.lato(
                   color: Colors.black,
                   fontSize: 15,
@@ -69,10 +69,10 @@ Widget otpScreen(
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Get.back();
                 },
                 child: Text(
-                  ConstrainData.otpResend,
+                  'otpResend'.tr,
                   style: GoogleFonts.lato(
                     color: Colors.redAccent,
                     fontSize: 15,
@@ -96,7 +96,7 @@ Widget otpScreen(
                 ),
               ),
               onPressed: onTap,
-              child: const Text("Verify")),
+              child:  Text('verify'.tr)),
         ],
       ),
     );

@@ -4,8 +4,8 @@ import 'package:care_and_cure/Presentation/PresentationPatient/PatientLoginScree
 import 'package:care_and_cure/Presentation/login_dash/widgets/login_dashes.dart';
 import 'package:care_and_cure/Presentation/login_dash/widgets/login_info.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
-import 'package:care_and_cure/Util/constrain_data.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginDashScreen extends StatefulWidget {
@@ -23,7 +23,7 @@ class _LoginDashScreenState extends State<LoginDashScreen> {
       appBar: AppBar(
         backgroundColor: ConstrainColor.bgAppBarColor,
         title: Text(
-          ConstrainData.appName,
+          'appName'.tr,
           style: GoogleFonts.lato(
             color: Colors.black,
             fontSize: 25,
@@ -54,38 +54,23 @@ class _LoginDashScreenState extends State<LoginDashScreen> {
         children: [
           loginDash(
             context: context,
-            nameOfLogin: ConstrainData.patientLogin,
+            nameOfLogin: 'patientLogin'.tr,
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const PatientLoginScreen(),
-                ),
-              );
+              Get.to(const PatientLoginScreen());
             },
           ),
           loginDash(
             context: context,
-            nameOfLogin: ConstrainData.doctorLogin,
+            nameOfLogin: 'doctorLogin'.tr,
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const DoctorLoginScreen(),
-                ),
-              );
+              Get.to(const DoctorLoginScreen());
             },
           ),
           loginDash(
             context: context,
-            nameOfLogin: ConstrainData.hospitalLogin,
+            nameOfLogin: 'hospitalLogin'.tr,
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const HospitalLoginScreen(),
-                ),
-              );
+              Get.to(const HospitalLoginScreen());
             },
           ),
         ],

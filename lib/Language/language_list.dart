@@ -1,10 +1,11 @@
-import 'package:care_and_cure/Extention/media_query_extention.dart';
+import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
+import 'package:care_and_cure/Language/language_constants.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Widget loginInfo(BuildContext context) => AnimatedContainer(
+Widget languageList() => AnimatedContainer(
       margin: const EdgeInsets.all(10),
       duration: const Duration(
         seconds: 10,
@@ -35,7 +36,7 @@ Widget loginInfo(BuildContext context) => AnimatedContainer(
                 width: 27,
               ),
               Text(
-                'sideName'.tr,
+                'select'.tr,
                 style: GoogleFonts.lato(
                   color: Colors.black,
                   fontSize: 20,
@@ -44,26 +45,27 @@ Widget loginInfo(BuildContext context) => AnimatedContainer(
               ),
             ],
           ),
-          Center(
-            child: Container(
-              height: context.screenHeight * 2 / 10,
-              width: context.screenWidth * 4 / 10,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/logo.png"),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
           const SizedBox(
             height: 15,
           ),
-          Text(
-            'loginInfo'.tr,
-            style: GoogleFonts.lato(
-              fontSize: 17,
-              fontWeight: FontWeight.w500,
+          ...List.generate(
+            LanguageConstants.languages.length,
+            (index) => ListTile(
+              leading: Text(LanguageConstants.languages[index].imageUrl),
+              title: Text(LanguageConstants.languages[index].languageName),
+              onTap: () {
+                SharedPref.setLanguageCode =
+                    LanguageConstants.languages[index].languageCode;
+                SharedPref.setCountryCode =
+                    LanguageConstants.languages[index].countryCode;
+                SharedPref.setSelectedIndex = index;
+                Get.updateLocale(Locale(
+                    SharedPref.getLanguageCode, SharedPref.getLanguageCode));
+                Get.back();
+              },
+              textColor: SharedPref.getSelectedIndex == index
+                  ? Colors.blue
+                  : Colors.black,
             ),
           ),
         ],

@@ -1,7 +1,8 @@
 import 'package:care_and_cure/Extention/media_query_extention.dart';
-import 'package:care_and_cure/Util/constrain_data.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 class BoardingSecondPage extends StatefulWidget {
   const BoardingSecondPage({super.key});
 
@@ -29,7 +30,7 @@ class _BoardingSecondPageState extends State<BoardingSecondPage> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            ConstrainData.rule2,
+            'rule2'.tr,
             style: GoogleFonts.lato(
               color: Colors.black,
               fontSize: 18,

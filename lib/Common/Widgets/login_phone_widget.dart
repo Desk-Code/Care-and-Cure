@@ -1,7 +1,8 @@
-import 'package:care_and_cure/Common/common_values.dart';
+import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
@@ -54,7 +55,7 @@ Widget loginPhoneWidget({
                   ),
                   alignment: Alignment.center,
                   child: Text(
-                    "GET OTP",
+                    'getOtp'.tr,
                     style: GoogleFonts.lato(
                       color: Colors.black,
                       fontSize: 20,

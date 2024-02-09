@@ -1,11 +1,11 @@
 import 'package:care_and_cure/Common/Widgets/login_phone_widget.dart';
-import 'package:care_and_cure/Common/common_values.dart';
 import 'package:care_and_cure/Data/FirebaseData/firebase_auth_api.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:care_and_cure/Presentation/PresentationDoctor/DoctorLoginScreen/doctor_otp_screen.dart';
+import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
-import 'package:care_and_cure/Util/constrain_data.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DoctorLoginScreen extends StatefulWidget {
@@ -24,12 +24,12 @@ class _DoctorLoginScreenState extends State<DoctorLoginScreen> {
         backgroundColor: ConstrainColor.bgAppBarColor,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
           icon: const Icon(Icons.arrow_back_rounded),
         ),
         title: Text(
-          ConstrainData.appName,
+          'appName'.tr,
           style: GoogleFonts.lato(
             color: Colors.black,
             fontSize: 25,
@@ -52,7 +52,7 @@ class _DoctorLoginScreenState extends State<DoctorLoginScreen> {
               ),
             ),
             Text(
-              ConstrainData.otpVerification,
+              'otpVerification'.tr,
               style: GoogleFonts.lato(
                 color: Colors.black,
                 fontSize: 21,
@@ -60,7 +60,7 @@ class _DoctorLoginScreenState extends State<DoctorLoginScreen> {
               ),
             ),
             Text(
-              ConstrainData.otpVeriInfo,
+              'otpVeriInfo'.tr,
               textAlign: TextAlign.center,
               style: GoogleFonts.lato(
                 color: Colors.black,
@@ -72,7 +72,6 @@ class _DoctorLoginScreenState extends State<DoctorLoginScreen> {
               context: context,
               onTap: () async {
                 await FirebaseApiAuth.sendOtp(
-                  context,
                   phNumber: CommonValues.phNumberValue,
                   toNavigate: (context) => const DoctorOtpScreen(),
                 );

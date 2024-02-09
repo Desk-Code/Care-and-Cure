@@ -1,5 +1,5 @@
-import 'package:care_and_cure/Util/constrain_data.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gif/gif.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -35,7 +35,7 @@ class _BoardingFirstPageState extends State<BoardingFirstPage>
           autostart: Autostart.loop,
         ),
         Text(
-          ConstrainData.rule1_1,
+          'rule1_1'.tr,
           style: GoogleFonts.lato(
             color: Colors.black,
             fontSize: 25,
@@ -43,7 +43,7 @@ class _BoardingFirstPageState extends State<BoardingFirstPage>
           ),
         ),
         Text(
-          ConstrainData.rule1_2,
+          'rule1_2'.tr,
           textAlign: TextAlign.center,
           style: GoogleFonts.lato(
             color: Colors.black,

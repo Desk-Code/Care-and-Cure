@@ -1,11 +1,11 @@
-import 'package:care_and_cure/Common/common_values.dart';
 import 'package:care_and_cure/Data/FirebaseData/firebase_auth_api.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/HospitalLoginSceen/hospital_otp_screen.dart';
 import 'package:care_and_cure/Presentation/SplashScreen/Screen/splash_screen_page.dart';
+import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
-import 'package:care_and_cure/Util/constrain_data.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
@@ -30,12 +30,12 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
         backgroundColor: ConstrainColor.bgAppBarColor,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
           icon: const Icon(Icons.arrow_back_rounded),
         ),
         title: Text(
-          ConstrainData.appName,
+          'appName'.tr,
           style: GoogleFonts.lato(
             color: Colors.black,
             fontSize: 25,
@@ -103,7 +103,6 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
                           // if (phNumberIsRegistrated) {
                           //   // ignore: use_build_context_synchronously
                           await FirebaseApiAuth.sendOtp(
-                            context,
                             phNumber: CommonValues.phNumberValue,
                             toNavigate: (context) => const HospitalOtpScreen(),
                           );
@@ -129,7 +128,7 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
                           ),
                           alignment: Alignment.center,
                           child: Text(
-                            "GET OTP",
+                            'getOtp'.tr,
                             style: GoogleFonts.lato(
                               color: Colors.black,
                               fontSize: 20,
@@ -148,7 +147,7 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  ConstrainData.notHaveAccount,
+                  'notHaveAccount'.tr,
                   style: GoogleFonts.lato(
                     color: Colors.black,
                     fontSize: 14,
@@ -157,14 +156,10 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SplashScreenPage(),
-                        ));
+                    Get.to(const SplashScreenPage());
                   },
                   child: Text(
-                    ConstrainData.register,
+                    'register'.tr,
                     style: GoogleFonts.lato(
                       color: Colors.black,
                       fontSize: 15,

@@ -1,14 +1,14 @@
 import 'package:care_and_cure/Common/Widgets/common_toast.dart';
-import 'package:care_and_cure/Common/common_values.dart';
+import 'package:care_and_cure/Util/common_values.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FirebaseApiAuth {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
   static String firebaseVerificationId = '';
 
-  static Future<void> sendOtp(
-    BuildContext context, {
+  static Future<void> sendOtp({
     required String phNumber,
     required Widget Function(BuildContext) toNavigate,
   }) async {
@@ -22,11 +22,8 @@ class FirebaseApiAuth {
         FlutterToast().showMessage(error.toString());
       },
       codeSent: (verificationId, forceResendingToken) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: toNavigate,
-          ),
+        Get.to(
+          toNavigate,
         );
         firebaseVerificationId = verificationId;
       },
@@ -34,8 +31,7 @@ class FirebaseApiAuth {
     );
   }
 
-  static void otpVerification(
-    BuildContext context, {
+  static void otpVerification({
     required Widget Function(BuildContext) toNaviagte,
   }) {
     AuthCredential credential = PhoneAuthProvider.credential(
@@ -43,11 +39,7 @@ class FirebaseApiAuth {
       smsCode: CommonValues.otpPinValue,
     );
     _auth.signInWithCredential(credential).then(
-          (value) => Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: toNaviagte),
-            (route) => false,
-          ),
+          (value) => Get.offAll(toNaviagte),
         );
   }
 }
