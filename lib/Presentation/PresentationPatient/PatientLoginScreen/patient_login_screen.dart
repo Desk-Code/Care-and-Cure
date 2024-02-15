@@ -73,7 +73,7 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
               onTap: () async {
                 await FirebaseApiAuth.sendOtp(
                   phNumber: CommonValues.phNumberValue,
-                  toNavigate: (context) => const PatientOtpScreen(),
+                  toNavigate: () => const PatientOtpScreen(),
                 );
               },
             ),

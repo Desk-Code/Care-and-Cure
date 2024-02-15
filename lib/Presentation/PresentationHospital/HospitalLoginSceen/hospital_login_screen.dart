@@ -1,7 +1,7 @@
 import 'package:care_and_cure/Data/FirebaseData/firebase_auth_api.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/HospitalLoginSceen/hospital_otp_screen.dart';
-import 'package:care_and_cure/Presentation/SplashScreen/Screen/splash_screen_page.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/HospitalSignUpScreen/hospital_signup_screen.dart';
 import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +104,7 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
                           //   // ignore: use_build_context_synchronously
                           await FirebaseApiAuth.sendOtp(
                             phNumber: CommonValues.phNumberValue,
-                            toNavigate: (context) => const HospitalOtpScreen(),
+                            toNavigate: () => const HospitalOtpScreen(),
                           );
                           // } else {
                           //   FlutterToast()
@@ -156,7 +156,7 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.to(const SplashScreenPage());
+                    Get.to(() => const HospitalSignUpScreen());
                   },
                   child: Text(
                     'register'.tr,

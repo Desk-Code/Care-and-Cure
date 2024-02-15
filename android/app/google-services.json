@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "1020707923981",
-    "project_id": "care-and-cure-9a4cd",
-    "storage_bucket": "care-and-cure-9a4cd.appspot.com"
+    "project_number": "311373636342",
+    "project_id": "hospital-data-management-ee1dc",
+    "storage_bucket": "hospital-data-management-ee1dc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1020707923981:android:79fcfeb5b106f6f2624d44",
+        "mobilesdk_app_id": "1:311373636342:android:75c1f9e80bba55b4db02d7",
         "android_client_info": {
           "package_name": "com.example.care_and_cure"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCPVXM1evKDp9u4qeJBEOjDeO-mBXBYO30"
+          "current_key": "AIzaSyDBTdfV92_ggCKjit2qtxo2GqrHRB8CU8c"
         }
       ],
       "services": {

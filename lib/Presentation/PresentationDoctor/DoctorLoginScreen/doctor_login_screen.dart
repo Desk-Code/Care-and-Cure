@@ -73,7 +73,7 @@ class _DoctorLoginScreenState extends State<DoctorLoginScreen> {
               onTap: () async {
                 await FirebaseApiAuth.sendOtp(
                   phNumber: CommonValues.phNumberValue,
-                  toNavigate: (context) => const DoctorOtpScreen(),
+                  toNavigate: () => const DoctorOtpScreen(),
                 );
               },
             ),

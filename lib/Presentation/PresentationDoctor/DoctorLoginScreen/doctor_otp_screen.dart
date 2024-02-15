@@ -40,7 +40,7 @@ class _DoctorOtpScreenState extends State<DoctorOtpScreen> {
           context,
           onTap: () {
             FirebaseApiAuth.otpVerification(
-              toNaviagte: (context) => const SplashScreenPage(),
+              toNaviagte: () => const SplashScreenPage(),
             );
           },
         ));

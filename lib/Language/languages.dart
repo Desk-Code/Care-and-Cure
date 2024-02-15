@@ -32,7 +32,20 @@ class Languages extends Translations {
           'start': 'Start',
           'next': 'Next',
           'previous': 'Previous',
-          'verify': 'Verify'
+          'verify': 'Verify',
+          'signupTitle': 'Let\'s create your account....',
+          'hospitalName': 'Hospital Name',
+          'hospitalMNumber': 'Hospital Mobile Number',
+          'hospitalEmail': 'Hospital Email',
+          'hospitalAddress': 'Hospital Address',
+          'hospitalUpiId': 'Hospital Upi Id',
+          'password': 'Password',
+          'signupButton': 'SignUp Now',
+          'hospital': 'Hospital',
+          'certificate': 'Certificate',
+          'addImage': 'Add Image',
+          'addImageInfo':
+              'Please Attached Your Document Image for verifying Hospital',
         },
         'hi_IN': {
           'appName': 'देखभाल और इलाज',
@@ -63,7 +76,20 @@ class Languages extends Translations {
           'start': 'शुरू',
           'next': 'अगला',
           'previous': 'पहले का',
-          'verify': 'सत्यापित करें'
+          'verify': 'सत्यापित करें',
+          'signupTitle': 'चलिए आपका अकाउंट बनाते हैं....',
+          'hospitalName': 'अस्पताल का नाम',
+          'hospitalMNumber': 'अस्पताल का मोबाइल नंबर',
+          'hospitalEmail': 'अस्पताल ईमेल',
+          'hospitalAddress': 'अस्पताल का पता',
+          'hospitalUpiId': 'हॉस्पिटल यूपीआई आईडी',
+          'password': 'पासवर्ड',
+          'signupButton': 'अभी साइनअप करें',
+          'hospital': 'अस्पताल',
+          'certificate': 'प्रमाणपत्र',
+          'addImage': 'छवि जोड़ें',
+          'addImageInfo':
+              'कृपया अस्पताल के सत्यापन के लिए अपने दस्तावेज़ की छवि संलग्न करें',
         },
         'gu_IN': {
           'appName': 'સંભાળ અને ઉપચાર',
@@ -94,7 +120,20 @@ class Languages extends Translations {
           'start': 'શરૂઆત',
           'next': 'આગળ',
           'previous': 'અગાઉના',
-          'verify': 'ચકાસો'
+          'verify': 'ચકાસો',
+          'signupTitle': 'ચાલો તમારું એકાઉન્ટ બનાવીએ....',
+          'hospitalName': 'હોસ્પિટલનું નામ',
+          'hospitalMNumber': 'હોસ્પિટલ મોબાઈલ નંબર',
+          'hospitalEmail': 'હોસ્પિટલ ઈમેલ',
+          'hospitalAddress': 'હોસ્પિટલનું સરનામું',
+          'hospitalUpiId': 'હોસ્પિટલ યુપીઆઈ આઈડી',
+          'password': 'પાસવર્ડ',
+          'signupButton': 'અત્યારે જોડવ',
+          'hospital': 'હોસ્પિટલ',
+          'certificate': 'પ્રમાણપત્ર',
+          'addImage': 'છબી ઉમેરો',
+          'addImageInfo':
+              'હોસ્પિટલની ચકાસણી માટે કૃપા કરીને તમારી દસ્તાવેજની છબી જોડો',
         },
       };
 }

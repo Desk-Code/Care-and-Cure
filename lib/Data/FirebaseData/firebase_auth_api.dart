@@ -10,7 +10,7 @@ class FirebaseApiAuth {
 
   static Future<void> sendOtp({
     required String phNumber,
-    required Widget Function(BuildContext) toNavigate,
+    required Widget Function() toNavigate,
   }) async {
     await _auth.verifyPhoneNumber(
       timeout: const Duration(seconds: 30),
@@ -32,7 +32,7 @@ class FirebaseApiAuth {
   }
 
   static void otpVerification({
-    required Widget Function(BuildContext) toNaviagte,
+    required Widget Function() toNaviagte,
   }) {
     AuthCredential credential = PhoneAuthProvider.credential(
       verificationId: firebaseVerificationId,

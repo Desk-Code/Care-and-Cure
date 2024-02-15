@@ -56,21 +56,21 @@ class _LoginDashScreenState extends State<LoginDashScreen> {
             context: context,
             nameOfLogin: 'patientLogin'.tr,
             onTap: () {
-              Get.to(const PatientLoginScreen());
+              Get.to(() => const PatientLoginScreen());
             },
           ),
           loginDash(
             context: context,
             nameOfLogin: 'doctorLogin'.tr,
             onTap: () {
-              Get.to(const DoctorLoginScreen());
+              Get.to(() => const DoctorLoginScreen());
             },
           ),
           loginDash(
             context: context,
             nameOfLogin: 'hospitalLogin'.tr,
             onTap: () {
-              Get.to(const HospitalLoginScreen());
+              Get.to(() => const HospitalLoginScreen());
             },
           ),
         ],

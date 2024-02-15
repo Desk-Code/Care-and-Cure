@@ -54,7 +54,7 @@ class _BoardingScreenPageState extends State<BoardingScreenPage> {
                         duration: const Duration(milliseconds: 400),
                         curve: Curves.easeIn);
                   },
-                  child:  Text('previous'.tr),
+                  child: Text('previous'.tr),
                 ),
                 SmoothPageIndicator(
                   controller: BoardingController.pageController,
@@ -64,10 +64,10 @@ class _BoardingScreenPageState extends State<BoardingScreenPage> {
                     ? ElevatedButton(
                         onPressed: () {
                           Get.off(
-                            const LoginDashScreen(),
+                            () => const LoginDashScreen(),
                           );
                         },
-                        child:  Text('start'.tr),
+                        child: Text('start'.tr),
                       )
                     : ElevatedButton(
                         onPressed: () {
@@ -76,7 +76,7 @@ class _BoardingScreenPageState extends State<BoardingScreenPage> {
                             curve: Curves.easeIn,
                           );
                         },
-                        child:  Text('next'.tr),
+                        child: Text('next'.tr),
                       ),
               ],
             ),

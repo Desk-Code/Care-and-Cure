@@ -40,7 +40,7 @@ class _PatientOtpScreenState extends State<PatientOtpScreen> {
           context,
           onTap: () {
             FirebaseApiAuth.otpVerification(
-              toNaviagte: (context) => const SplashScreenPage(),
+              toNaviagte: () => const SplashScreenPage(),
             );
           },
         ));

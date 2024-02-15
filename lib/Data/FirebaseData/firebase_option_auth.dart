@@ -13,7 +13,7 @@ class DefaultFirebaseOptions {
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
-      case TargetPlatform.iOS: 
+      case TargetPlatform.iOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for ios - '
           'you can reconfigure this by running the FlutterFire CLI again.',
@@ -41,10 +41,10 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCPVXM1evKDp9u4qeJBEOjDeO-mBXBYO30',
-    appId: '1:1020707923981:android:79fcfeb5b106f6f2624d44',
-    messagingSenderId: '1020707923981',
-    projectId: 'care-and-cure-9a4cd',
-    storageBucket: 'care-and-cure-9a4cd.appspot.com',
+    apiKey: 'AIzaSyDBTdfV92_ggCKjit2qtxo2GqrHRB8CU8c',
+    appId: '1:311373636342:android:75c1f9e80bba55b4db02d7',
+    messagingSenderId: '311373636342',
+    projectId: 'hospital-data-management-ee1dc',
+    storageBucket: 'hospital-data-management-ee1dc.appspot.com',
   );
 }
