@@ -1,17 +1,14 @@
-import 'dart:developer';
-import 'dart:io';
-
+import 'package:care_and_cure/Common/Widgets/common_file_picker.dart';
 import 'package:care_and_cure/Common/Widgets/common_toast.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/HospitalSignUpScreen/controller/hospital_signup_controller.dart';
+import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:info_popup/info_popup.dart';
 
 class HospitalSignUpScreen extends StatefulWidget {
@@ -191,124 +188,64 @@ class _HospitalSignUpScreenState extends State<HospitalSignUpScreen> {
                   children: [
                     SizedBox(
                       width: context.screenWidth * 0.85 / 2,
-                      child: ElevatedButton(
-                        onPressed: (instance.isHImage.value)
-                            ? null
-                            : () async {
-                                // add the package image_picker
-                                final file = await ImagePicker()
-                                    .pickImage(source: ImageSource.gallery);
-                                if (file == null) return;
-                                String fileName = DateTime.now()
-                                    .microsecondsSinceEpoch
-                                    .toString();
-
-                                // Get the reference to storage root
-                                // We create the image folder first and insider folder we upload the image
-                                Reference referenceRoot =
-                                    FirebaseStorage.instance.ref();
-                                Reference referenceDireImages =
-                                    referenceRoot.child('hospitalImages');
-
-                                // we have creata reference for the image to be stored
-                                Reference referenceImageaToUpload =
-                                    referenceDireImages.child(fileName);
-
-                                // For errors handled and/or success
-                                try {
-                                  await referenceImageaToUpload
-                                      .putFile(File(file.path))
-                                      .then((p0) {
-                                    instance.isHImage.value = true;
-                                  });
-
-                                  // We have successfully upload the image now
-                                  // make this upload image link in firebase database
-
-                                  instance.hospitalImage =
-                                      await referenceImageaToUpload
-                                          .getDownloadURL();
-                                  log("Image Url = ${instance.hospitalImage}");
-                                } catch (error) {
-                                  //some error
-                                }
-                              },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(
-                              Iconsax.add_square5,
-                              color: Colors.black45,
-                            ),
-                            const SizedBox(
-                              width: 7,
-                            ),
-                            Text(
-                              'hospital'.tr,
-                              style: const TextStyle(color: Colors.black87),
-                            ),
-                          ],
-                        ),
-                      ),
+                      child: Obx(() {
+                        return ElevatedButton(
+                          onPressed:
+                              (CommonValues.pickHospitalImageLink.isEmpty)
+                                  ? () {
+                                      Get.to(() => const CommonFilePicker(),
+                                          arguments: 1);
+                                    }
+                                  : null,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Iconsax.add_square5,
+                                color: Colors.black45,
+                              ),
+                              const SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                'hospital'.tr,
+                                style: const TextStyle(color: Colors.black87),
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
                     ),
                     const Spacer(),
                     SizedBox(
                       width: context.screenWidth * 0.85 / 2,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          // add the package image_picker
-                          final file = await ImagePicker()
-                              .pickImage(source: ImageSource.gallery);
-                          if (file == null) return;
-                          String fileName =
-                              DateTime.now().microsecondsSinceEpoch.toString();
-
-                          // Get the reference to storage root
-                          // We create the image folder first and insider folder we upload the image
-                          Reference referenceRoot =
-                              FirebaseStorage.instance.ref();
-                          Reference referenceDireImages =
-                              referenceRoot.child('hospitalImages');
-
-                          // we have creata reference for the image to be stored
-                          Reference referenceImageaToUpload =
-                              referenceDireImages.child(fileName);
-
-                          // For errors handled and/or success
-                          try {
-                            await referenceImageaToUpload
-                                .putFile(File(file.path))
-                                .then((p0) {
-                              instance.isHCertificate.value = true;
-                            });
-
-                            // We have successfully upload the image now
-                            // make this upload image link in firebase database
-
-                            instance.hospitalCertificate =
-                                await referenceImageaToUpload.getDownloadURL();
-                            log("Image Certificate Url = ${instance.hospitalCertificate}");
-                          } catch (error) {
-                            //some error
-                          }
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Icon(
-                              Iconsax.add_square5,
-                              color: Colors.black45,
-                            ),
-                            const SizedBox(
-                              width: 7,
-                            ),
-                            Text(
-                              'certificate'.tr,
-                              style: const TextStyle(
-                                color: Colors.black87,
+                      child: Obx(
+                        () => ElevatedButton(
+                          onPressed:
+                              (CommonValues.pickHospitalCertiLink.isEmpty)
+                                  ? () {
+                                      Get.to(() => const CommonFilePicker(),
+                                          arguments: 2);
+                                    }
+                                  : null,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Iconsax.add_square5,
+                                color: Colors.black45,
                               ),
-                            ),
-                          ],
+                              const SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                'certificate'.tr,
+                                style: const TextStyle(
+                                  color: Colors.black87,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -322,8 +259,8 @@ class _HospitalSignUpScreenState extends State<HospitalSignUpScreen> {
                   child: ElevatedButton(
                       onPressed: () {
                         if (instance.key.currentState!.validate()) {
-                          if (instance.hospitalImage.isEmpty ||
-                              instance.hospitalCertificate.isEmpty) {
+                          if (CommonValues.pickHospitalImageLink.isEmpty ||
+                              CommonValues.pickHospitalCertiLink.isEmpty) {
                             FlutterToast()
                                 .showMessage("Please Upload Image First...");
                             return;
