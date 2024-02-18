@@ -1,6 +1,8 @@
+import 'dart:developer';
+
+import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:care_and_cure/Presentation/SplashScreen/Controller/splash_controller.dart';
-import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
 import 'package:gif/gif.dart';
 
@@ -23,6 +25,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
   @override
   void initState() {
     SpalshScreenController.navigateToBoarding();
+    log(SharedPref.getHospitalUser);
     super.initState();
   }
 
@@ -36,7 +39,6 @@ class _SplashScreenPageState extends State<SplashScreenPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ConstrainColor.bgColor,
       body: SafeArea(
           child: Column(
         children: [

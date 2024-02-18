@@ -1,5 +1,5 @@
 import 'package:care_and_cure/Presentation/PresentationDoctor/DoctorLoginScreen/doctor_login_screen.dart';
-import 'package:care_and_cure/Presentation/PresentationHospital/HospitalLoginSceen/hospital_login_screen.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/Services/hospital_services.dart';
 import 'package:care_and_cure/Presentation/PresentationPatient/PatientLoginScreen/patient_login_screen.dart';
 import 'package:care_and_cure/Presentation/login_dash/widgets/login_dashes.dart';
 import 'package:care_and_cure/Presentation/login_dash/widgets/login_info.dart';
@@ -70,7 +70,8 @@ class _LoginDashScreenState extends State<LoginDashScreen> {
             context: context,
             nameOfLogin: 'hospitalLogin'.tr,
             onTap: () {
-              Get.to(() => const HospitalLoginScreen());
+              SplashServiciesForHospital.isLogin();
+              // Get.to(() => const HospitalLoginScreen());
             },
           ),
         ],

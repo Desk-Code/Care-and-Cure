@@ -3,6 +3,7 @@ import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Language/language_constants.dart';
 import 'package:care_and_cure/Language/languages.dart';
 import 'package:care_and_cure/Presentation/SplashScreen/Screen/splash_screen_page.dart';
+import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -30,7 +31,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+          background: ConstrainColor.bgColor,
+        ),
         useMaterial3: true,
       ),
 

@@ -1,6 +1,6 @@
 import 'package:care_and_cure/Common/Widgets/otp_screen.dart';
 import 'package:care_and_cure/Data/FirebaseData/firebase_auth_api.dart';
-import 'package:care_and_cure/Presentation/SplashScreen/Screen/splash_screen_page.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/DashboardScreen/Screen/hospital_dashboard_screen.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,7 +40,7 @@ class _HospitalOtpScreenState extends State<HospitalOtpScreen> {
         context,
         onTap: () {
           FirebaseApiAuth.otpVerification(
-            toNaviagte: () => const SplashScreenPage(),
+            toNaviagte: () => const HospitalDashBoard(),
           );
         },
       ),

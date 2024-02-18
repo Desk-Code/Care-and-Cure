@@ -1,4 +1,6 @@
+import 'package:care_and_cure/Common/Widgets/common_toast.dart';
 import 'package:care_and_cure/Data/FirebaseData/firebase_auth_api.dart';
+import 'package:care_and_cure/Data/FirebaseData/hospital_firebase_api.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/HospitalLoginSceen/hospital_otp_screen.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/HospitalSignUpScreen/hospital_signup_screen.dart';
@@ -97,25 +99,25 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
                       ),
                       GestureDetector(
                         onTap: () async {
-                          // bool phNumberIsRegistrated =
-                          //     await FirebaseApi.selectData(
-                          //         CommonValue.inputedNumber);
-                          // if (phNumberIsRegistrated) {
-                          //   // ignore: use_build_context_synchronously
-                          await FirebaseApiAuth.sendOtp(
-                            phNumber: CommonValues.phNumberValue,
-                            toNavigate: () => const HospitalOtpScreen(),
-                          );
+                          List isRegister =
+                              await HospitalFirebaseApi.getUserData(
+                                  CommonValues.inputedNumber);
+                          if (isRegister.isNotEmpty) {
+                            await FirebaseApiAuth.sendOtp(
+                              phNumber: CommonValues.phNumberValue,
+                              toNavigate: () => const HospitalOtpScreen(),
+                            );
+                          } else {
+                            FlutterToast().showMessage('register error'.tr);
+                          }
+                          // await FirebaseApiAuth.sendOtp(
+                          //   phNumber: CommonValues.phNumberValue,
+                          //   toNavigate: () => const HospitalOtpScreen(),
+                          // );
                           // } else {
                           //   FlutterToast()
                           //       .showMessage("Your Data is Not Found !!!");
                           // }
-                          // log(FirebaseApiAuth.firebaseVerificationId);
-                          // await FirebaseApiAuth.sendOtp(
-                          //   context,
-                          //   phNumber: CommonValue.phNumberValue,
-                          //   toNavigate: (context) => const HospitalOtpScreen(),
-                          // );
                         },
                         child: Container(
                           height: context.screenHeight * 0.06,

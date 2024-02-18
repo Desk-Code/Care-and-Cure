@@ -8,8 +8,8 @@ class FlutterToast {
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
-        backgroundColor: Colors.blue,
-        textColor: Colors.white,
+        backgroundColor: Colors.blue.shade300,
+        textColor: Colors.black,
         fontSize: 16.0);
   }
 }

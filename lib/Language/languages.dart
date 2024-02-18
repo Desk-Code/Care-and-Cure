@@ -46,6 +46,11 @@ class Languages extends Translations {
           'addImage': 'Add Image',
           'addImageInfo':
               'Please Attached Your Document Image for verifying Hospital',
+          'done': 'Done',
+          'select file': 'Select File',
+          'upload file': 'Upload File',
+          'register error':
+              'Your PhoneNumber Is Not Register With The Hospital',
         },
         'hi_IN': {
           'appName': 'देखभाल और इलाज',
@@ -90,6 +95,10 @@ class Languages extends Translations {
           'addImage': 'छवि जोड़ें',
           'addImageInfo':
               'कृपया अस्पताल के सत्यापन के लिए अपने दस्तावेज़ की छवि संलग्न करें',
+          'done': 'हो गया',
+          'select file': 'फ़ाइल का चयन करें',
+          'upload file': 'फ़ाइल अपलोड करें',
+          'register error': 'आपका फ़ोन नंबर अस्पताल में पंजीकृत नहीं है',
         },
         'gu_IN': {
           'appName': 'સંભાળ અને ઉપચાર',
@@ -134,6 +143,10 @@ class Languages extends Translations {
           'addImage': 'છબી ઉમેરો',
           'addImageInfo':
               'હોસ્પિટલની ચકાસણી માટે કૃપા કરીને તમારી દસ્તાવેજની છબી જોડો',
+          'done': 'થઈ ગયું',
+          'select file': 'ફાઇલ પસંદ કરો',
+          'upload file': 'ફાઈલ અપલોડ કરો',
+          'register error': 'તમારો ફોન નંબર હોસ્પિટલ સાથે રજીસ્ટર નથી',
         },
       };
 }

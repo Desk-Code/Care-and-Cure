@@ -255,22 +255,21 @@ class _HospitalSignUpScreenState extends State<HospitalSignUpScreen> {
                   height: 10,
                 ),
                 SizedBox(
-                  width: context.screenWidth,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        if (instance.key.currentState!.validate()) {
-                          if (CommonValues.pickHospitalImageLink.isEmpty ||
-                              CommonValues.pickHospitalCertiLink.isEmpty) {
-                            FlutterToast()
-                                .showMessage("Please Upload Image First...");
-                            return;
-                          } else {
-                            instance.hospitalSignup();
+                    width: context.screenWidth,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          if (instance.key.currentState!.validate()) {
+                            if (CommonValues.pickHospitalImageLink.isEmpty ||
+                                CommonValues.pickHospitalCertiLink.isEmpty) {
+                              FlutterToast()
+                                  .showMessage("Please Upload Image First...");
+                              return;
+                            } else {
+                              instance.hospitalSignup();
+                            }
                           }
-                        }
-                      },
-                      child: Text('signupButton'.tr)),
-                ),
+                        },
+                        child: Text('signupButton'.tr))),
                 const SizedBox(
                   height: 10,
                 ),

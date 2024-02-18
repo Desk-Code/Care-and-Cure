@@ -8,7 +8,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CommonFilePicker extends StatefulWidget {
   const CommonFilePicker({
@@ -52,52 +51,48 @@ class _CommonFilePickerState extends State<CommonFilePicker> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "crop doctor".tr,
-          style: GoogleFonts.lato(),
-        ),
-      ),
-      body: Stack(
-        children: [
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (pickedFile != null)
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (pickedFile != null)
+                    SizedBox(
+                        height: 400,
+                        child: Image.file(
+                          File(pickedFile!.path!),
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        )),
+                  const SizedBox(height: 20),
                   SizedBox(
-                      height: 400,
-                      child: Image.file(
-                        File(pickedFile!.path!),
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      )),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: context.screenWidth * 1.7 / 2,
-                  child: ElevatedButton(
-                    onPressed: selectFile,
-                    child: const Text("select file"),
+                    width: context.screenWidth * 1.7 / 2,
+                    child: ElevatedButton(
+                      onPressed: selectFile,
+                      child: Text('select file'.tr),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 7),
-                SizedBox(
-                  width: context.screenWidth * 1.7 / 2,
-                  child: ElevatedButton(
-                    onPressed: uploadFile,
-                    child: const Text("upload file"),
+                  const SizedBox(height: 7),
+                  SizedBox(
+                    width: context.screenWidth * 1.7 / 2,
+                    child: ElevatedButton(
+                      onPressed: uploadFile,
+                      child: Text('upload file'.tr),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: buildProgress(),
-          ),
-        ],
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: buildProgress(),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -118,16 +113,18 @@ class _CommonFilePickerState extends State<CommonFilePicker> {
                     onTap: (progress == 100)
                         ? () {
                             if (argData == 1) {
-                              CommonValues.pickHospitalImageLink.value = pickFileLink;
+                              CommonValues.pickHospitalImageLink.value =
+                                  pickFileLink;
                             } else if (argData == 2) {
-                              CommonValues.pickHospitalCertiLink.value = pickFileLink;
+                              CommonValues.pickHospitalCertiLink.value =
+                                  pickFileLink;
                             }
                             Get.back();
                           }
                         : null,
                     child: LinearProgressIndicator(
                       borderRadius: BorderRadius.circular(17),
-                      value: progress,
+                      value: progress / 100,
                       backgroundColor: Colors.grey,
                       color: Colors.green,
                     ),
@@ -135,7 +132,7 @@ class _CommonFilePickerState extends State<CommonFilePicker> {
                   Center(
                     child: Text(
                       (progress == 100)
-                          ? "Done"
+                          ? 'done'.tr
                           : "${(progress).roundToDouble()}%",
                       style: const TextStyle(color: Colors.white),
                     ),
