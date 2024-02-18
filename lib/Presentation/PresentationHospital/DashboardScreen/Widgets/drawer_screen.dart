@@ -1,4 +1,6 @@
+import 'package:care_and_cure/Data/FirebaseData/hospital_firebase_api.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/DashboardScreen/Widgets/common_drawer_tile.dart';
+import 'package:care_and_cure/Presentation/login_dash/screen/login_dash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -99,12 +101,15 @@ Widget dashDrawer(BuildContext context) => Drawer(
                       actions: [
                         MaterialButton(
                           onPressed: () {
-                            Navigator.pop(context);
+                            Get.back();
                           },
                           child: const Text("No"),
                         ),
                         MaterialButton(
                           onPressed: () async {
+                            await HospitalFirebaseApi.signOutMethod().then(
+                                (value) =>
+                                    Get.offAll(() => const LoginDashScreen()));
                             // await FirebaseAuth.instance
                             //     .signOut()
                             //     .then((value) => Navigator.pushAndRemoveUntil(

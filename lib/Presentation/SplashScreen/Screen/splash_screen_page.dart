@@ -43,17 +43,17 @@ class _SplashScreenPageState extends State<SplashScreenPage>
           child: Column(
         children: [
           SizedBox(
-            height: context.screenHeight * 0.05,
-          ),
-          Gif(
-            controller: _introDoctorGifController,
-            autostart: Autostart.loop,
-            image: const AssetImage(
-              "assets/animation/intro_doctor.gif",
+            height: context.screenHeight * 0.56,
+            child: Gif(
+              controller: _introDoctorGifController,
+              autostart: Autostart.loop,
+              image: const AssetImage(
+                "assets/animation/intro_doctor.gif",
+              ),
             ),
           ),
           SizedBox(
-            height: context.screenHeight * 0.39,
+            height: context.screenHeight * 0.35,
             width: context.screenWidth,
             child: Gif(
               controller: _heartBeatGifController,

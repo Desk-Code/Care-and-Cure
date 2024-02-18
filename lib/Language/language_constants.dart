@@ -1,4 +1,4 @@
-import 'package:care_and_cure/Common/controllers/language_model.dart';
+import 'package:care_and_cure/Common/model/language_model.dart';
 
 class LanguageConstants {
   static List<LanguageModel> languages = [
