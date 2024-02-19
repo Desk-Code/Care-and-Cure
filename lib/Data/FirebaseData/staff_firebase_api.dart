@@ -11,6 +11,7 @@ class StaffFirebaseApi {
   static CollectionReference staff =
       FirebaseFirestore.instance.collection(staffCollection);
 
+
   static Future<void> addStaff(String staffCatagory) async {
     final DatabaseReference db = FirebaseDatabase.instance.ref('User');
     String docKey = db.push().key!;

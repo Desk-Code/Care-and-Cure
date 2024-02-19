@@ -59,6 +59,7 @@ dependencies:
   firebase_database: ^10.4.5
   loading_animation_widget: ^1.2.0+4
   dropdown_button2: ^2.3.9
+  lottie: ^3.0.0
 
 dev_dependencies:
   flutter_test:
