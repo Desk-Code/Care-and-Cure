@@ -86,7 +86,11 @@ class _HospitalSignUpScreenState extends State<HospitalSignUpScreen> {
                 ),
                 TextFormField(
                   controller: instance.txtPhoneNumber,
-                  validator: ValidationBuilder().required().build(),
+                  validator: MultiValidator([
+                    RequiredValidator(errorText: 'Phone Number is required'),
+                    LengthRangeValidator(
+                        min: 10, max: 10, errorText: 'Enter Number In Length')
+                  ]).call,
                   expands: false,
                   decoration: InputDecoration(
                     labelText: 'hospitalMNumber'.tr,

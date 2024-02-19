@@ -4,6 +4,7 @@ import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/DashboardScreen/Widgets/common_tile_dash.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/DashboardScreen/Widgets/drawer_screen.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/ProfileScreen/hospital_profile_screen.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/StaffData/Screen/staff_dash_screen.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
   Widget build(BuildContext context) {
     SharedPref.setHospitalUser =
         FirebaseAuth.instance.currentUser!.phoneNumber!;
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: ConstrainColor.bgAppBarColor,
         leading: Builder(builder: (context) {
@@ -45,7 +46,7 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
         actions: [
           IconButton(
             onPressed: () {
-              Get.to(()=> const HospitalProfileScreen());
+              Get.to(() => const HospitalProfileScreen());
             },
             icon: const Icon(Icons.dashboard),
           ),
@@ -86,11 +87,7 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
                   context,
                   data: "Staff",
                   onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => const StaffDashScreen(),
-                    //     ));
+                    Get.to(() => const StaffDashScreen());
                   },
                 ),
                 commonDash(
@@ -142,5 +139,3 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
     );
   }
 }
-
-

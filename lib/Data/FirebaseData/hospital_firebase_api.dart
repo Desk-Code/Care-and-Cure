@@ -2,12 +2,12 @@
 
 import 'dart:developer';
 
+import 'package:care_and_cure/Common/Widgets/common_loader.dart';
 import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HospitalFirebaseApi {
   static String hospitalCollection = "Hospital";
@@ -60,11 +60,7 @@ class HospitalFirebaseApi {
     Get.dialog(
       Dialog(
         child: Center(
-          child: LoadingAnimationWidget.flickr(
-            leftDotColor: Colors.red.shade200,
-            rightDotColor: Colors.blue.shade200,
-            size: 50,
-          ),
+          child: loadingIndicator(),
         ),
       ),
     );

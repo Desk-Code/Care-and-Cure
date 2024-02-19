@@ -56,6 +56,7 @@ class HospitalSignupController extends GetxController {
 // MAILING ENDING CODE
 
   void hospitalSignup() async {
+    String docKey = db.push().key!;
     final newHospital = Hospital(
       hospitalName: txtHospitalName.text.trim(),
       mobileNumber: txtPhoneNumber.text.trim(),
@@ -65,19 +66,21 @@ class HospitalSignupController extends GetxController {
       password: txtPassword.text.trim(),
       hospitalImage: CommonValues.pickHospitalImageLink.value,
       hospitalCertificate: CommonValues.pickHospitalCertiLink.value,
+      hID: docKey,
     );
-
-    String docKey = db.push().key!;
 
     DocumentReference store = FirebaseFirestore.instance
         .collection(HospitalFirebaseApi.hospitalCollection)
         .doc(docKey);
 
-    store.set(newHospital.toJson()).then((value) {
+    await store
+        .set(newHospital.toJson())
+        .catchError((onError) => log("Failed to Add user: $onError"))
+        .then((value) {
       sendMailFromOutlook();
-      Get.back();
       CommonValues.pickHospitalCertiLink = "".obs;
       CommonValues.pickHospitalImageLink = "".obs;
+      Get.back();
     });
   }
 }

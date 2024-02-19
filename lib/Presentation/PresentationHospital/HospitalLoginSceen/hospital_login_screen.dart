@@ -1,3 +1,4 @@
+import 'package:care_and_cure/Common/Widgets/common_loader.dart';
 import 'package:care_and_cure/Common/Widgets/common_toast.dart';
 import 'package:care_and_cure/Data/FirebaseData/firebase_auth_api.dart';
 import 'package:care_and_cure/Data/FirebaseData/hospital_firebase_api.dart';
@@ -103,6 +104,13 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
                               await HospitalFirebaseApi.getUserData(
                                   CommonValues.inputedNumber);
                           if (isRegister.isNotEmpty) {
+                            Get.dialog(
+                              Dialog(
+                                child: Center(
+                                  child: loadingIndicator(),
+                                ),
+                              ),
+                            );
                             await FirebaseApiAuth.sendOtp(
                               phNumber: CommonValues.phNumberValue,
                               toNavigate: () => const HospitalOtpScreen(),

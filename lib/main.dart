@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:care_and_cure/Common/Widgets/common_loader.dart';
 import 'package:care_and_cure/Data/FirebaseData/firebase_option_auth.dart';
 import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Language/language_constants.dart';
@@ -19,38 +22,52 @@ Future<void> main() async {
   //localisation language
   await SharedPref.init;
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final Future<FirebaseApp> _intialization = Firebase.initializeApp();
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-          background: ConstrainColor.bgColor,
-        ),
-        useMaterial3: true,
-      ),
+    return FutureBuilder(
+      future: _intialization,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          log("Something went Wrong");
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.deepPurple,
+                background: ConstrainColor.bgColor,
+              ),
+              useMaterial3: true,
+            ),
 
-      // local gets a language code when app build
-      locale: Locale(SharedPref.getLanguageCode, SharedPref.getCountryCode),
+            // local gets a language code when app build
+            locale:
+                Locale(SharedPref.getLanguageCode, SharedPref.getCountryCode),
 
-      //its a get list of languages
-      translations: Languages(),
+            //its a get list of languages
+            translations: Languages(),
 
-      //when ever localization has a null value at time its a call
-      fallbackLocale: Locale(LanguageConstants.languages[0].languageCode,
-          LanguageConstants.languages[0].countryCode),
+            //when ever localization has a null value at time its a call
+            fallbackLocale: Locale(LanguageConstants.languages[0].languageCode,
+                LanguageConstants.languages[0].countryCode),
 
-      //its a root calling
-      home: const SplashScreenPage(),
-      // home: const CommonFilePicker(),
+            //its a root calling
+            home: const SplashScreenPage(),
+            // home: const CommonFilePicker(),
+          );
+        }
+        return loadingIndicator();
+      },
     );
   }
 }

@@ -8,10 +8,13 @@ class CommonValues extends GetxController {
   static String otpPinValue = "";
   static String inputedNumber = "";
 
+  static String search = "";
+
   static final OtpFieldController _otpFeildController = OtpFieldController();
   static OtpFieldController get otpController => _otpFeildController;
 
   // pick file value
   static RxString pickHospitalImageLink = "".obs;
   static RxString pickHospitalCertiLink = "".obs;
+  static RxString pickStaffLink = "".obs;
 }

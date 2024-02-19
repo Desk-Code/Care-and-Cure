@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 Hospital hospitalFromJson(String str) => Hospital.fromJson(json.decode(str));
@@ -5,6 +6,7 @@ Hospital hospitalFromJson(String str) => Hospital.fromJson(json.decode(str));
 String hospitalToJson(Hospital data) => json.encode(data.toJson());
 
 class Hospital {
+  String hID;
   String hospitalName;
   String mobileNumber;
   String email;
@@ -15,6 +17,7 @@ class Hospital {
   String hospitalCertificate;
 
   Hospital({
+    required this.hID,
     required this.hospitalName,
     required this.mobileNumber,
     required this.email,
@@ -34,9 +37,11 @@ class Hospital {
         password: json["password"],
         hospitalImage: json["hospitalImage"],
         hospitalCertificate: json["hospitalCertificate"],
+        hID: json['hId'],
       );
 
   Map<String, dynamic> toJson() => {
+        "hId": hID,
         "hospitalName": hospitalName,
         "mobileNumber": mobileNumber,
         "email": email,

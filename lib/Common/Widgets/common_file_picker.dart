@@ -118,6 +118,8 @@ class _CommonFilePickerState extends State<CommonFilePicker> {
                             } else if (argData == 2) {
                               CommonValues.pickHospitalCertiLink.value =
                                   pickFileLink;
+                            } else if (argData == 3) {
+                              CommonValues.pickStaffLink.value = pickFileLink;
                             }
                             Get.back();
                           }
