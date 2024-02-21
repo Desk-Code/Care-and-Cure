@@ -64,7 +64,8 @@ class _HospitalSignUpScreenState extends State<HospitalSignUpScreen> {
                   width: context.screenWidth * 0.90,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("assets/images/hospitalregister.jpeg"),
+                      image:
+                          AssetImage("assets/images/hospitalregister.jpeg"),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -87,9 +88,12 @@ class _HospitalSignUpScreenState extends State<HospitalSignUpScreen> {
                 TextFormField(
                   controller: instance.txtPhoneNumber,
                   validator: MultiValidator([
-                    RequiredValidator(errorText: 'Phone Number is required'),
+                    RequiredValidator(
+                        errorText: 'Phone Number is required'),
                     LengthRangeValidator(
-                        min: 10, max: 10, errorText: 'Enter Number In Length')
+                        min: 10,
+                        max: 10,
+                        errorText: 'Enter Number In Length')
                   ]).call,
                   expands: false,
                   decoration: InputDecoration(
@@ -104,7 +108,8 @@ class _HospitalSignUpScreenState extends State<HospitalSignUpScreen> {
                   controller: instance.txtEmail,
                   validator: MultiValidator([
                     RequiredValidator(errorText: 'Email is required'),
-                    EmailValidator(errorText: 'Email is not a valid format'),
+                    EmailValidator(
+                        errorText: 'Email is not a valid format'),
                   ]).call,
                   expands: false,
                   decoration: InputDecoration(
@@ -145,7 +150,7 @@ class _HospitalSignUpScreenState extends State<HospitalSignUpScreen> {
                       if (value == null) {
                         return 'Passowrd is required';
                       }
-
+            
                       if (value.length <= 6) {
                         return 'Minimum 6 character password is required';
                       }
@@ -213,7 +218,8 @@ class _HospitalSignUpScreenState extends State<HospitalSignUpScreen> {
                               ),
                               Text(
                                 'hospital'.tr,
-                                style: const TextStyle(color: Colors.black87),
+                                style:
+                                    const TextStyle(color: Colors.black87),
                               ),
                             ],
                           ),
@@ -263,10 +269,12 @@ class _HospitalSignUpScreenState extends State<HospitalSignUpScreen> {
                     child: ElevatedButton(
                         onPressed: () {
                           if (instance.key.currentState!.validate()) {
-                            if (CommonValues.pickHospitalImageLink.isEmpty ||
-                                CommonValues.pickHospitalCertiLink.isEmpty) {
-                              FlutterToast()
-                                  .showMessage("Please Upload Image First...");
+                            if (CommonValues
+                                    .pickHospitalImageLink.isEmpty ||
+                                CommonValues
+                                    .pickHospitalCertiLink.isEmpty) {
+                              FlutterToast().showMessage(
+                                  "Please Upload Image First...");
                               return;
                             } else {
                               instance.hospitalSignup();

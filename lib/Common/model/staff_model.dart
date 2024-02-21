@@ -15,6 +15,7 @@ class Staff {
   String aadharNumber;
   String address;
   String staffProfile;
+  String hospitalRef;
 
   Staff({
     required this.staffCatagory,
@@ -26,6 +27,7 @@ class Staff {
     required this.aadharNumber,
     required this.address,
     required this.staffProfile,
+    required this.hospitalRef,
   });
 
   factory Staff.fromJson(Map<String, dynamic> json) => Staff(
@@ -38,6 +40,7 @@ class Staff {
         aadharNumber: json["aadharNumber"],
         address: json["address"],
         staffProfile: json["staffProfile"],
+        hospitalRef: json["hospitalRef"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,5 +53,6 @@ class Staff {
         "aadharNumber": aadharNumber,
         "address": address,
         "staffProfile": staffProfile,
+        "hospitalRef": hospitalRef,
       };
 }

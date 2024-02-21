@@ -2,13 +2,13 @@ import 'package:care_and_cure/Common/Widgets/common_loader.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:flutter/material.dart';
 
-Widget commonStaffCard(
+Widget commonDoctorCard(
   BuildContext context, {
-  required String staffSection,
-  required String staffSectionkey,
-  required String staffName,
-  required String staffMobile,
-  required String staffProfile,
+  required String key,
+  required String name,
+  required String mobNum,
+  required String doctorProfile,
+  required String qualification,
 }) =>
     Card(
       margin: EdgeInsets.symmetric(
@@ -17,7 +17,7 @@ Widget commonStaffCard(
       ),
       elevation: 5,
       child: Container(
-        height: context.screenHeight * 0.18,
+        height: context.screenHeight * 0.19,
         width: context.screenWidth * 0.9,
         padding: const EdgeInsets.all(8),
         child: Column(
@@ -36,7 +36,7 @@ Widget commonStaffCard(
                     CircleAvatar(
                       backgroundColor: Colors.transparent,
                       radius: 30,
-                      backgroundImage: NetworkImage(staffProfile),
+                      backgroundImage: NetworkImage(doctorProfile),
                     ),
                   ],
                 ),
@@ -44,7 +44,7 @@ Widget commonStaffCard(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const Icon(Icons.person_pin_circle_outlined),
-                    Text(staffSectionkey),
+                    Text(key),
                   ],
                 ),
               ],
@@ -52,8 +52,9 @@ Widget commonStaffCard(
             const SizedBox(
               height: 10,
             ),
-            Text("$staffSection Name    : $staffName"),
-            Text("$staffSection Mobile  : $staffMobile"),
+            Text("Doctor Name    : $name"),
+            Text("Doctor Mobile  : $mobNum"),
+            Text("Doctor Qualification  : $qualification"),
           ],
         ),
       ),

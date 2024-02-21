@@ -1,30 +1,26 @@
-import 'package:care_and_cure/Common/Widgets/common_file_picker.dart';
+import 'package:care_and_cure/Common/model/staff_model.dart';
 import 'package:care_and_cure/Data/FirebaseData/staff_firebase_api.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/StaffData/Controller/staff_dash_controller.dart';
-import 'package:care_and_cure/Presentation/PresentationHospital/StaffData/Screen/staff_search_page.dart';
-import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
-class StaffAddDataScreen extends StatefulWidget {
-  final String staffSection;
-  const StaffAddDataScreen({super.key, required this.staffSection});
+class StaffUpdateData extends StatefulWidget {
+  final Staff staffData;
+  const StaffUpdateData({super.key, required this.staffData});
 
   @override
-  State<StaffAddDataScreen> createState() => _StaffAddDataScreenState();
+  State<StaffUpdateData> createState() => _StaffUpdateDataState();
 }
 
-class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
+class _StaffUpdateDataState extends State<StaffUpdateData> {
   @override
   void initState() {
-    StaffDashController.txtStaffClearController;
     super.initState();
   }
 
@@ -32,22 +28,14 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ConstrainColor.bgAppBarColor,
         leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: const Icon(Icons.arrow_back_rounded),
-        ),
-        title: Text(
-          'appName'.tr,
-          style: GoogleFonts.lato(
-            color: Colors.black,
-            fontSize: 25,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        centerTitle: true,
+            onPressed: () {
+              StaffDashController.txtStaffClearController;
+              Get.back();
+            },
+            icon: const Icon(Icons.arrow_back)),
+        elevation: 0,
+        backgroundColor: ConstrainColor.bgColor,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -166,40 +154,6 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                SizedBox(
-                  width: context.screenWidth * 1.80 / 2,
-                  child: Obx(
-                    () => ElevatedButton(
-                      onPressed: (CommonValues.pickStaffLink.isEmpty)
-                          ? () {
-                              Get.to(() => const CommonFilePicker(),
-                                  arguments: 3);
-                            }
-                          : null,
-                      child: const Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Iconsax.profile_add5,
-                            color: Colors.black45,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Text(
-                            "Profile Pick",
-                            style: TextStyle(
-                              color: Colors.black87,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
                 ElevatedButton(
                   style: ButtonStyle(
                     minimumSize: MaterialStateProperty.all(
@@ -212,18 +166,29 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                   onPressed: () async {
                     if (StaffDashController.globalKey.currentState!
                         .validate()) {
-                      await StaffFirebaseApi.addStaff(widget.staffSection)
-                          .then((value) {
-                        Get.back();
-                        return Get.off(() {
-                          return StaffSearchpage(
-                            selectedStaff: widget.staffSection,
-                          );
-                        });
-                      });
+                      await StaffFirebaseApi.updateUser(
+                          staffCatagory: widget.staffData.staffCatagory,
+                          sId: widget.staffData.sId,
+                          fullName:
+                              StaffDashController.txtStaffController[0].text,
+                          mobileNumber:
+                              StaffDashController.txtStaffController[1].text,
+                          gender:
+                              StaffDashController.txtStaffController[2].text,
+                          age: StaffDashController.txtStaffController[3].text,
+                          aadharNumber:
+                              StaffDashController.txtStaffController[4].text,
+                          address:
+                              StaffDashController.txtStaffController[5].text,
+                          staffProfile: widget.staffData.staffProfile);
+                      StaffDashController.txtStaffClearController;
+                      Get.back();
                     }
                   },
-                  child: const Text("Submit"),
+                  child: const Text("Update"),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
               ],
             ),

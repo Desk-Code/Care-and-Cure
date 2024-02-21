@@ -1,53 +1,36 @@
-import 'package:care_and_cure/Common/Widgets/common_file_picker.dart';
-import 'package:care_and_cure/Data/FirebaseData/staff_firebase_api.dart';
+import 'package:care_and_cure/Common/model/doctor_model.dart';
+import 'package:care_and_cure/Data/FirebaseData/doctor_firebase_api.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
-import 'package:care_and_cure/Presentation/PresentationHospital/StaffData/Controller/staff_dash_controller.dart';
-import 'package:care_and_cure/Presentation/PresentationHospital/StaffData/Screen/staff_search_page.dart';
-import 'package:care_and_cure/Util/common_values.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/DoctorData/Controller/doctor.controller.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 
-class StaffAddDataScreen extends StatefulWidget {
-  final String staffSection;
-  const StaffAddDataScreen({super.key, required this.staffSection});
+class DoctorUpdateScreen extends StatefulWidget {
+  final Doctor doctorData;
+  const DoctorUpdateScreen({super.key, required this.doctorData});
 
   @override
-  State<StaffAddDataScreen> createState() => _StaffAddDataScreenState();
+  State<DoctorUpdateScreen> createState() => _DoctorUpdateScreenState();
 }
 
-class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
-  @override
-  void initState() {
-    StaffDashController.txtStaffClearController;
-    super.initState();
-  }
-
+class _DoctorUpdateScreenState extends State<DoctorUpdateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ConstrainColor.bgAppBarColor,
         leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: const Icon(Icons.arrow_back_rounded),
-        ),
-        title: Text(
-          'appName'.tr,
-          style: GoogleFonts.lato(
-            color: Colors.black,
-            fontSize: 25,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        centerTitle: true,
+            onPressed: () {
+              DoctorController.txtSearchController;
+              Get.back();
+            },
+            icon: const Icon(Icons.arrow_back)),
+        elevation: 0,
+        backgroundColor: ConstrainColor.bgColor,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -57,11 +40,11 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
             right: context.screenWidth * 0.05,
           ),
           child: Form(
-            key: StaffDashController.globalKey,
+            key: DoctorController.globalKey,
             child: Column(
               children: [
                 TextFormField(
-                  controller: StaffDashController.txtStaffController[0],
+                  controller: DoctorController.txtDrController[0],
                   validator: ValidationBuilder().required().build(),
                   expands: false,
                   decoration: const InputDecoration(
@@ -73,7 +56,7 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                   height: 10,
                 ),
                 TextFormField(
-                  controller: StaffDashController.txtStaffController[1],
+                  controller: DoctorController.txtDrController[1],
                   validator: MultiValidator([
                     RequiredValidator(errorText: 'Phone Number is required'),
                     LengthRangeValidator(
@@ -98,12 +81,12 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                       ),
                     ),
                     onChanged: (value) =>
-                        StaffDashController.txtStaffController[2].text = value!,
+                        DoctorController.txtDrController[3].text = value!,
                     isExpanded: true,
                     hint: Text(
-                      StaffDashController.txtStaffController[2].text.isEmpty
+                      DoctorController.txtDrController[3].text.isEmpty
                           ? 'Select Your Gender'
-                          : StaffDashController.txtStaffController[2].text,
+                          : DoctorController.txtDrController[3].text,
                     ),
                     items: const [
                       DropdownMenuItem(
@@ -121,9 +104,9 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                   height: 10,
                 ),
                 TextFormField(
-                  controller: StaffDashController.txtStaffController[3],
+                  controller: DoctorController.txtDrController[4],
                   validator: MultiValidator([
-                    RequiredValidator(errorText: 'Phone Number is required'),
+                    RequiredValidator(errorText: 'Age is required'),
                     LengthRangeValidator(
                         min: 2, max: 2, errorText: 'Enter a Valid Age')
                   ]).call,
@@ -137,7 +120,7 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                   height: 10,
                 ),
                 TextFormField(
-                  controller: StaffDashController.txtStaffController[4],
+                  controller: DoctorController.txtDrController[5],
                   validator: MultiValidator([
                     RequiredValidator(errorText: 'Aadhar Number is required'),
                     LengthRangeValidator(
@@ -155,7 +138,7 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                   height: 10,
                 ),
                 TextFormField(
-                  controller: StaffDashController.txtStaffController[5],
+                  controller: DoctorController.txtDrController[6],
                   validator: ValidationBuilder().required().build(),
                   expands: false,
                   decoration: const InputDecoration(
@@ -167,34 +150,44 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                   height: 10,
                 ),
                 SizedBox(
-                  width: context.screenWidth * 1.80 / 2,
-                  child: Obx(
-                    () => ElevatedButton(
-                      onPressed: (CommonValues.pickStaffLink.isEmpty)
-                          ? () {
-                              Get.to(() => const CommonFilePicker(),
-                                  arguments: 3);
-                            }
-                          : null,
-                      child: const Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Iconsax.profile_add5,
-                            color: Colors.black45,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Text(
-                            "Profile Pick",
-                            style: TextStyle(
-                              color: Colors.black87,
-                            ),
-                          ),
-                        ],
+                  width: double.infinity,
+                  child: DropdownButtonFormField2(
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
                       ),
                     ),
+                    onChanged: (value) =>
+                        DoctorController.txtDrController[7].text = value!,
+                    isExpanded: true,
+                    hint: Text(
+                      DoctorController.txtDrController[7].text.isEmpty
+                          ? 'Select Your Qualification'
+                          : DoctorController.txtDrController[7].text,
+                    ),
+                    items: [
+                      ...List.generate(
+                        DoctorController.qualificationList.length,
+                        (index) => DropdownMenuItem(
+                          value: DoctorController.qualificationList[index],
+                          child:
+                              Text(DoctorController.qualificationList[index]),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  controller: DoctorController.txtDrController[8],
+                  validator: ValidationBuilder().required().build(),
+                  expands: false,
+                  decoration: const InputDecoration(
+                    labelText: "Specialist",
+                    prefixIcon: Icon(Iconsax.eye),
                   ),
                 ),
                 const SizedBox(
@@ -210,20 +203,29 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                     ),
                   ),
                   onPressed: () async {
-                    if (StaffDashController.globalKey.currentState!
-                        .validate()) {
-                      await StaffFirebaseApi.addStaff(widget.staffSection)
-                          .then((value) {
-                        Get.back();
-                        return Get.off(() {
-                          return StaffSearchpage(
-                            selectedStaff: widget.staffSection,
-                          );
-                        });
-                      });
+                    if (DoctorController.globalKey.currentState!.validate()) {
+                      await DoctorApi.updateDoctor(
+                        dId: widget.doctorData.dId,
+                        fullName: DoctorController.txtDrController[0].text,
+                        mobileNumber: DoctorController.txtDrController[1].text,
+                        gender: DoctorController.txtDrController[2].text,
+                        age: DoctorController.txtDrController[4].text,
+                        aadharNumber: DoctorController.txtDrController[5].text,
+                        address: DoctorController.txtDrController[6].text,
+                        profileLink: widget.doctorData.profileLink,
+                        email: widget.doctorData.email,
+                        qualification: DoctorController.txtDrController[7].text,
+                        specialist: DoctorController.txtDrController[8].text,
+                        hospitalRef: widget.doctorData.hospitalRef,
+                      );
+                      DoctorController.txtDrClearController;
+                      Get.back();
                     }
                   },
-                  child: const Text("Submit"),
+                  child: const Text("Update"),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
               ],
             ),

@@ -9,6 +9,7 @@ class CommonValues extends GetxController {
   static String inputedNumber = "";
 
   static String search = "";
+  static String filterData = "fullName";
 
   static final OtpFieldController _otpFeildController = OtpFieldController();
   static OtpFieldController get otpController => _otpFeildController;
@@ -17,4 +18,5 @@ class CommonValues extends GetxController {
   static RxString pickHospitalImageLink = "".obs;
   static RxString pickHospitalCertiLink = "".obs;
   static RxString pickStaffLink = "".obs;
+  static RxString pickDoctorLink = "".obs;
 }

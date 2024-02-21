@@ -3,11 +3,7 @@ import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Widget staffFiltering(
-  BuildContext context, {
-  required String staffSection,
-}) =>
-    AnimatedContainer(
+Widget doctorFiltering(BuildContext context) => AnimatedContainer(
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(10),
       duration: const Duration(
@@ -27,8 +23,8 @@ Widget staffFiltering(
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Sort Staff ($staffSection) by",
-                  style: const TextStyle(
+              const Text("Sort Doctor by",
+                  style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   )),
@@ -105,6 +101,34 @@ Widget staffFiltering(
               "Aadhar Card",
               style: TextStyle(
                 color: (CommonValues.filterData == "aadharNumber")
+                    ? Colors.blue
+                    : Colors.black,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              CommonValues.filterData = "qualification";
+              Get.back();
+            },
+            child: Text(
+              "Qualification",
+              style: TextStyle(
+                color: (CommonValues.filterData == "qualification")
+                    ? Colors.blue
+                    : Colors.black,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              CommonValues.filterData = "email";
+              Get.back();
+            },
+            child: Text(
+              "Email",
+              style: TextStyle(
+                color: (CommonValues.filterData == "email")
                     ? Colors.blue
                     : Colors.black,
               ),

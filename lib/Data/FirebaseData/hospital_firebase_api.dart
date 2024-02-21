@@ -45,6 +45,7 @@ class HospitalFirebaseApi {
                   SharedPref.setHospitalMobileNumber = doc['mobileNumber'];
                   SharedPref.setHospitalPasssword = doc['password'];
                   SharedPref.setHospitalUpiId = doc['upiId'];
+                  SharedPref.setHospitalHId = doc['hId'];
                 }),
               });
       // log("${SharedPref.getHospitalAddress} \n ${SharedPref.getHospitalEmail} \n ${SharedPref.getHospitalCertificate} \n ${SharedPref.getHospitalImage} \n ${SharedPref.getHospitalName} \n ${SharedPref.getHospitalMobileNumber} \n ${SharedPref.getHospitalPassword} \n ${SharedPref.getHospitalUpiId} \n");

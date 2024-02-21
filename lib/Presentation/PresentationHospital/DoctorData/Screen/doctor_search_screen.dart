@@ -1,16 +1,15 @@
 import 'dart:developer';
 
 import 'package:care_and_cure/Common/Widgets/no_data.dart';
-import 'package:care_and_cure/Common/model/staff_model.dart';
-import 'package:care_and_cure/Data/FirebaseData/staff_firebase_api.dart';
+import 'package:care_and_cure/Common/model/doctor_model.dart';
+import 'package:care_and_cure/Data/FirebaseData/doctor_firebase_api.dart';
 import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
-import 'package:care_and_cure/Presentation/PresentationHospital/DashboardScreen/Screen/hospital_dashboard_screen.dart';
-import 'package:care_and_cure/Presentation/PresentationHospital/StaffData/Controller/staff_dash_controller.dart';
-import 'package:care_and_cure/Presentation/PresentationHospital/StaffData/Screen/staff_add_data_screen.dart';
-import 'package:care_and_cure/Presentation/PresentationHospital/StaffData/Screen/staff_profile_screen.dart';
-import 'package:care_and_cure/Presentation/PresentationHospital/StaffData/Widget/common_staff_card.dart';
-import 'package:care_and_cure/Presentation/PresentationHospital/StaffData/Widget/satff_filtering.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/DoctorData/Controller/doctor.controller.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/DoctorData/Screen/doctor_add_screen.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/DoctorData/Screen/doctor_profile_screen.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/DoctorData/Widget/common_doctor_card.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/DoctorData/Widget/doctor_filtering.dart';
 import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,26 +17,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class StaffSearchpage extends StatefulWidget {
-  final String selectedStaff;
-  const StaffSearchpage({super.key, required this.selectedStaff});
+class DoctorSearchScreen extends StatefulWidget {
+  const DoctorSearchScreen({super.key});
 
   @override
-  State<StaffSearchpage> createState() => _StaffSearchpageState();
+  State<DoctorSearchScreen> createState() => _DoctorSearchScreenState();
 }
 
-class _StaffSearchpageState extends State<StaffSearchpage> {
+class _DoctorSearchScreenState extends State<DoctorSearchScreen> {
   @override
   void initState() {
-    log(widget.selectedStaff);
+    CommonValues.search = "";
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    Stream<QuerySnapshot> staffStream = FirebaseFirestore.instance
-        .collection(StaffFirebaseApi.staffCollection)
-        .where('staffCatagory', isEqualTo: widget.selectedStaff)
+    Stream<QuerySnapshot> doctorStream = FirebaseFirestore.instance
+        .collection(DoctorApi.doctorCollection)
         .where('hospitalRef', isEqualTo: SharedPref.getHospitalHId)
         .snapshots();
     return Scaffold(
@@ -46,7 +43,7 @@ class _StaffSearchpageState extends State<StaffSearchpage> {
         backgroundColor: ConstrainColor.bgAppBarColor,
         leading: IconButton(
           onPressed: () {
-            Get.offAll(() => const HospitalDashBoard());
+            Get.back();
           },
           icon: const Icon(Icons.arrow_back_rounded),
         ),
@@ -62,9 +59,7 @@ class _StaffSearchpageState extends State<StaffSearchpage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(() => StaffAddDataScreen(
-                staffSection: widget.selectedStaff,
-              ));
+          Get.to(() => const DoctorAddScreen());
         },
         child: const Icon(Icons.add),
       ),
@@ -77,7 +72,7 @@ class _StaffSearchpageState extends State<StaffSearchpage> {
                 SizedBox(
                   width: context.screenWidth * 0.82,
                   child: TextField(
-                    controller: StaffDashController.txtSearchController,
+                    controller: DoctorController.txtSearchController,
                     decoration: InputDecoration(
                       hintText: "Search",
                       border: OutlineInputBorder(
@@ -97,10 +92,7 @@ class _StaffSearchpageState extends State<StaffSearchpage> {
                         context: context,
                         enableDrag: true,
                         isScrollControlled: true,
-                        builder: (contex) => staffFiltering(
-                          contex,
-                          staffSection: widget.selectedStaff,
-                        ),
+                        builder: (contex) => doctorFiltering(context),
                       );
                     },
                     icon: const Icon(
@@ -111,7 +103,7 @@ class _StaffSearchpageState extends State<StaffSearchpage> {
             ),
           ),
           StreamBuilder<QuerySnapshot>(
-            stream: staffStream,
+            stream: doctorStream,
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasError) {
@@ -137,35 +129,37 @@ class _StaffSearchpageState extends State<StaffSearchpage> {
                         return GestureDetector(
                           onTap: () {
                             Get.to(
-                              () => StaffProfileScreen(
-                                profileStaffData: Staff(
-                                  hospitalRef: SharedPref.getHospitalHId,
-                                  staffCatagory: storedocs[index]
-                                      ['staffCatagory'],
-                                  sId: storedocs[index]['sId'],
+                              () => DoctorProfileScreen(
+                                profileDoctorData: Doctor(
+                                  dId: storedocs[index]['dId'],
+                                  hospitalRef: storedocs[index]['hospitalRef'],
                                   fullName: storedocs[index]['fullName'],
                                   mobileNumber: storedocs[index]
                                       ['mobileNumber'],
-                                  gender: storedocs[index]['gender'],
+                                  email: storedocs[index]['email'],
                                   age: storedocs[index]['age'],
+                                  gender: storedocs[index]['gender'],
+                                  address: storedocs[index]['address'],
                                   aadharNumber: storedocs[index]
                                       ['aadharNumber'],
-                                  address: storedocs[index]['address'],
-                                  staffProfile: storedocs[index]
-                                      ['staffProfile'],
+                                  qualification: storedocs[index]
+                                      ['qualification'],
+                                  specialist: storedocs[index]['specialist'],
+                                  profileLink: storedocs[index]['profileLink'],
                                 ),
                               ),
                             );
+
                             CommonValues.search = "";
                             CommonValues.filterData = "fullName";
                           },
-                          child: commonStaffCard(
+                          child: commonDoctorCard(
                             context,
-                            staffSection: storedocs[index]['staffCatagory'],
-                            staffSectionkey: storedocs[index]['sId'],
-                            staffName: storedocs[index]['fullName'],
-                            staffMobile: storedocs[index]['mobileNumber'],
-                            staffProfile: storedocs[index]['staffProfile'],
+                            key: storedocs[index]['dId'],
+                            name: storedocs[index]['fullName'],
+                            mobNum: storedocs[index]['mobileNumber'],
+                            doctorProfile: storedocs[index]['profileLink'],
+                            qualification: storedocs[index]['qualification'],
                           ),
                         );
                       } else if (storedocs[index][CommonValues.filterData]
@@ -175,35 +169,36 @@ class _StaffSearchpageState extends State<StaffSearchpage> {
                         return GestureDetector(
                           onTap: () {
                             Get.to(
-                              () => StaffProfileScreen(
-                                profileStaffData: Staff(
-                                  hospitalRef: SharedPref.getHospitalHId,
-                                  staffCatagory: storedocs[index]
-                                      ['staffCatagory'],
-                                  sId: storedocs[index]['sId'],
+                              () => DoctorProfileScreen(
+                                profileDoctorData: Doctor(
+                                  dId: storedocs[index]['dId'],
+                                  hospitalRef: storedocs[index]['hospitalRef'],
                                   fullName: storedocs[index]['fullName'],
                                   mobileNumber: storedocs[index]
                                       ['mobileNumber'],
-                                  gender: storedocs[index]['gender'],
+                                  email: storedocs[index]['email'],
                                   age: storedocs[index]['age'],
+                                  gender: storedocs[index]['gender'],
+                                  address: storedocs[index]['address'],
                                   aadharNumber: storedocs[index]
                                       ['aadharNumber'],
-                                  address: storedocs[index]['address'],
-                                  staffProfile: storedocs[index]
-                                      ['staffProfile'],
+                                  qualification: storedocs[index]
+                                      ['qualification'],
+                                  specialist: storedocs[index]['specialist'],
+                                  profileLink: storedocs[index]['profileLink'],
                                 ),
                               ),
                             );
                             CommonValues.search = "";
                             CommonValues.filterData = "fullName";
                           },
-                          child: commonStaffCard(
+                          child: commonDoctorCard(
                             context,
-                            staffSection: storedocs[index]['staffCatagory'],
-                            staffSectionkey: storedocs[index]['sId'],
-                            staffName: storedocs[index]['fullName'],
-                            staffMobile: storedocs[index]['mobileNumber'],
-                            staffProfile: storedocs[index]['staffProfile'],
+                            key: storedocs[index]['dId'],
+                            name: storedocs[index]['fullName'],
+                            mobNum: storedocs[index]['mobileNumber'],
+                            doctorProfile: storedocs[index]['profileLink'],
+                            qualification: storedocs[index]['qualification'],
                           ),
                         );
                       } else {
