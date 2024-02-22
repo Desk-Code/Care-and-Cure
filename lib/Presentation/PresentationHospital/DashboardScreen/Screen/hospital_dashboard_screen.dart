@@ -4,6 +4,7 @@ import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/DashboardScreen/Widgets/common_tile_dash.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/DashboardScreen/Widgets/drawer_screen.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/DoctorData/Screen/doctor_search_screen.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/PatientData/Screen/patient_search_screen.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/ProfileScreen/hospital_profile_screen.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/StaffData/Screen/staff_dash_screen.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
@@ -95,12 +96,7 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
                   context,
                   data: "Patient",
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const PatientSearchPage(),
-                    //   ),
-                    // );
+                    Get.to(() => const PatientSearchScreen());
                   },
                 ),
               ],

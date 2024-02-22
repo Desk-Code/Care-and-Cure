@@ -19,4 +19,5 @@ class CommonValues extends GetxController {
   static RxString pickHospitalCertiLink = "".obs;
   static RxString pickStaffLink = "".obs;
   static RxString pickDoctorLink = "".obs;
+  static RxString pickPatientLink = "".obs;
 }

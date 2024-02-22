@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:care_and_cure/Common/model/doctor_model.dart';
 import 'package:care_and_cure/Data/FirebaseData/doctor_firebase_api.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
@@ -80,8 +82,10 @@ class _DoctorUpdateScreenState extends State<DoctorUpdateScreen> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                     ),
-                    onChanged: (value) =>
-                        DoctorController.txtDrController[3].text = value!,
+                    onChanged: (value) {
+                      DoctorController.txtDrController[3].text = value!;
+                      log(value);
+                    },
                     isExpanded: true,
                     hint: Text(
                       DoctorController.txtDrController[3].text.isEmpty
@@ -90,11 +94,11 @@ class _DoctorUpdateScreenState extends State<DoctorUpdateScreen> {
                     ),
                     items: const [
                       DropdownMenuItem(
-                        value: 'Male',
+                        value: "Male",
                         child: Text('Male'),
                       ),
                       DropdownMenuItem(
-                        value: 'Female',
+                        value: "Female",
                         child: Text('Female'),
                       ),
                     ],
@@ -208,7 +212,7 @@ class _DoctorUpdateScreenState extends State<DoctorUpdateScreen> {
                         dId: widget.doctorData.dId,
                         fullName: DoctorController.txtDrController[0].text,
                         mobileNumber: DoctorController.txtDrController[1].text,
-                        gender: DoctorController.txtDrController[2].text,
+                        gender: DoctorController.txtDrController[3].text,
                         age: DoctorController.txtDrController[4].text,
                         aadharNumber: DoctorController.txtDrController[5].text,
                         address: DoctorController.txtDrController[6].text,
