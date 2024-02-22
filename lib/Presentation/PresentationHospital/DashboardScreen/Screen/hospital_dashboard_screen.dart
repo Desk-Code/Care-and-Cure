@@ -1,6 +1,7 @@
 import 'package:care_and_cure/Data/FirebaseData/hospital_firebase_api.dart';
 import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/BillData/Screen/bill_data.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/DashboardScreen/Widgets/common_tile_dash.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/DashboardScreen/Widgets/drawer_screen.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/DoctorData/Screen/doctor_search_screen.dart';
@@ -115,12 +116,7 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
                   context,
                   data: "Bill",
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const BillSearchData(),
-                    //   ),
-                    // );
+                    Get.to(() => const BillData());
                   },
                 ),
               ],

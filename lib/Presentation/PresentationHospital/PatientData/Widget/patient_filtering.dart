@@ -23,7 +23,7 @@ Widget patientFiltering(BuildContext context) => AnimatedContainer(
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Sort Doctor by",
+              const Text("Sort Patient by",
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -59,20 +59,6 @@ Widget patientFiltering(BuildContext context) => AnimatedContainer(
               "Mobile Number",
               style: TextStyle(
                 color: (CommonValues.filterData == "mobileNumber")
-                    ? Colors.blue
-                    : Colors.black,
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              CommonValues.filterData = "gender";
-              Get.back();
-            },
-            child: Text(
-              "Gender",
-              style: TextStyle(
-                color: (CommonValues.filterData == "gender")
                     ? Colors.blue
                     : Colors.black,
               ),

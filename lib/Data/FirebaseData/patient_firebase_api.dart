@@ -93,7 +93,7 @@ class PatientApi {
   }
 
   // For Deleting User
-  static Future<void> deleteDoctor({required String id}) {
+  static Future<void> deletePatient({required String id}) {
     return patient.doc(id).delete().then((value) {
       log('User Deleted');
       FlutterToast().showMessage('User Deleted');
@@ -103,40 +103,48 @@ class PatientApi {
     });
   }
 
-  // static Future<void> updateDoctor({
-  //   required String dId,
-  //   required String fullName,
-  //   required String mobileNumber,
-  //   required String gender,
-  //   required String age,
-  //   required String aadharNumber,
-  //   required String address,
-  //   required String profileLink,
-  //   required String email,
-  //   required String qualification,
-  //   required String specialist,
-  //   required String hospitalRef,
-  // }) async {
-  //   final newDoctor = Doctor(
-  //     dId: dId,
-  //     hospitalRef: hospitalRef,
-  //     fullName: fullName,
-  //     mobileNumber: mobileNumber,
-  //     email: email,
-  //     age: age,
-  //     gender: gender,
-  //     address: address,
-  //     aadharNumber: aadharNumber,
-  //     qualification: qualification,
-  //     specialist: specialist,
-  //     profileLink: profileLink,
-  //   );
-  //   return await doctor.doc(dId).update(newDoctor.toJson()).then((value) {
-  //     Get.back();
-  //     FlutterToast().showMessage("User Updated");
-  //     log("User Updated");
-  //   }).catchError((onError) {
-  //     log("Failed to update Doctor data : $onError");
-  //   });
-  // }
+  static Future<void> updatePatient({
+    required String pId,
+    required String hospitalRef,
+    required String doctorRef,
+    required String name,
+    required String mobileNumber,
+    required String email,
+    required String age,
+    required String gender,
+    required String bloodGroup,
+    required String address,
+    required String pickImage,
+    required String disease,
+    required String adminDate,
+    required String payAmount,
+    required String roomNo,
+    required String wardNo,
+  }) async {
+    final newPatient = Patient(
+      pId: pId,
+      hospitalRef: hospitalRef,
+      doctorRef: doctorRef,
+      name: name,
+      mobileNumber: mobileNumber,
+      email: email,
+      age: age,
+      gender: gender,
+      bloodGroup: bloodGroup,
+      address: address,
+      pickImage: pickImage,
+      disease: disease,
+      adminDate: adminDate,
+      payAmount: payAmount,
+      roomNo: roomNo,
+      wardNo: wardNo,
+    );
+    return await patient.doc(pId).update(newPatient.toJson()).then((value) {
+      Get.back();
+      FlutterToast().showMessage("User Updated");
+      log("User Updated");
+    }).catchError((onError) {
+      log("Failed to update Patient data : $onError");
+    });
+  }
 }

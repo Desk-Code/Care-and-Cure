@@ -66,20 +66,6 @@ Widget doctorFiltering(BuildContext context) => AnimatedContainer(
           ),
           TextButton(
             onPressed: () {
-              CommonValues.filterData = "gender";
-              Get.back();
-            },
-            child: Text(
-              "Gender",
-              style: TextStyle(
-                color: (CommonValues.filterData == "gender")
-                    ? Colors.blue
-                    : Colors.black,
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
               CommonValues.filterData = "age";
               Get.back();
             },
