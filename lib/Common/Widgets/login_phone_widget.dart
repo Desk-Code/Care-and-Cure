@@ -1,5 +1,5 @@
-import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
+import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,6 +37,7 @@ Widget loginPhoneWidget({
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   CommonValues.phNumberValue = value.completeNumber;
+                  CommonValues.inputedNumber = value.number;
                 },
               ),
               const SizedBox(

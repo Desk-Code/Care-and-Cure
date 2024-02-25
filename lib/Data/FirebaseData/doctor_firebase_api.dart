@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_function_literals_in_foreach_calls
+
 import 'dart:developer';
 
 import 'package:care_and_cure/Common/Widgets/common_toast.dart';
@@ -6,6 +8,7 @@ import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/DoctorData/Controller/doctor.controller.dart';
 import 'package:care_and_cure/Util/common_values.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +17,25 @@ class DoctorApi {
 
   static CollectionReference doctor =
       FirebaseFirestore.instance.collection(doctorCollection);
+
+  // get doctor is registred
+
+  static Future doctorIsRegister() async {
+    List dataList = [];
+    try {
+      await doctor
+          .where('mobileNumber', isEqualTo: CommonValues.inputedNumber)
+          .get()
+          .then((QuerySnapshot querySnapshot) =>
+              querySnapshot.docs.forEach((doc) {
+                dataList.add(doc.data());
+              }));
+      return dataList;
+    } catch (e) {
+      log("$e");
+      return null;
+    }
+  }
 
   static Future<void> addDoctor() async {
     final DatabaseReference db = FirebaseDatabase.instance.ref('User');
@@ -87,5 +109,11 @@ class DoctorApi {
     }).catchError((onError) {
       log("Failed to update Doctor data : $onError");
     });
+  }
+
+  static Future<void> signOutMethod() async {
+    SharedPref.setDoctorUser = "";
+    await FirebaseAuth.instance.signOut();
+    Get.back();
   }
 }

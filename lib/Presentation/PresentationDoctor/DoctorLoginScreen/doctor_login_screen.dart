@@ -1,4 +1,7 @@
+import 'package:care_and_cure/Common/Widgets/common_loader.dart';
+import 'package:care_and_cure/Common/Widgets/common_toast.dart';
 import 'package:care_and_cure/Common/Widgets/login_phone_widget.dart';
+import 'package:care_and_cure/Data/FirebaseData/doctor_firebase_api.dart';
 import 'package:care_and_cure/Data/FirebaseData/firebase_auth_api.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:care_and_cure/Presentation/PresentationDoctor/DoctorLoginScreen/doctor_otp_screen.dart';
@@ -16,6 +19,8 @@ class DoctorLoginScreen extends StatefulWidget {
 }
 
 class _DoctorLoginScreenState extends State<DoctorLoginScreen> {
+  bool isOnTap = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,44 +44,64 @@ class _DoctorLoginScreenState extends State<DoctorLoginScreen> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Column(
+        child: Stack(
+          alignment: Alignment.center,
           children: [
-            Container(
-              height: context.screenHeight * 0.35,
-              width: context.screenWidth,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/doctorlogin.jpg"),
-                  fit: BoxFit.fill,
+            Column(
+              children: [
+                Container(
+                  height: context.screenHeight * 0.35,
+                  width: context.screenWidth,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/doctorlogin.jpg"),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                 ),
-              ),
+                Text(
+                  'otpVerification'.tr,
+                  style: GoogleFonts.lato(
+                    color: Colors.black,
+                    fontSize: 21,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  'otpVeriInfo'.tr,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.lato(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                loginPhoneWidget(
+                  context: context,
+                  onTap: () async {
+                    List isRegister = await DoctorApi.doctorIsRegister();
+                    if (isRegister.isNotEmpty) {
+                      setState(() {
+                        isOnTap = true;
+                      });
+                      await FirebaseApiAuth.sendOtp(
+                        phNumber: CommonValues.phNumberValue,
+                        toNavigate: () => const DoctorOtpScreen(),
+                      );
+                    } else {
+                      FlutterToast().showMessage('register error'.tr);
+                    }
+                  },
+                ),
+              ],
             ),
-            Text(
-              'otpVerification'.tr,
-              style: GoogleFonts.lato(
-                color: Colors.black,
-                fontSize: 21,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'otpVeriInfo'.tr,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.lato(
-                color: Colors.black,
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            loginPhoneWidget(
-              context: context,
-              onTap: () async {
-                await FirebaseApiAuth.sendOtp(
-                  phNumber: CommonValues.phNumberValue,
-                  toNavigate: () => const DoctorOtpScreen(),
-                );
-              },
-            ),
+            (isOnTap == true)
+                ? SizedBox(
+                    height: context.screenHeight * 0.8,
+                    width: context.screenWidth * 1,
+                    child: loadingIndicator(),
+                  )
+                : const SizedBox(),
           ],
         ),
       ),

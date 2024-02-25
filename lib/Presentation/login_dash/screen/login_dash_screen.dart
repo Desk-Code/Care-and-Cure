@@ -1,6 +1,6 @@
-import 'package:care_and_cure/Presentation/PresentationDoctor/DoctorLoginScreen/doctor_login_screen.dart';
-import 'package:care_and_cure/Presentation/PresentationHospital/Services/hospital_services.dart';
-import 'package:care_and_cure/Presentation/PresentationPatient/PatientLoginScreen/patient_login_screen.dart';
+import 'package:care_and_cure/Common/Services/doctor_services.dart';
+import 'package:care_and_cure/Common/Services/hospital_services.dart';
+import 'package:care_and_cure/Common/Services/patient_services.dart';
 import 'package:care_and_cure/Presentation/login_dash/widgets/login_dashes.dart';
 import 'package:care_and_cure/Presentation/login_dash/widgets/login_info.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
@@ -56,14 +56,14 @@ class _LoginDashScreenState extends State<LoginDashScreen> {
             context: context,
             nameOfLogin: 'patientLogin'.tr,
             onTap: () {
-              Get.to(() => const PatientLoginScreen());
+              SplashServiciesForPatient.isLogin();
             },
           ),
           loginDash(
             context: context,
             nameOfLogin: 'doctorLogin'.tr,
             onTap: () {
-              Get.to(() => const DoctorLoginScreen());
+              SplashServiciesForDoctor.isLogin();
             },
           ),
           loginDash(

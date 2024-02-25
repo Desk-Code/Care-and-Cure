@@ -6,6 +6,8 @@ class SharedKey {
   static String languageCode = "LanguageCode";
   static String selectedIndex = "SelectedIndex";
   static String hospitalUser = "HospitalUser";
+  static String doctorUser = "DoctorUser";
+  static String patientUser = "PatientUser";
   static String hospitalAddress = "HospitalAddress";
   static String hospitalEmail = "HospitalEmail";
   static String hospitalCertificate = "HospitalCertificate";
@@ -33,6 +35,10 @@ class SharedPref {
       pref!.setInt(SharedKey.selectedIndex, data);
   static set setHospitalUser(String data) =>
       pref!.setString(SharedKey.hospitalUser, data);
+  static set setDoctorUser(String data) =>
+      pref!.setString(SharedKey.doctorUser, data);
+  static set setPatientUser(String data) =>
+      pref!.setString(SharedKey.patientUser, data);
   static set setHospitalAddress(String data) =>
       pref!.setString(SharedKey.hospitalAddress, data);
   static set setHospitalEmail(String data) =>
@@ -62,6 +68,10 @@ class SharedPref {
   static int get getSelectedIndex => pref!.getInt(SharedKey.selectedIndex) ?? 0;
   static String get getHospitalUser =>
       pref!.getString(SharedKey.hospitalUser) ?? "";
+  static String get getDoctorUser =>
+      pref!.getString(SharedKey.doctorUser) ?? "";
+  static String get getPatientUser =>
+      pref!.getString(SharedKey.patientUser) ?? "";
   static String get getHospitalAddress =>
       pref!.getString(SharedKey.hospitalAddress) ?? "";
   static String get getHospitalEmail =>

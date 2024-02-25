@@ -9,6 +9,7 @@ import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/PatientData/Controller/patient.controller.dart';
 import 'package:care_and_cure/Util/common_values.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +18,25 @@ class PatientApi {
 
   static CollectionReference patient =
       FirebaseFirestore.instance.collection(patientCollection);
+
+  // get doctor is registred
+
+  static Future patientIsRegister() async {
+    List dataList = [];
+    try {
+      await patient
+          .where('mobileNumber', isEqualTo: CommonValues.inputedNumber)
+          .get()
+          .then((QuerySnapshot querySnapshot) =>
+              querySnapshot.docs.forEach((doc) {
+                dataList.add(doc.data());
+              }));
+      return dataList;
+    } catch (e) {
+      log("$e");
+      return null;
+    }
+  }
 
   // get Particular User Record
   static List dataList = [];
@@ -146,5 +166,11 @@ class PatientApi {
     }).catchError((onError) {
       log("Failed to update Patient data : $onError");
     });
+  }
+
+  static Future<void> signOutMethod() async {
+    SharedPref.setPatientUser = "";
+    await FirebaseAuth.instance.signOut();
+    Get.back();
   }
 }

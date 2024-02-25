@@ -1,5 +1,7 @@
+import 'package:care_and_cure/Common/Widgets/common_toast.dart';
 import 'package:care_and_cure/Common/Widgets/login_phone_widget.dart';
 import 'package:care_and_cure/Data/FirebaseData/firebase_auth_api.dart';
+import 'package:care_and_cure/Data/FirebaseData/patient_firebase_api.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:care_and_cure/Presentation/PresentationPatient/PatientLoginScreen/patient_otp_screen.dart';
 import 'package:care_and_cure/Util/common_values.dart';
@@ -16,6 +18,7 @@ class PatientLoginScreen extends StatefulWidget {
 }
 
 class _PatientLoginScreenState extends State<PatientLoginScreen> {
+  bool isOnTap = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,10 +74,18 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
             loginPhoneWidget(
               context: context,
               onTap: () async {
-                await FirebaseApiAuth.sendOtp(
-                  phNumber: CommonValues.phNumberValue,
-                  toNavigate: () => const PatientOtpScreen(),
-                );
+                List isRegister = await PatientApi.patientIsRegister();
+                if (isRegister.isNotEmpty) {
+                  setState(() {
+                    isOnTap = true;
+                  });
+                  await FirebaseApiAuth.sendOtp(
+                    phNumber: CommonValues.phNumberValue,
+                    toNavigate: () => const PatientOtpScreen(),
+                  );
+                } else {
+                  FlutterToast().showMessage('register error'.tr);
+                }
               },
             ),
           ],

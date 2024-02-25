@@ -8,6 +8,7 @@ import 'package:care_and_cure/Presentation/PresentationHospital/DoctorData/Scree
 import 'package:care_and_cure/Presentation/PresentationHospital/PatientData/Screen/patient_search_screen.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/ProfileScreen/hospital_profile_screen.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/StaffData/Screen/staff_dash_screen.dart';
+import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
   void initState() {
     SharedPref.setHospitalUser =
         FirebaseAuth.instance.currentUser!.phoneNumber!;
-    HospitalFirebaseApi.getUserData("9313403837");
+    HospitalFirebaseApi.getUserData(CommonValues.inputedNumber);
     super.initState();
   }
 

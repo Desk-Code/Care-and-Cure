@@ -1,6 +1,6 @@
 import 'package:care_and_cure/Common/Widgets/otp_screen.dart';
 import 'package:care_and_cure/Data/FirebaseData/firebase_auth_api.dart';
-import 'package:care_and_cure/Presentation/SplashScreen/Screen/splash_screen_page.dart';
+import 'package:care_and_cure/Presentation/PresentationDoctor/DoctorDashboard/screen/nalalog.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,7 +40,7 @@ class _DoctorOtpScreenState extends State<DoctorOtpScreen> {
           context,
           onTap: () {
             FirebaseApiAuth.otpVerification(
-              toNaviagte: () => const SplashScreenPage(),
+              toNaviagte: () => const NalaLog(),
             );
           },
         ));

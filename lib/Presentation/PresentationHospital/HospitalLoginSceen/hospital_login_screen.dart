@@ -113,14 +113,6 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
                                   await HospitalFirebaseApi.getUserData(
                                       CommonValues.inputedNumber);
                               if (isRegister.isNotEmpty) {
-                                // Get.dialog(
-                                //   Dialog(
-                                //     child: Center(
-                                //       child: loadingIndicator(),
-                                //     ),
-                                //   ),
-                                // );
-
                                 setState(() {
                                   isOnTap = true;
                                 });
