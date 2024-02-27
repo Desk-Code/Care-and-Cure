@@ -1,36 +1,35 @@
+import 'package:care_and_cure/Data/FirebaseData/patient_firebase_api.dart';
 import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
+import 'package:care_and_cure/Presentation/PresentationPatient/screen/patient_medicine_screen.dart';
+import 'package:care_and_cure/Presentation/PresentationPatient/screen/patient_payment_screen.dart';
+import 'package:care_and_cure/Presentation/PresentationPatient/screen/patient_profile_screen.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class PatientScreenDemo extends StatefulWidget {
-  const PatientScreenDemo({super.key});
+class PatientController extends StatefulWidget {
+  const PatientController({super.key});
 
   @override
-  State<PatientScreenDemo> createState() => _PatientScreenDemoState();
+  State<PatientController> createState() => _PatientControllerState();
 }
 
-class _PatientScreenDemoState extends State<PatientScreenDemo> {
+class _PatientControllerState extends State<PatientController> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
-  static const List _widgetOptions = [
-    Text(
-      'Profile',
-      style: optionStyle,
-    ),
-    Text(
-      'Payment',
-      style: optionStyle,
-    ),
-    Text(
-      'Log Out',
-      style: optionStyle,
-    ),
+
+  // static const TextStyle optionStyle =
+  //     TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
+  static final List _widgetOptions = [
+    const PatientProfileScreen(),
+    const PatientPaymentScreen(),
+    const PatientMedicineScreen(),
+    Container(),
   ];
+
   @override
   void initState() {
     SharedPref.setPatientUser = FirebaseAuth.instance.currentUser!.phoneNumber!;
@@ -42,7 +41,7 @@ class _PatientScreenDemoState extends State<PatientScreenDemo> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ConstrainColor.bgAppBarColor,
-        elevation: 20,
+        // elevation: 20,
         title: Text(
           'appName'.tr,
           style: GoogleFonts.lato(
@@ -92,16 +91,40 @@ class _PatientScreenDemoState extends State<PatientScreenDemo> {
                   text: 'payment',
                 ),
                 GButton(
+                  icon: Icons.medical_services_outlined,
+                  text: 'Medicine',
+                ),
+                GButton(
                   icon: Icons.logout_outlined,
                   text: 'Log Out',
                 ),
               ],
               selectedIndex: _selectedIndex,
-              onTabChange: (index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
-              },
+              onTabChange: (index) => (index != 3)
+                  ? setState(() {
+                      _selectedIndex = index;
+                    })
+                  : showDialog(
+                      context: context,
+                      builder: (context) => CupertinoAlertDialog(
+                        title: const Text('Please Confirm'),
+                        content: const Text("Do you want to logout ?"),
+                        actions: [
+                          MaterialButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            child: const Text("No"),
+                          ),
+                          MaterialButton(
+                            onPressed: () async {
+                              await PatientApi.signOutMethod();
+                            },
+                            child: const Text("Yes"),
+                          ),
+                        ],
+                      ),
+                    ),
             ),
           ),
         ),

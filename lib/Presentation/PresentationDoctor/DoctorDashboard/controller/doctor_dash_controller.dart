@@ -1,35 +1,30 @@
+import 'package:care_and_cure/Data/FirebaseData/doctor_firebase_api.dart';
 import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
+import 'package:care_and_cure/Presentation/PresentationDoctor/DoctorDashboard/screen/doctor_dashboard.dart';
+import 'package:care_and_cure/Presentation/PresentationDoctor/DoctorDashboard/screen/doctor_profile.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class NalaLog extends StatefulWidget {
-  const NalaLog({super.key});
+class DoctorDashController extends StatefulWidget {
+  const DoctorDashController({super.key});
 
   @override
-  State<NalaLog> createState() => _NalaLogState();
+  State<DoctorDashController> createState() => _DoctorDashControllerState();
 }
 
-class _NalaLogState extends State<NalaLog> {
+class _DoctorDashControllerState extends State<DoctorDashController> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
-  static const List _widgetOptions = [
-    Text(
-      'Profile',
-      style: optionStyle,
-    ),
-    Text(
-      'Dash Board',
-      style: optionStyle,
-    ),
-    Text(
-      'Log Out',
-      style: optionStyle,
-    ),
+  // static const TextStyle optionStyle =
+  //     TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
+  static final List _widgetOptions = [
+    const DoctorProfile(),
+    const DoctorDashBoard(),
+    Container(),
   ];
   @override
   void initState() {
@@ -40,9 +35,10 @@ class _NalaLogState extends State<NalaLog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: ConstrainColor.bgAppBarColor,
-        elevation: 20,
+        // elevation: 20,
         title: Text(
           'appName'.tr,
           style: GoogleFonts.lato(
@@ -97,11 +93,31 @@ class _NalaLogState extends State<NalaLog> {
                 ),
               ],
               selectedIndex: _selectedIndex,
-              onTabChange: (index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
-              },
+              onTabChange: (index) => (index != 2)
+                  ? setState(() {
+                      _selectedIndex = index;
+                    })
+                  : showDialog(
+                      context: context,
+                      builder: (context) => CupertinoAlertDialog(
+                        title: const Text('Please Confirm'),
+                        content: const Text("Do you want to logout ?"),
+                        actions: [
+                          MaterialButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            child: const Text("No"),
+                          ),
+                          MaterialButton(
+                            onPressed: () async {
+                              await DoctorApi.signOutMethod();
+                            },
+                            child: const Text("Yes"),
+                          ),
+                        ],
+                      ),
+                    ),
             ),
           ),
         ),

@@ -17,6 +17,8 @@ class SharedKey {
   static String hospitalPassword = "HospitalPassword";
   static String hospitalUpiID = "HospitalUpiID";
   static String hospitalHID = "HospitalHID";
+  static String doctorDId = "DoctorDId";
+  static String patientId = "PatientId";
 }
 
 class SharedPref {
@@ -57,6 +59,10 @@ class SharedPref {
       pref!.setString(SharedKey.hospitalUpiID, data);
   static set setHospitalHId(String data) =>
       pref!.setString(SharedKey.hospitalHID, data);
+  static set setDoctorDId(String data) =>
+      pref!.setString(SharedKey.doctorDId, data);
+  static set setPatientId(String data) =>
+      pref!.setString(SharedKey.patientId, data);
 
   //for the get value
   static String get getLanguageCode =>
@@ -90,4 +96,6 @@ class SharedPref {
       pref!.getString(SharedKey.hospitalUpiID) ?? "";
   static String get getHospitalHId =>
       pref!.getString(SharedKey.hospitalHID) ?? "";
+  static String get getDoctorDId => pref!.getString(SharedKey.doctorDId) ?? "";
+  static String get getPatientId => pref!.getString(SharedKey.patientId) ?? "";
 }

@@ -6,6 +6,7 @@ import 'package:care_and_cure/Common/Widgets/common_toast.dart';
 import 'package:care_and_cure/Common/model/doctor_model.dart';
 import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/DoctorData/Controller/doctor.controller.dart';
+import 'package:care_and_cure/Presentation/login_dash/screen/login_dash_screen.dart';
 import 'package:care_and_cure/Util/common_values.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,6 +30,7 @@ class DoctorApi {
           .then((QuerySnapshot querySnapshot) =>
               querySnapshot.docs.forEach((doc) {
                 dataList.add(doc.data());
+                SharedPref.setDoctorDId = doc['dId'];
               }));
       return dataList;
     } catch (e) {
@@ -113,7 +115,8 @@ class DoctorApi {
 
   static Future<void> signOutMethod() async {
     SharedPref.setDoctorUser = "";
+    SharedPref.setDoctorDId = "";
     await FirebaseAuth.instance.signOut();
-    Get.back();
+    Get.offAll(() => const LoginDashScreen());
   }
 }

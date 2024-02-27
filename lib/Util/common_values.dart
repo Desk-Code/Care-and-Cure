@@ -11,6 +11,8 @@ class CommonValues extends GetxController {
   static String search = "";
   static String filterData = "fullName";
 
+  static double payableAmount = 0;
+
   static final OtpFieldController _otpFeildController = OtpFieldController();
   static OtpFieldController get otpController => _otpFeildController;
 

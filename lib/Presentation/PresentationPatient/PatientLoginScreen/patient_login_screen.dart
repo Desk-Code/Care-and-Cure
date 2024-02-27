@@ -1,3 +1,4 @@
+import 'package:care_and_cure/Common/Widgets/common_loader.dart';
 import 'package:care_and_cure/Common/Widgets/common_toast.dart';
 import 'package:care_and_cure/Common/Widgets/login_phone_widget.dart';
 import 'package:care_and_cure/Data/FirebaseData/firebase_auth_api.dart';
@@ -42,52 +43,63 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Column(
+        child: Stack(
           children: [
-            Container(
-              height: context.screenHeight * 0.35,
-              width: context.screenWidth,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/patientlogin.jpg"),
-                  fit: BoxFit.fill,
+            Column(
+              children: [
+                Container(
+                  height: context.screenHeight * 0.35,
+                  width: context.screenWidth,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/patientlogin.jpg"),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                 ),
-              ),
+                Text(
+                  'otpVerification'.tr,
+                  style: GoogleFonts.lato(
+                    color: Colors.black,
+                    fontSize: 21,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  'otpVeriInfo'.tr,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.lato(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                loginPhoneWidget(
+                  context: context,
+                  onTap: () async {
+                    List isRegister = await PatientApi.patientIsRegister();
+                    if (isRegister.isNotEmpty) {
+                      setState(() {
+                        isOnTap = true;
+                      });
+                      await FirebaseApiAuth.sendOtp(
+                        phNumber: CommonValues.phNumberValue,
+                        toNavigate: () => const PatientOtpScreen(),
+                      );
+                    } else {
+                      FlutterToast().showMessage('register error'.tr);
+                    }
+                  },
+                ),
+              ],
             ),
-            Text(
-              'otpVerification'.tr,
-              style: GoogleFonts.lato(
-                color: Colors.black,
-                fontSize: 21,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'otpVeriInfo'.tr,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.lato(
-                color: Colors.black,
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            loginPhoneWidget(
-              context: context,
-              onTap: () async {
-                List isRegister = await PatientApi.patientIsRegister();
-                if (isRegister.isNotEmpty) {
-                  setState(() {
-                    isOnTap = true;
-                  });
-                  await FirebaseApiAuth.sendOtp(
-                    phNumber: CommonValues.phNumberValue,
-                    toNavigate: () => const PatientOtpScreen(),
-                  );
-                } else {
-                  FlutterToast().showMessage('register error'.tr);
-                }
-              },
-            ),
+            (isOnTap == true)
+                ? SizedBox(
+                    height: context.screenHeight * 0.8,
+                    width: context.screenWidth * 1,
+                    child: loadingIndicator(),
+                  )
+                : const SizedBox(),
           ],
         ),
       ),

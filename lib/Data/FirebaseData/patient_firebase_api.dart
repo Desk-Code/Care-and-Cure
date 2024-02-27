@@ -1,12 +1,14 @@
 // ignore_for_file: avoid_function_literals_in_foreach_calls
 
 import 'dart:developer';
+import 'dart:math' as mt;
 
 import 'package:care_and_cure/Common/Widgets/common_toast.dart';
 import 'package:care_and_cure/Common/model/patient_model.dart';
 import 'package:care_and_cure/Data/FirebaseData/doctor_firebase_api.dart';
 import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/PatientData/Controller/patient.controller.dart';
+import 'package:care_and_cure/Presentation/login_dash/screen/login_dash_screen.dart';
 import 'package:care_and_cure/Util/common_values.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,6 +32,7 @@ class PatientApi {
           .then((QuerySnapshot querySnapshot) =>
               querySnapshot.docs.forEach((doc) {
                 dataList.add(doc.data());
+                SharedPref.setPatientId = doc['pId'];
               }));
       return dataList;
     } catch (e) {
@@ -168,9 +171,42 @@ class PatientApi {
     });
   }
 
+  static Future<void> updateBillAndDisease(
+      {required String pId,
+      required String disease,
+      required String amount}) async {
+    int intValue = mt.Random().nextInt(25) + 1;
+    List<String> charList = ["A", "B", "C", "D", "E", "F", "G", "H", "P", "Y"];
+    String charValue = charList[mt.Random().nextInt(9)];
+    await patient.doc(pId).update({
+      'disease': disease,
+      'payAmount': amount,
+      'roomNo': intValue,
+      'wardNo': charValue,
+    }).then((value) {
+      Get.back();
+      FlutterToast().showMessage("User Data Updated");
+      log("User Data Updated");
+    }).catchError((onError) {
+      log("Failed to update Patient data : $onError");
+    });
+  }
+
+  static Future<void> updatePayAmount(
+      {required String key, required String payAmount}) async {
+    await patient.doc(key).update({
+      'payAmount': payAmount,
+    }).then((value) {
+      log("Patient Data Updated");
+    }).catchError((onError) {
+      log("Failed to update Patient data : $onError");
+    });
+  }
+
   static Future<void> signOutMethod() async {
     SharedPref.setPatientUser = "";
+    SharedPref.setPatientId = "";
     await FirebaseAuth.instance.signOut();
-    Get.back();
+    Get.to(() => const LoginDashScreen());
   }
 }

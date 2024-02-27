@@ -38,13 +38,13 @@ Widget patientFiltering(BuildContext context) => AnimatedContainer(
           ),
           TextButton(
             onPressed: () {
-              CommonValues.filterData = "fullName";
+              CommonValues.filterData = "name";
               Get.back();
             },
             child: Text(
               "Name",
               style: TextStyle(
-                color: (CommonValues.filterData == "fullName")
+                color: (CommonValues.filterData == "name")
                     ? Colors.blue
                     : Colors.black,
               ),
