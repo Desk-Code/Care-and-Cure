@@ -45,8 +45,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 a['id'] = documnet.id;
               }).toList();
 
-              CommonValues.payableAmount =
-              double.parse(storedocs[0]['payAmount']);
+              CommonValues.payableAmount = int.parse(storedocs[0]['payAmount']);
               if (snapshot.hasData && storedocs.isNotEmpty) {
                 return Column(
                   children: [

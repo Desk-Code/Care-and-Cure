@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:care_and_cure/Common/Widgets/common_text.dart';
 import 'package:care_and_cure/Common/Widgets/common_toast.dart';
 import 'package:care_and_cure/Data/FirebaseData/patient_firebase_api.dart';
@@ -7,8 +9,8 @@ import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:slide_to_act/slide_to_act.dart';
 
 class PatientPaymentScreen extends StatefulWidget {
   const PatientPaymentScreen({super.key});
@@ -20,21 +22,8 @@ class PatientPaymentScreen extends StatefulWidget {
 class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
   final TextEditingController _textEditingController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
-
+  int amount = CommonValues.payableAmount;
   final Razorpay _razorPay = Razorpay();
-
-  var options = {
-    'key': 'rzp_test_yNCgfS03jZXBVM',
-    'amount': 1000,
-    'name': 'Acme Corp.',
-    'description': 'Demo',
-    'retry': {'enabled': true, 'max_count': 1},
-    'send_sms_hash': true,
-    'prefill': {
-      'contact': '9313403837',
-      'email': 'test@razorpay.com',
-    },
-  };
 
   @override
   void initState() {
@@ -94,6 +83,12 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
                     children: [
                       TextFormField(
                         controller: _textEditingController,
+                        onChanged: (value) {
+                          if (value != "") {
+                            amount = int.parse(_textEditingController.text);
+                            log(amount.toString());
+                          }
+                        },
                         validator: MultiValidator([
                           RequiredValidator(
                               errorText: "Enter Amout to you have Pay"),
@@ -110,12 +105,88 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-                      GestureDetector(
-                        onTap: () {
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     if (_globalKey.currentState!.validate()) {
+                      //       if (CommonValues.payableAmount >=
+                      //           double.parse(_textEditingController.text)) {
+                      //         var options = {
+                      //           'key': 'rzp_test_yNCgfS03jZXBVM',
+                      //           'amount': (amount * 100),
+                      //           'name': 'Acme Corp.',
+                      //           'description': 'Demo',
+                      //           'retry': {'enabled': true, 'max_count': 1},
+                      //           'send_sms_hash': true,
+                      //           'prefill': {
+                      //             'contact': '9313403837',
+                      //             'email': 'test@razorpay.com',
+                      //           },
+                      //         };
+                      //         _razorPay.open(options);
+                      //         _razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS,
+                      //             paymentSuccess);
+                      //         _razorPay.on(
+                      //             Razorpay.EVENT_PAYMENT_ERROR, paymentFailure);
+                      //       } else {
+                      //         FlutterToast().showMessage(
+                      //             "Please Check Payable Amount First or Its not higher than your Pay Amount");
+                      //       }
+                      //     }
+                      //   },
+                      //   child: Container(
+                      //     height: context.screenHeight * 0.06,
+                      //     decoration: BoxDecoration(
+                      //       borderRadius: BorderRadius.circular(5),
+                      //       border: Border.all(
+                      //         color: Colors.black,
+                      //         width: 2,
+                      //       ),
+                      //     ),
+                      //     alignment: Alignment.center,
+                      //     child: Text(
+                      //       "Make Payment",
+                      //       style: GoogleFonts.lato(
+                      //         color: Colors.black,
+                      //         fontSize: 20,
+                      //         fontWeight: FontWeight.bold,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+
+                      SlideAction(
+                        borderRadius: 12,
+                        elevation: 0,
+                        innerColor: Colors.blue.shade400,
+                        outerColor: Colors.blue.shade100,
+                        sliderButtonIcon: const Icon(
+                          Icons.attach_money_sharp,
+                          color: Colors.black,
+                        ),
+                        text: "Slide to Pay",
+                        textStyle: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                        onSubmit: () {
                           if (_globalKey.currentState!.validate()) {
                             if (CommonValues.payableAmount >=
-                                double.parse(_textEditingController.text)) {
-                                  _razorPay.open(options);
+                                    double.parse(_textEditingController.text) &&
+                                double.parse(_textEditingController.text) !=
+                                    0) {
+                              var options = {
+                                'key': 'rzp_test_yNCgfS03jZXBVM',
+                                'amount': (amount * 100),
+                                'name': 'Acme Corp.',
+                                'description': 'Demo',
+                                'retry': {'enabled': true, 'max_count': 1},
+                                'send_sms_hash': true,
+                                'prefill': {
+                                  'contact': '9313403837',
+                                  'email': 'test@razorpay.com',
+                                },
+                              };
+                              _razorPay.open(options);
                               _razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS,
                                   paymentSuccess);
                               _razorPay.on(
@@ -124,28 +195,9 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
                               FlutterToast().showMessage(
                                   "Please Check Payable Amount First or Its not higher than your Pay Amount");
                             }
-                            
                           }
+                          return null;
                         },
-                        child: Container(
-                          height: context.screenHeight * 0.06,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(
-                              color: Colors.black,
-                              width: 2,
-                            ),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Make Payment",
-                            style: GoogleFonts.lato(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
                       ),
                     ],
                   ),
@@ -159,7 +211,7 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
   }
 
   void paymentSuccess(PaymentSuccessResponse paymentSuccessResponse) async {
-    CommonValues.payableAmount -= double.parse(_textEditingController.text);
+    CommonValues.payableAmount -= int.parse(_textEditingController.text);
     await PatientApi.updatePayAmount(
       key: SharedPref.getPatientId,
       payAmount: CommonValues.payableAmount.toString(),

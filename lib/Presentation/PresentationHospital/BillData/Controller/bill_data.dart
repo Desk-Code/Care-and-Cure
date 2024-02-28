@@ -1,3 +1,5 @@
+import 'package:care_and_cure/Presentation/PresentationHospital/BillData/Screen/payment_completed_screen.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/BillData/Screen/payment_pending_screen.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +18,7 @@ class _BillDataState extends State<BillData> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: ConstrainColor.bgAppBarColor,
           title: Text(
@@ -46,8 +49,8 @@ class _BillDataState extends State<BillData> {
         ),
         body: const TabBarView(
           children: [
-            Center(child: Text("Harsh")),
-            Center(child: Text("Kano")),
+            PaymentPendingScreen(),
+            PaymentCompletedScreen(),
           ],
         ),
       ),

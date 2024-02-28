@@ -26,6 +26,7 @@ class _PatientControllerState extends State<PatientController> {
   static final List _widgetOptions = [
     const PatientProfileScreen(),
     const PatientPaymentScreen(),
+    // const MedicineProfile(),
     const PatientMedicineScreen(),
     Container(),
   ];
