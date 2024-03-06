@@ -1,6 +1,7 @@
 import 'package:care_and_cure/Common/Widgets/common_loader.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 Widget commonDoctorCard(
   BuildContext context, {
@@ -52,9 +53,9 @@ Widget commonDoctorCard(
             const SizedBox(
               height: 10,
             ),
-            Text("Doctor Name    : $name"),
-            Text("Doctor Mobile  : $mobNum"),
-            Text("Doctor Qualification  : $qualification"),
+            Text("${'doctorName'.tr} : $name"),
+            Text("${'mobileNo'.tr}: $mobNum"),
+            Text("${'qualification'.tr}  : $qualification"),
           ],
         ),
       ),

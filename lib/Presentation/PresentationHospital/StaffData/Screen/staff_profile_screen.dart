@@ -7,6 +7,7 @@ import 'package:care_and_cure/Presentation/PresentationHospital/StaffData/Contro
 import 'package:care_and_cure/Presentation/PresentationHospital/StaffData/Screen/staff_update_data_screen.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class StaffProfileScreen extends StatefulWidget {
@@ -66,13 +67,13 @@ class _StaffProfileScreenState extends State<StaffProfileScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      commonText(data: "Full Name", size: 17),
-                      commonText(data: "Mobile No", size: 17),
-                      commonText(data: "Gender", size: 17),
-                      commonText(data: "Age", size: 17),
-                      commonText(data: "staffSection", size: 17),
-                      commonText(data: "Aadhar Number", size: 17),
-                      commonText(data: "Address", size: 17),
+                      commonText(data: 'fullName'.tr, size: 17),
+                      commonText(data: 'mobileNo'.tr, size: 17),
+                      commonText(data: 'gender'.tr, size: 17),
+                      commonText(data: 'age'.tr, size: 17),
+                      commonText(data: 'staffSection'.tr, size: 17),
+                      commonText(data: 'adharNumber'.tr, size: 17),
+                      commonText(data: 'address'.tr, size: 17),
                     ],
                   ),
                   SingleChildScrollView(
@@ -121,23 +122,6 @@ class _StaffProfileScreenState extends State<StaffProfileScreen> {
               ),
             ),
             onPressed: () {
-              // StaffDashController.txtStaffController[0].text = widget.fullName;
-              // StaffDashController.txtStaffController[1].text =
-              //     widget.mobileNumber;
-              // StaffDashController.txtStaffController[2].text = widget.gender;
-              // StaffDashController.txtStaffController[3].text = widget.age;
-              // StaffDashController.txtStaffController[4].text =
-              //     widget.aadharNumber;
-              // StaffDashController.txtStaffController[5].text = widget.address;
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => StaffUpdatePage(
-              //       selectedKey: widget.selectedKey,
-              //       selectedStaff: widget.staffSection,
-              //     ),
-              //   ),
-              // );
               StaffDashController.txtStaffController[0].text =
                   widget.profileStaffData.fullName;
               StaffDashController.txtStaffController[1].text =
@@ -152,7 +136,7 @@ class _StaffProfileScreenState extends State<StaffProfileScreen> {
                   widget.profileStaffData.address;
               Get.to(() => StaffUpdateData(staffData: widget.profileStaffData));
             },
-            child: const Text("Update"),
+            child:  Text('update'.tr),
           ),
           const SizedBox(
             height: 20,
@@ -167,10 +151,11 @@ class _StaffProfileScreenState extends State<StaffProfileScreen> {
               ),
             ),
             onPressed: () async {
+              HapticFeedback.heavyImpact();
               await StaffFirebaseApi.deleteUser(
                   id: widget.profileStaffData.sId);
             },
-            child: const Text("Fire"),
+            child:  Text('fire'.tr),
           ),
           const SizedBox(
             height: 20,

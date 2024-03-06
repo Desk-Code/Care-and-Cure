@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:get/get.dart';
 
 Widget commonTextFormField({
   required IconData icon,
@@ -12,7 +13,7 @@ Widget commonTextFormField({
       child: TextFormField(
         controller: textEditingController,
         validator: MultiValidator([
-          RequiredValidator(errorText: 'This field is required'),
+          RequiredValidator(errorText: 'tfError'.tr),
         ]).call,
         decoration: InputDecoration(
           border: OutlineInputBorder(

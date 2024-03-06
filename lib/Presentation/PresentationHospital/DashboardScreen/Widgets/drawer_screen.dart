@@ -1,5 +1,10 @@
 import 'package:care_and_cure/Data/FirebaseData/hospital_firebase_api.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/BillData/Controller/bill_data.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/DashboardScreen/Widgets/common_drawer_tile.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/DoctorData/Screen/doctor_search_screen.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/PatientData/Screen/patient_search_screen.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/ProfileScreen/hospital_profile_screen.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/StaffData/Screen/staff_dash_screen.dart';
 import 'package:care_and_cure/Presentation/login_dash/screen/login_dash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,74 +29,51 @@ Widget dashDrawer(BuildContext context) => Drawer(
               const Divider(),
               commonDrawerTile(
                 icon: Icons.home,
-                name: "Home",
+                name: 'home'.tr,
                 onTap: () {
                   Get.back();
                 },
               ),
               commonDrawerTile(
                 icon: Icons.person,
-                name: "Patient Details",
+                name: 'patientDetails'.tr,
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const PatientSearchPage(),
-                  //   ),
-                  // );
+                  Get.to(() => const PatientSearchScreen());
                 },
               ),
               commonDrawerTile(
                 icon: Icons.groups,
-                name: "Staff Detail",
+                name: 'staffDetail'.tr,
                 onTap: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const StaffDashScreen(),
-                  //     ));
+                  Get.to(() => const StaffDashScreen());
                 },
               ),
               commonDrawerTile(
                 icon: Icons.person,
-                name: "Doctor Detail",
+                name: 'doctorDetail'.tr,
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const DoctorSearchPage(),
-                  //   ),
-                  // );
+                  Get.to(() => const DoctorSearchScreen());
                 },
               ),
               commonDrawerTile(
                 icon: Icons.currency_rupee_sharp,
-                name: "Bill",
+                name: 'bill'.tr,
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const BillSearchData(),
-                  //   ),
-                  // );
+                  Get.to(() => const BillData());
                 },
               ),
               const Divider(),
               commonDrawerText(text: "Profile"),
               commonDrawerTile(
                 icon: Icons.person,
-                name: "Profile",
+                name: 'profile'.tr,
                 onTap: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => const HospProfilePage(),
-                  //     ));
+                  Get.to(() => const HospitalProfileScreen());
                 },
               ),
               commonDrawerTile(
                 icon: Icons.logout_rounded,
-                name: "Log Out",
+                name: 'logout'.tr,
                 onTap: () {
                   showDialog(
                     context: context,
@@ -103,24 +85,15 @@ Widget dashDrawer(BuildContext context) => Drawer(
                           onPressed: () {
                             Get.back();
                           },
-                          child: const Text("No"),
+                          child: Text('no'.tr),
                         ),
                         MaterialButton(
                           onPressed: () async {
                             await HospitalFirebaseApi.signOutMethod().then(
                                 (value) =>
                                     Get.offAll(() => const LoginDashScreen()));
-                            // await FirebaseAuth.instance
-                            //     .signOut()
-                            //     .then((value) => Navigator.pushAndRemoveUntil(
-                            //         context,
-                            //         MaterialPageRoute(
-                            //           builder: (context) =>
-                            //               const LoginDashScreen(),
-                            //         ),
-                            //         (route) => false));
                           },
-                          child: const Text("Yes"),
+                          child: Text('yes'.tr),
                         ),
                       ],
                     ),
@@ -151,15 +124,7 @@ Widget dashDrawer(BuildContext context) => Drawer(
                         ),
                         MaterialButton(
                           onPressed: () async {
-                            // await FirebaseApi.deleteAccount(
-                            //         key: FirebaseApi.loginUser['key'])
-                            //     .then((value) => Navigator.pushAndRemoveUntil(
-                            //         context,
-                            //         MaterialPageRoute(
-                            //           builder: (context) =>
-                            //               const LoginDashScreen(),
-                            //         ),
-                            //         (route) => false));
+                            //
                           },
                           child: const Text("Yes"),
                         ),

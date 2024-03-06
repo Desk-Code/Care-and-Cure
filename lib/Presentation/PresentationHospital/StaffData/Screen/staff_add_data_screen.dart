@@ -7,6 +7,7 @@ import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
@@ -64,9 +65,9 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                   controller: StaffDashController.txtStaffController[0],
                   validator: ValidationBuilder().required().build(),
                   expands: false,
-                  decoration: const InputDecoration(
-                    labelText: "Full Name",
-                    prefixIcon: Icon(Iconsax.profile_2user),
+                  decoration: InputDecoration(
+                    labelText: 'fullName'.tr,
+                    prefixIcon: const Icon(Iconsax.profile_2user),
                   ),
                 ),
                 const SizedBox(
@@ -75,14 +76,14 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                 TextFormField(
                   controller: StaffDashController.txtStaffController[1],
                   validator: MultiValidator([
-                    RequiredValidator(errorText: 'Phone Number is required'),
+                    RequiredValidator(errorText: 'phIsReq'.tr),
                     LengthRangeValidator(
-                        min: 10, max: 10, errorText: 'Enter Number In Length')
+                        min: 10, max: 10, errorText: 'entInLength'.tr)
                   ]).call,
                   expands: false,
-                  decoration: const InputDecoration(
-                    labelText: "Phone Number",
-                    prefixIcon: Icon(Iconsax.call),
+                  decoration: InputDecoration(
+                    labelText: 'mobileNo'.tr,
+                    prefixIcon: const Icon(Iconsax.call),
                   ),
                 ),
                 const SizedBox(
@@ -102,17 +103,17 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                     isExpanded: true,
                     hint: Text(
                       StaffDashController.txtStaffController[2].text.isEmpty
-                          ? 'Select Your Gender'
+                          ? 'sGender'.tr
                           : StaffDashController.txtStaffController[2].text,
                     ),
-                    items: const [
+                    items: [
                       DropdownMenuItem(
                         value: 'Male',
-                        child: Text('Male'),
+                        child: Text('male'.tr),
                       ),
                       DropdownMenuItem(
                         value: 'Female',
-                        child: Text('Female'),
+                        child: Text('female'.tr),
                       ),
                     ],
                   ),
@@ -123,14 +124,14 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                 TextFormField(
                   controller: StaffDashController.txtStaffController[3],
                   validator: MultiValidator([
-                    RequiredValidator(errorText: 'Phone Number is required'),
+                    RequiredValidator(errorText: 'ageIsReq'.tr),
                     LengthRangeValidator(
-                        min: 2, max: 2, errorText: 'Enter a Valid Age')
+                        min: 2, max: 2, errorText: 'validRange'.tr)
                   ]).call,
                   expands: false,
-                  decoration: const InputDecoration(
-                    labelText: "Age",
-                    prefixIcon: Icon(Icons.accessibility_new_rounded),
+                  decoration: InputDecoration(
+                    labelText: 'age'.tr,
+                    prefixIcon: const Icon(Icons.accessibility_new_rounded),
                   ),
                 ),
                 const SizedBox(
@@ -139,16 +140,14 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                 TextFormField(
                   controller: StaffDashController.txtStaffController[4],
                   validator: MultiValidator([
-                    RequiredValidator(errorText: 'Aadhar Number is required'),
+                    RequiredValidator(errorText: 'aadharIsReq'.tr),
                     LengthRangeValidator(
-                        min: 12,
-                        max: 12,
-                        errorText: 'Enter a Valid Aadhar Number'),
+                        min: 12, max: 12, errorText: 'validAadhar'.tr),
                   ]).call,
                   expands: false,
-                  decoration: const InputDecoration(
-                    labelText: "Aadhar Number",
-                    prefixIcon: Icon(Icons.photo_camera_front_outlined),
+                  decoration: InputDecoration(
+                    labelText: 'adharNumber'.tr,
+                    prefixIcon: const Icon(Icons.photo_camera_front_outlined),
                   ),
                 ),
                 const SizedBox(
@@ -158,9 +157,9 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                   controller: StaffDashController.txtStaffController[5],
                   validator: ValidationBuilder().required().build(),
                   expands: false,
-                  decoration: const InputDecoration(
-                    labelText: "Address",
-                    prefixIcon: Icon(Iconsax.home),
+                  decoration: InputDecoration(
+                    labelText: 'address'.tr,
+                    prefixIcon: const Icon(Iconsax.home),
                   ),
                 ),
                 const SizedBox(
@@ -176,19 +175,19 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                                   arguments: 3);
                             }
                           : null,
-                      child: const Row(
+                      child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(
+                          const Icon(
                             Iconsax.profile_add5,
                             color: Colors.black45,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 7,
                           ),
                           Text(
-                            "Profile Pick",
-                            style: TextStyle(
+                            'profilePick'.tr,
+                            style: const TextStyle(
                               color: Colors.black87,
                             ),
                           ),
@@ -212,6 +211,7 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                   onPressed: () async {
                     if (StaffDashController.globalKey.currentState!
                         .validate()) {
+                      HapticFeedback.heavyImpact();
                       await StaffFirebaseApi.addStaff(widget.staffSection)
                           .then((value) {
                         Get.back();
@@ -223,7 +223,7 @@ class _StaffAddDataScreenState extends State<StaffAddDataScreen> {
                       });
                     }
                   },
-                  child: const Text("Submit"),
+                  child: Text('submit'.tr),
                 ),
               ],
             ),

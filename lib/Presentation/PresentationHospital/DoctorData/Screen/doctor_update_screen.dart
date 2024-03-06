@@ -7,6 +7,7 @@ import 'package:care_and_cure/Presentation/PresentationHospital/DoctorData/Contr
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
@@ -49,9 +50,9 @@ class _DoctorUpdateScreenState extends State<DoctorUpdateScreen> {
                   controller: DoctorController.txtDrController[0],
                   validator: ValidationBuilder().required().build(),
                   expands: false,
-                  decoration: const InputDecoration(
-                    labelText: "Full Name",
-                    prefixIcon: Icon(Iconsax.profile_2user),
+                  decoration: InputDecoration(
+                    labelText: 'fullName'.tr,
+                    prefixIcon: const Icon(Iconsax.profile_2user),
                   ),
                 ),
                 const SizedBox(
@@ -60,14 +61,14 @@ class _DoctorUpdateScreenState extends State<DoctorUpdateScreen> {
                 TextFormField(
                   controller: DoctorController.txtDrController[1],
                   validator: MultiValidator([
-                    RequiredValidator(errorText: 'Phone Number is required'),
+                    RequiredValidator(errorText: 'phIsReq'.tr),
                     LengthRangeValidator(
-                        min: 10, max: 10, errorText: 'Enter Number In Length')
+                        min: 10, max: 10, errorText: 'entInLength'.tr)
                   ]).call,
                   expands: false,
-                  decoration: const InputDecoration(
-                    labelText: "Phone Number",
-                    prefixIcon: Icon(Iconsax.call),
+                  decoration: InputDecoration(
+                    labelText: 'mobileNo'.tr,
+                    prefixIcon: const Icon(Iconsax.call),
                   ),
                 ),
                 const SizedBox(
@@ -89,17 +90,17 @@ class _DoctorUpdateScreenState extends State<DoctorUpdateScreen> {
                     isExpanded: true,
                     hint: Text(
                       DoctorController.txtDrController[3].text.isEmpty
-                          ? 'Select Your Gender'
+                          ? 'sGender'.tr
                           : DoctorController.txtDrController[3].text,
                     ),
-                    items: const [
+                    items: [
                       DropdownMenuItem(
                         value: "Male",
-                        child: Text('Male'),
+                        child: Text('male'.tr),
                       ),
                       DropdownMenuItem(
                         value: "Female",
-                        child: Text('Female'),
+                        child: Text('female'.tr),
                       ),
                     ],
                   ),
@@ -110,14 +111,14 @@ class _DoctorUpdateScreenState extends State<DoctorUpdateScreen> {
                 TextFormField(
                   controller: DoctorController.txtDrController[4],
                   validator: MultiValidator([
-                    RequiredValidator(errorText: 'Age is required'),
+                    RequiredValidator(errorText: 'ageIsReq'.tr),
                     LengthRangeValidator(
-                        min: 2, max: 2, errorText: 'Enter a Valid Age')
+                        min: 2, max: 2, errorText: 'validRange'.tr)
                   ]).call,
                   expands: false,
-                  decoration: const InputDecoration(
-                    labelText: "Age",
-                    prefixIcon: Icon(Icons.accessibility_new_rounded),
+                  decoration: InputDecoration(
+                    labelText: 'age'.tr,
+                    prefixIcon: const Icon(Icons.accessibility_new_rounded),
                   ),
                 ),
                 const SizedBox(
@@ -126,16 +127,14 @@ class _DoctorUpdateScreenState extends State<DoctorUpdateScreen> {
                 TextFormField(
                   controller: DoctorController.txtDrController[5],
                   validator: MultiValidator([
-                    RequiredValidator(errorText: 'Aadhar Number is required'),
+                    RequiredValidator(errorText: 'aadharIsReq'.tr),
                     LengthRangeValidator(
-                        min: 12,
-                        max: 12,
-                        errorText: 'Enter a Valid Aadhar Number'),
+                        min: 12, max: 12, errorText: 'validAadhar'.tr),
                   ]).call,
                   expands: false,
-                  decoration: const InputDecoration(
-                    labelText: "Aadhar Number",
-                    prefixIcon: Icon(Icons.photo_camera_front_outlined),
+                  decoration: InputDecoration(
+                    labelText: 'adharNumber'.tr,
+                    prefixIcon: const Icon(Icons.photo_camera_front_outlined),
                   ),
                 ),
                 const SizedBox(
@@ -145,9 +144,9 @@ class _DoctorUpdateScreenState extends State<DoctorUpdateScreen> {
                   controller: DoctorController.txtDrController[6],
                   validator: ValidationBuilder().required().build(),
                   expands: false,
-                  decoration: const InputDecoration(
-                    labelText: "Address",
-                    prefixIcon: Icon(Iconsax.home),
+                  decoration: InputDecoration(
+                    labelText: 'address'.tr,
+                    prefixIcon: const Icon(Iconsax.home),
                   ),
                 ),
                 const SizedBox(
@@ -167,7 +166,7 @@ class _DoctorUpdateScreenState extends State<DoctorUpdateScreen> {
                     isExpanded: true,
                     hint: Text(
                       DoctorController.txtDrController[7].text.isEmpty
-                          ? 'Select Your Qualification'
+                          ? 'sQualification'.tr
                           : DoctorController.txtDrController[7].text,
                     ),
                     items: [
@@ -189,9 +188,9 @@ class _DoctorUpdateScreenState extends State<DoctorUpdateScreen> {
                   controller: DoctorController.txtDrController[8],
                   validator: ValidationBuilder().required().build(),
                   expands: false,
-                  decoration: const InputDecoration(
-                    labelText: "Specialist",
-                    prefixIcon: Icon(Iconsax.eye),
+                  decoration: InputDecoration(
+                    labelText: 'specialist'.tr,
+                    prefixIcon: const Icon(Iconsax.eye),
                   ),
                 ),
                 const SizedBox(
@@ -208,6 +207,7 @@ class _DoctorUpdateScreenState extends State<DoctorUpdateScreen> {
                   ),
                   onPressed: () async {
                     if (DoctorController.globalKey.currentState!.validate()) {
+                      HapticFeedback.heavyImpact();
                       await DoctorApi.updateDoctor(
                         dId: widget.doctorData.dId,
                         fullName: DoctorController.txtDrController[0].text,
@@ -226,7 +226,7 @@ class _DoctorUpdateScreenState extends State<DoctorUpdateScreen> {
                       Get.back();
                     }
                   },
-                  child: const Text("Update"),
+                  child: Text('update'.tr),
                 ),
                 const SizedBox(
                   height: 20,

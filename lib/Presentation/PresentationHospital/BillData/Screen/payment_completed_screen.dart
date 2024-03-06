@@ -4,10 +4,12 @@ import 'package:care_and_cure/Common/Widgets/no_data.dart';
 import 'package:care_and_cure/Data/FirebaseData/patient_firebase_api.dart';
 import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/BillData/Widget/bill_filtering.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/BillData/Widget/common_bill_card.dart';
 import 'package:care_and_cure/Util/common_values.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PaymentCompletedScreen extends StatefulWidget {
   const PaymentCompletedScreen({super.key});
@@ -21,6 +23,7 @@ class _PaymentCompletedScreenState extends State<PaymentCompletedScreen> {
   @override
   void initState() {
     CommonValues.search = "";
+    CommonValues.filterData = "name";
     super.initState();
   }
 
@@ -47,7 +50,7 @@ class _PaymentCompletedScreenState extends State<PaymentCompletedScreen> {
                 child: TextField(
                   controller: _txtSearch,
                   decoration: InputDecoration(
-                    hintText: "Search",
+                    hintText: 'search'.tr,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -61,12 +64,12 @@ class _PaymentCompletedScreenState extends State<PaymentCompletedScreen> {
               ),
               IconButton(
                   onPressed: () {
-                    // showModalBottomSheet(
-                    //   context: context,
-                    //   enableDrag: true,
-                    //   isScrollControlled: true,
-                    //   builder: (contex) => doctorFiltering(context),
-                    // );
+                    showModalBottomSheet(
+                      context: context,
+                      enableDrag: true,
+                      isScrollControlled: true,
+                      builder: (contex) => billFiltering(context),
+                    );
                   },
                   icon: const Icon(
                     Icons.filter_alt_outlined,
@@ -103,35 +106,23 @@ class _PaymentCompletedScreenState extends State<PaymentCompletedScreen> {
                   itemCount: (storedocs.length),
                   itemBuilder: (context, index) {
                     if (CommonValues.search.isEmpty) {
-                      return GestureDetector(
-                        onTap: () {
-                          //
-                          CommonValues.search = "";
-                          // CommonValues.filterData = "fullName";
-                        },
-                        child: commonBillCard(
-                          context,
-                          name: storedocs[index]['name'],
-                          mobileNumber: storedocs[index]['mobileNumber'],
-                          amt: storedocs[index]['payAmount'],
-                        ),
+                      return commonBillCard(
+                        context,
+                        name: storedocs[index]['name'],
+                        mobileNumber: storedocs[index]['mobileNumber'],
+                        amt: storedocs[index]['payAmount'],
+                        patientProfile: storedocs[index]['pickImage'],
                       );
                     } else if (storedocs[index][CommonValues.filterData]
                         .toString()
                         .toLowerCase()
                         .contains(CommonValues.search.toLowerCase())) {
-                      return GestureDetector(
-                        onTap: () {
-                          //
-                          CommonValues.search = "";
-                          // CommonValues.filterData = "fullName";
-                        },
-                        child: commonBillCard(
-                          context,
-                          name: storedocs[index]['name'],
-                          mobileNumber: storedocs[index]['mobileNumber'],
-                          amt: storedocs[index]['payAmount'],
-                        ),
+                      return commonBillCard(
+                        context,
+                        name: storedocs[index]['name'],
+                        mobileNumber: storedocs[index]['mobileNumber'],
+                        amt: storedocs[index]['payAmount'],
+                        patientProfile: storedocs[index]['pickImage'],
                       );
                     } else {
                       return const SizedBox();

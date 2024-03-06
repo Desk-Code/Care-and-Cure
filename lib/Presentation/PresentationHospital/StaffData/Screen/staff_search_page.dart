@@ -79,7 +79,7 @@ class _StaffSearchpageState extends State<StaffSearchpage> {
                   child: TextField(
                     controller: StaffDashController.txtSearchController,
                     decoration: InputDecoration(
-                      hintText: "Search",
+                      hintText: 'search'.tr,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),

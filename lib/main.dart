@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
 
             //its a root calling
             home: const SplashScreenPage(),
-            // home: const CommonFilePicker(),
+            // home: const PatientMedicineScreen(),
           );
         }
         return loadingIndicator();

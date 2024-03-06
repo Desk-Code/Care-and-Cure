@@ -2,6 +2,7 @@ import 'package:care_and_cure/Presentation/BoardingScreen/controller/boarding_sc
 import 'package:care_and_cure/Presentation/login_dash/screen/login_dash_screen.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -63,6 +64,7 @@ class _BoardingScreenPageState extends State<BoardingScreenPage> {
                 (BoardingController.onLastPage)
                     ? ElevatedButton(
                         onPressed: () {
+                          HapticFeedback.heavyImpact();
                           Get.off(
                             () => const LoginDashScreen(),
                           );

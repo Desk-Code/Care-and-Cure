@@ -1,6 +1,8 @@
+import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
@@ -16,6 +18,17 @@ class MedicineProfile extends StatefulWidget {
 }
 
 class _MedicineProfileState extends State<MedicineProfile> {
+  FlutterTts flutterTts = FlutterTts();
+
+  void textToSpeech(String text) async {
+    await flutterTts.setLanguage(
+        "${SharedPref.getLanguageCode}-${SharedPref.getCountryCode}");
+    await flutterTts.setVolume(0.5);
+    await flutterTts.setSpeechRate(0.5);
+    await flutterTts.setPitch(1);
+    await flutterTts.speak(text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,13 +47,25 @@ class _MedicineProfileState extends State<MedicineProfile> {
           SizedBox(
             height: context.screenHeight * 0.05,
           ),
-          Text(
-            widget.medicineName,
-            style: GoogleFonts.lato(
-              color: Colors.black,
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                widget.medicineName,
+                style: GoogleFonts.lato(
+                  color: Colors.black,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  textToSpeech(widget.medicineDescription);
+                },
+                icon: const Icon(Icons.volume_up_rounded),
+              )
+            ],
           ),
           SizedBox(
             height: context.screenHeight * 0.02,

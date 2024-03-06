@@ -3,7 +3,7 @@ import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Widget doctorFiltering(BuildContext context) => AnimatedContainer(
+Widget billFiltering(BuildContext context) => AnimatedContainer(
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(10),
       duration: const Duration(
@@ -23,7 +23,7 @@ Widget doctorFiltering(BuildContext context) => AnimatedContainer(
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('sortDocBy'.tr,
+              Text('sortbillby'.tr,
                   style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -38,13 +38,13 @@ Widget doctorFiltering(BuildContext context) => AnimatedContainer(
           ),
           TextButton(
             onPressed: () {
-              CommonValues.filterData = "fullName";
+              CommonValues.filterData = "name";
               Get.back();
             },
             child: Text(
               'name'.tr,
               style: TextStyle(
-                color: (CommonValues.filterData == "fullName")
+                color: (CommonValues.filterData == "name")
                     ? Colors.blue
                     : Colors.black,
               ),
@@ -59,62 +59,6 @@ Widget doctorFiltering(BuildContext context) => AnimatedContainer(
               'mobileNo'.tr,
               style: TextStyle(
                 color: (CommonValues.filterData == "mobileNumber")
-                    ? Colors.blue
-                    : Colors.black,
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              CommonValues.filterData = "age";
-              Get.back();
-            },
-            child: Text(
-              'age'.tr,
-              style: TextStyle(
-                color: (CommonValues.filterData == "age")
-                    ? Colors.blue
-                    : Colors.black,
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              CommonValues.filterData = "aadharNumber";
-              Get.back();
-            },
-            child: Text(
-              'adharNumber'.tr,
-              style: TextStyle(
-                color: (CommonValues.filterData == "aadharNumber")
-                    ? Colors.blue
-                    : Colors.black,
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              CommonValues.filterData = "qualification";
-              Get.back();
-            },
-            child: Text(
-              'qualification'.tr,
-              style: TextStyle(
-                color: (CommonValues.filterData == "qualification")
-                    ? Colors.blue
-                    : Colors.black,
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              CommonValues.filterData = "email";
-              Get.back();
-            },
-            child: Text(
-              'email'.tr,
-              style: TextStyle(
-                color: (CommonValues.filterData == "email")
                     ? Colors.blue
                     : Colors.black,
               ),

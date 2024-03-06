@@ -58,10 +58,10 @@ class DoctorApi {
     );
 
     return await doctor.doc(docKey).set(newDoctor.toJson()).then((value) {
-      FlutterToast().showMessage("User Added");
+      FlutterToast().showMessage('userAdded'.tr);
       DoctorController.txtDrClearController;
     }).catchError((onError) {
-      FlutterToast().showMessage("Failed to Add user: $onError");
+      FlutterToast().showMessage("${'faiAddUser'.tr}: $onError");
     });
   }
 
@@ -69,10 +69,10 @@ class DoctorApi {
   static Future<void> deleteDoctor({required String id}) {
     return doctor.doc(id).delete().then((value) {
       log('User Deleted');
-      FlutterToast().showMessage('User Deleted');
+      FlutterToast().showMessage('userDeleted'.tr);
       Get.back();
     }).catchError((error) {
-      log('Failed to Delete user: $error');
+      log('${'faiDelUser'.tr}: $error');
     });
   }
 
@@ -106,10 +106,10 @@ class DoctorApi {
     );
     return await doctor.doc(dId).update(newDoctor.toJson()).then((value) {
       Get.back();
-      FlutterToast().showMessage("User Updated");
+      FlutterToast().showMessage('userUpdated'.tr);
       log("User Updated");
     }).catchError((onError) {
-      log("Failed to update Doctor data : $onError");
+      log("${'faiUpdUser'.tr} : $onError");
     });
   }
 

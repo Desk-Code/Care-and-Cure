@@ -7,6 +7,7 @@ import 'package:care_and_cure/Presentation/PresentationHospital/PatientData/Cont
 import 'package:care_and_cure/Presentation/PresentationHospital/PatientData/Screen/patient_update_screen.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class PatientProfileScreen extends StatefulWidget {
@@ -69,14 +70,14 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      commonText(data: "Full Name", size: 17),
-                      commonText(data: "Mobile No", size: 17),
-                      commonText(data: "Email", size: 17),
-                      commonText(data: "Age", size: 17),
-                      commonText(data: "Gender", size: 17),
-                      commonText(data: "Blood Group", size: 17),
-                      commonText(data: "Address", size: 17),
-                      commonText(data: "Admin Date", size: 17),
+                      commonText(data: 'fullName'.tr, size: 17),
+                      commonText(data: 'mobileNo'.tr, size: 17),
+                      commonText(data: 'email'.tr, size: 17),
+                      commonText(data: 'age'.tr, size: 17),
+                      commonText(data: 'gender'.tr, size: 17),
+                      commonText(data: 'bloodGroup'.tr, size: 17),
+                      commonText(data: 'address'.tr, size: 17),
+                      commonText(data: 'admitDate'.tr, size: 17),
                     ],
                   ),
                   SingleChildScrollView(
@@ -140,7 +141,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               Get.to(
                   () => PatientUpdateScreen(patientData: widget.patientData));
             },
-            child: const Text("Update"),
+            child: Text('update'.tr),
           ),
           const SizedBox(
             height: 20,
@@ -155,9 +156,10 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               ),
             ),
             onPressed: () async {
+              HapticFeedback.heavyImpact();
               await PatientApi.deletePatient(id: widget.patientData.pId);
             },
-            child: const Text("Fire"),
+            child: Text('fire'.tr),
           ),
           const SizedBox(
             height: 20,

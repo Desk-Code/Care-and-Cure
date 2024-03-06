@@ -9,7 +9,7 @@ class SplashServiciesForPatient {
     if (patPhNumber != "") {
       Get.offAll(() => const PatientController());
     } else {
-      Get.offAll(() => const PatientLoginScreen());
+      Get.to(() => const PatientLoginScreen());
     }
   }
 }

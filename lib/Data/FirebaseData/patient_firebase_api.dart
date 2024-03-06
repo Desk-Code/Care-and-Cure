@@ -83,7 +83,6 @@ class PatientApi {
     String formattedDateTime() {
       DateTime now = DateTime.now();
       return "${now.day}-${months[now.month - 1]}-${now.year}";
-      // ${now.hour}:${now.minute}:${now.second}
     }
 
     final DatabaseReference db = FirebaseDatabase.instance.ref('User');
@@ -107,22 +106,22 @@ class PatientApi {
       wardNo: "",
     );
     return await patient.doc(docKey).set(newPatient.toJson()).then((value) {
-      FlutterToast().showMessage("User Added");
+      FlutterToast().showMessage('userAdded'.tr);
       PatientController.txtPtClearController;
       Get.back();
     }).catchError((onError) {
-      FlutterToast().showMessage("Failed to Add user: $onError");
+      FlutterToast().showMessage("${'faiAddUser'.tr}: $onError");
     });
   }
 
   // For Deleting User
   static Future<void> deletePatient({required String id}) {
     return patient.doc(id).delete().then((value) {
-      log('User Deleted');
+      log('userDeleted'.tr);
       FlutterToast().showMessage('User Deleted');
       Get.back();
     }).catchError((error) {
-      log('Failed to Delete user: $error');
+      log('${'faiDelUser'.tr}: $error');
     });
   }
 
@@ -164,9 +163,10 @@ class PatientApi {
     );
     return await patient.doc(pId).update(newPatient.toJson()).then((value) {
       Get.back();
-      FlutterToast().showMessage("User Updated");
+      FlutterToast().showMessage('userUpdated'.tr);
       log("User Updated");
     }).catchError((onError) {
+      FlutterToast().showMessage('${'faiUpdUser'.tr} $onError');
       log("Failed to update Patient data : $onError");
     });
   }
@@ -175,7 +175,7 @@ class PatientApi {
       {required String pId,
       required String disease,
       required String amount}) async {
-    int intValue = mt.Random().nextInt(25) + 1;
+    String intValue = (mt.Random().nextInt(25) + 1).toString();
     List<String> charList = ["A", "B", "C", "D", "E", "F", "G", "H", "P", "Y"];
     String charValue = charList[mt.Random().nextInt(9)];
     await patient.doc(pId).update({
@@ -185,10 +185,10 @@ class PatientApi {
       'wardNo': charValue,
     }).then((value) {
       Get.back();
-      FlutterToast().showMessage("User Data Updated");
+      FlutterToast().showMessage('userUpdated'.tr);
       log("User Data Updated");
     }).catchError((onError) {
-      log("Failed to update Patient data : $onError");
+      log("${'faiUpdUser'.tr}: $onError");
     });
   }
 
@@ -197,9 +197,9 @@ class PatientApi {
     await patient.doc(key).update({
       'payAmount': payAmount,
     }).then((value) {
-      log("Patient Data Updated");
+      log('userUpdated'.tr);
     }).catchError((onError) {
-      log("Failed to update Patient data : $onError");
+      log("${'faiUpdUser'.tr} : $onError");
     });
   }
 

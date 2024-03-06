@@ -74,7 +74,7 @@ class _DoctorSearchScreenState extends State<DoctorSearchScreen> {
                   child: TextField(
                     controller: DoctorController.txtSearchController,
                     decoration: InputDecoration(
-                      hintText: "Search",
+                      hintText: 'search'.tr,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),

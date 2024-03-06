@@ -3,6 +3,7 @@ import 'package:care_and_cure/Data/FirebaseData/firebase_auth_api.dart';
 import 'package:care_and_cure/Presentation/PresentationPatient/controller/patient_controller.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,6 +40,7 @@ class _PatientOtpScreenState extends State<PatientOtpScreen> {
         body: otpScreen(
           context,
           onTap: () {
+            HapticFeedback.heavyImpact();
             FirebaseApiAuth.otpVerification(
               toNaviagte: () => const PatientController(),
             );

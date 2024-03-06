@@ -9,6 +9,7 @@ import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:care_and_cure/Util/common_values.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PatientProfileScreen extends StatefulWidget {
   const PatientProfileScreen({super.key});
@@ -88,18 +89,18 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              commonText(data: "Patient Name", size: 17),
-                              commonText(data: "Mobile No", size: 17),
-                              commonText(data: "Email", size: 17),
-                              commonText(data: "Gender", size: 17),
-                              commonText(data: "Age", size: 17),
-                              commonText(data: "Blood Group", size: 17),
-                              commonText(data: "Disease", size: 17),
-                              commonText(data: "Address", size: 17),
-                              commonText(data: "Admin Date", size: 17),
-                              commonText(data: "Pay Amount", size: 17),
-                              commonText(data: "Room No.", size: 17),
-                              commonText(data: "Ward No.", size: 17),
+                              commonText(data: 'patientName'.tr, size: 17),
+                              commonText(data: 'mobileNo'.tr, size: 17),
+                              commonText(data: 'email'.tr, size: 17),
+                              commonText(data: 'gender'.tr, size: 17),
+                              commonText(data: 'age'.tr, size: 17),
+                              commonText(data: 'bloodGroup'.tr, size: 17),
+                              commonText(data: 'disease'.tr, size: 17),
+                              commonText(data: 'address'.tr, size: 17),
+                              commonText(data: 'admitDate'.tr, size: 17),
+                              commonText(data: 'payAmount'.tr, size: 17),
+                              commonText(data: 'roomNo'.tr, size: 17),
+                              commonText(data: 'wardNo'.tr, size: 17),
                             ],
                           ),
                           Column(

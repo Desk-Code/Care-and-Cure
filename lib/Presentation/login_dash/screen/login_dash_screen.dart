@@ -5,6 +5,7 @@ import 'package:care_and_cure/Presentation/login_dash/widgets/login_dashes.dart'
 import 'package:care_and_cure/Presentation/login_dash/widgets/login_info.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -56,6 +57,7 @@ class _LoginDashScreenState extends State<LoginDashScreen> {
             context: context,
             nameOfLogin: 'patientLogin'.tr,
             onTap: () {
+              HapticFeedback.heavyImpact();
               SplashServiciesForPatient.isLogin();
             },
           ),
@@ -63,6 +65,7 @@ class _LoginDashScreenState extends State<LoginDashScreen> {
             context: context,
             nameOfLogin: 'doctorLogin'.tr,
             onTap: () {
+              HapticFeedback.heavyImpact();
               SplashServiciesForDoctor.isLogin();
             },
           ),
@@ -70,6 +73,7 @@ class _LoginDashScreenState extends State<LoginDashScreen> {
             context: context,
             nameOfLogin: 'hospitalLogin'.tr,
             onTap: () {
+              HapticFeedback.heavyImpact();
               SplashServiciesForHospital.isLogin();
               // Get.to(() => const HospitalLoginScreen());
             },

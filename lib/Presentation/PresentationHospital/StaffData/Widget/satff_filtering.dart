@@ -27,7 +27,7 @@ Widget staffFiltering(
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Sort Staff ($staffSection) by",
+              Text("${'sortStaff'.tr} ($staffSection) ${'by'.tr}",
                   style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -46,7 +46,7 @@ Widget staffFiltering(
               Get.back();
             },
             child: Text(
-              "Name",
+              'name'.tr,
               style: TextStyle(
                 color: (CommonValues.filterData == "fullName")
                     ? Colors.blue
@@ -60,7 +60,7 @@ Widget staffFiltering(
               Get.back();
             },
             child: Text(
-              "Mobile Number",
+              'mobileNo'.tr,
               style: TextStyle(
                 color: (CommonValues.filterData == "mobileNumber")
                     ? Colors.blue
@@ -74,7 +74,7 @@ Widget staffFiltering(
               Get.back();
             },
             child: Text(
-              "Gender",
+              'gender'.tr,
               style: TextStyle(
                 color: (CommonValues.filterData == "gender")
                     ? Colors.blue
@@ -88,7 +88,7 @@ Widget staffFiltering(
               Get.back();
             },
             child: Text(
-              "Age",
+              'age'.tr,
               style: TextStyle(
                 color: (CommonValues.filterData == "age")
                     ? Colors.blue
@@ -102,7 +102,7 @@ Widget staffFiltering(
               Get.back();
             },
             child: Text(
-              "Aadhar Card",
+              'adharNumber'.tr,
               style: TextStyle(
                 color: (CommonValues.filterData == "aadharNumber")
                     ? Colors.blue

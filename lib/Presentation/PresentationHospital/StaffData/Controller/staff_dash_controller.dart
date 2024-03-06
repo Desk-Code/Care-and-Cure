@@ -5,15 +5,15 @@ class StaffDashController {
   static GlobalKey<FormState> globalKey = GlobalKey<FormState>();
 
   static List<String> staffField = [
-    "Nursing",
-    "Ward Boy",
-    "Reception",
-    "Cleanner Staff",
-    "Medical",
-    "Lab",
-    "RMO",
-    "OT Staff",
-    "Assistant Dr.",
+    'Nursing',
+    'WardBoy',
+    'Reception',
+    'Cleanner Staff',
+    'Medical',
+    'Lab',
+    'RMO',
+    'OT Staff',
+    'Assistant Dr.',
   ];
 
   static List<String> assetUrl = [

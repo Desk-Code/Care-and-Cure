@@ -16,7 +16,7 @@ class FirebaseApiAuth {
       timeout: const Duration(seconds: 30),
       phoneNumber: phNumber,
       verificationCompleted: (phoneAuthCredential) {
-        FlutterToast().showMessage('Verification completed');
+        FlutterToast().showMessage('verfiComp'.tr);
       },
       verificationFailed: (error) {
         FlutterToast().showMessage(error.toString());

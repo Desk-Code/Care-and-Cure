@@ -4,6 +4,7 @@ import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:care_and_cure/Presentation/PresentationDoctor/DoctorDashboard/screen/add_diease_page.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -75,14 +76,14 @@ class _DocPatientProfileState extends State<DocPatientProfile> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        commonText(data: "Patient Name", size: 17),
-                        commonText(data: "Mobile No", size: 17),
-                        commonText(data: "Email", size: 17),
-                        commonText(data: "Gender", size: 17),
-                        commonText(data: "Blood Group", size: 17),
-                        commonText(data: "Age", size: 17),
-                        commonText(data: "Address", size: 17),
-                        commonText(data: "Admit Date", size: 17),
+                        commonText(data: 'patientName'.tr, size: 17),
+                        commonText(data: 'mobileNo'.tr, size: 17),
+                        commonText(data: 'email'.tr, size: 17),
+                        commonText(data: 'gender'.tr, size: 17),
+                        commonText(data: 'bloodGroup'.tr, size: 17),
+                        commonText(data: 'age'.tr, size: 17),
+                        commonText(data: 'address'.tr, size: 17),
+                        commonText(data: 'admitDate'.tr, size: 17),
                       ],
                     ),
                     Column(
@@ -129,11 +130,12 @@ class _DocPatientProfileState extends State<DocPatientProfile> {
                 ),
               ),
               onPressed: () {
+                HapticFeedback.heavyImpact();
                 Get.to(() => AddDieasePage(
                       patientKey: widget.patientData['pId'],
                     ));
               },
-              child: const Text("Add Disease and Payment"),
+              child: Text('addDP'.tr),
             ),
             const SizedBox(
               height: 20,

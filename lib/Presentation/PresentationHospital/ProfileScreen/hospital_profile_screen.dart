@@ -3,6 +3,7 @@ import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HospitalProfileScreen extends StatefulWidget {
@@ -65,11 +66,11 @@ class _HospitalProfileScreenState extends State<HospitalProfileScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            commonText(data: "Hospital Name", size: 18),
-                            commonText(data: "Mobile No", size: 18),
-                            commonText(data: "Email", size: 18),
-                            commonText(data: "Address", size: 18),
-                            commonText(data: "Upi Id", size: 18),
+                            commonText(data: 'hospitalName'.tr, size: 18),
+                            commonText(data: 'mobileNo'.tr, size: 18),
+                            commonText(data: 'email'.tr, size: 18),
+                            commonText(data: 'address'.tr, size: 18),
+                            commonText(data: 'upiid'.tr, size: 18),
                           ],
                         ),
                         Column(

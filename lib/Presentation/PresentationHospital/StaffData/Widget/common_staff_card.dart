@@ -1,6 +1,7 @@
 import 'package:care_and_cure/Common/Widgets/common_loader.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 Widget commonStaffCard(
   BuildContext context, {
@@ -52,8 +53,8 @@ Widget commonStaffCard(
             const SizedBox(
               height: 10,
             ),
-            Text("$staffSection Name    : $staffName"),
-            Text("$staffSection Mobile  : $staffMobile"),
+            Text("$staffSection ${'name'.tr}    : $staffName"),
+            Text("$staffSection ${'mobileNo'.tr}  : $staffMobile"),
           ],
         ),
       ),

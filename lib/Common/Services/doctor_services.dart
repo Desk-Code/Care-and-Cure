@@ -9,7 +9,7 @@ class SplashServiciesForDoctor {
     if (docPhNumber != "") {
       Get.offAll(() => const DoctorDashController());
     } else {
-      Get.offAll(() => const DoctorLoginScreen());
+      Get.to(() => const DoctorLoginScreen());
     }
   }
 }

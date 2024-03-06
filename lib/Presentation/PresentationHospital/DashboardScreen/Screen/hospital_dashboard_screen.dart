@@ -12,6 +12,7 @@ import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -72,7 +73,7 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
               height: context.screenHeight * 0.1,
             ),
             Text(
-              "Welcome to ${SharedPref.getHospitalName}",
+              "${'welcome'.tr} ${SharedPref.getHospitalName}",
               style: GoogleFonts.lato(
                 color: Colors.black,
                 fontSize: 25,
@@ -87,15 +88,17 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
               children: [
                 commonDash(
                   context,
-                  data: "Staff",
+                  data: 'staff'.tr,
                   onTap: () {
+                    HapticFeedback.heavyImpact();
                     Get.to(() => const StaffDashScreen());
                   },
                 ),
                 commonDash(
                   context,
-                  data: "Patient",
+                  data: 'patient'.tr,
                   onTap: () {
+                    HapticFeedback.heavyImpact();
                     Get.to(() => const PatientSearchScreen());
                   },
                 ),
@@ -106,15 +109,17 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
               children: [
                 commonDash(
                   context,
-                  data: "Doctor",
+                  data: 'doctor'.tr,
                   onTap: () {
+                    HapticFeedback.heavyImpact();
                     Get.to(() => const DoctorSearchScreen());
                   },
                 ),
                 commonDash(
                   context,
-                  data: "Bill",
+                  data: 'bill'.tr,
                   onTap: () {
+                    HapticFeedback.heavyImpact();
                     Get.to(() => const BillData());
                   },
                 ),

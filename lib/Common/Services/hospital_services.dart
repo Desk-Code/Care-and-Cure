@@ -9,7 +9,7 @@ class SplashServiciesForHospital {
     if (hosPhNumber != "") {
       Get.offAll(() => const HospitalDashBoard());
     } else {
-      Get.offAll(() => const HospitalLoginScreen());
+      Get.to(() => const HospitalLoginScreen());
     }
   }
 }

@@ -31,20 +31,20 @@ class StaffFirebaseApi {
       hospitalRef: SharedPref.getHospitalHId,
     );
     return await staff.doc(docKey).set(newStaff.toJson()).then((value) {
-      FlutterToast().showMessage("User Added");
+      FlutterToast().showMessage('userAdded'.tr);
       StaffDashController.txtStaffClearController;
     }).catchError((onError) {
-      FlutterToast().showMessage("Failed to Add user: $onError");
+      FlutterToast().showMessage("${'faiAddUser'.tr}: $onError");
     });
   }
 
   // For Deleting User
   static Future<void> deleteUser({required String id}) {
     return staff.doc(id).delete().then((value) {
-      log('User Deleted');
+      log('userDeleted'.tr);
       Get.back();
     }).catchError((error) {
-      log('Failed to Delete user: $error');
+      log('${'faiDelUser'.tr}: $error');
     });
   }
 
@@ -73,9 +73,9 @@ class StaffFirebaseApi {
     return await staff.doc(sId).update(newStaff.toJson()).then((value) {
       Get.back();
       FlutterToast().showMessage("User Updated");
-      log("User Updated");
+      log('userUpdated'.tr);
     }).catchError((onError) {
-      log("Failed to update staff data : $onError");
+      log("${'faiUpdUser'.tr} : $onError");
     });
   }
 }

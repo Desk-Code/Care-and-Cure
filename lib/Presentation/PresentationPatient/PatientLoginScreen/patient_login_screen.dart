@@ -8,6 +8,7 @@ import 'package:care_and_cure/Presentation/PresentationPatient/PatientLoginScree
 import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -77,11 +78,13 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
                 loginPhoneWidget(
                   context: context,
                   onTap: () async {
+                    HapticFeedback.heavyImpact();
                     List isRegister = await PatientApi.patientIsRegister();
                     if (isRegister.isNotEmpty) {
                       setState(() {
                         isOnTap = true;
                       });
+
                       await FirebaseApiAuth.sendOtp(
                         phNumber: CommonValues.phNumberValue,
                         toNavigate: () => const PatientOtpScreen(),

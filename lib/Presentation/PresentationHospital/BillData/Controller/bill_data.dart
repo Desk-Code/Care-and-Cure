@@ -35,14 +35,14 @@ class _BillDataState extends State<BillData> {
             overlayColor: MaterialStatePropertyAll(
               Colors.cyan[80],
             ),
-            tabs: const [
+            tabs:  [
               Tab(
-                icon: Icon(Icons.money_off_csred_outlined),
-                text: "Payment Pending",
+                icon: const Icon(Icons.money_off_csred_outlined),
+                text: 'payPrnd'.tr,
               ),
               Tab(
-                icon: Icon(Icons.monetization_on),
-                text: "Payment Completed",
+                icon: const Icon(Icons.monetization_on),
+                text: 'payComp'.tr,
               ),
             ],
           ),

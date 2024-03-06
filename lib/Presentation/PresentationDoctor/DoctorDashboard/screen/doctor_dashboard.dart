@@ -44,7 +44,7 @@ class _DoctorDashBoardState extends State<DoctorDashBoard> {
                 child: TextField(
                   controller: PatientController.txtSearchController,
                   decoration: InputDecoration(
-                    hintText: "Search",
+                    hintText: 'search'.tr,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),

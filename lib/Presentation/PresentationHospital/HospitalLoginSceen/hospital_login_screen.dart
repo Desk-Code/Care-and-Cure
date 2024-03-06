@@ -8,6 +8,7 @@ import 'package:care_and_cure/Presentation/PresentationHospital/HospitalSignUpSc
 import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -109,6 +110,7 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
                           ),
                           GestureDetector(
                             onTap: () async {
+                              HapticFeedback.heavyImpact();
                               List isRegister =
                                   await HospitalFirebaseApi.getUserData(
                                       CommonValues.inputedNumber);
@@ -124,14 +126,6 @@ class _HospitalLoginScreenState extends State<HospitalLoginScreen> {
                               } else {
                                 FlutterToast().showMessage('register error'.tr);
                               }
-                              // await FirebaseApiAuth.sendOtp(
-                              //   phNumber: CommonValues.phNumberValue,
-                              //   toNavigate: () => const HospitalOtpScreen(),
-                              // );
-                              // } else {
-                              //   FlutterToast()
-                              //       .showMessage("Your Data is Not Found !!!");
-                              // }
                             },
                             child: Container(
                               height: context.screenHeight * 0.06,

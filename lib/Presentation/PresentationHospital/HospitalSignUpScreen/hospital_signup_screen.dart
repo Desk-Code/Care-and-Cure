@@ -4,6 +4,7 @@ import 'package:care_and_cure/Presentation/PresentationHospital/HospitalSignUpSc
 import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
@@ -64,8 +65,7 @@ class _HospitalSignUpScreenState extends State<HospitalSignUpScreen> {
                   width: context.screenWidth * 0.90,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image:
-                          AssetImage("assets/images/hospitalregister.jpeg"),
+                      image: AssetImage("assets/images/hospitalregister.jpeg"),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -88,12 +88,9 @@ class _HospitalSignUpScreenState extends State<HospitalSignUpScreen> {
                 TextFormField(
                   controller: instance.txtPhoneNumber,
                   validator: MultiValidator([
-                    RequiredValidator(
-                        errorText: 'Phone Number is required'),
+                    RequiredValidator(errorText: 'phIsReq'.tr),
                     LengthRangeValidator(
-                        min: 10,
-                        max: 10,
-                        errorText: 'Enter Number In Length')
+                        min: 10, max: 10, errorText: 'entInLength'.tr)
                   ]).call,
                   expands: false,
                   decoration: InputDecoration(
@@ -107,9 +104,8 @@ class _HospitalSignUpScreenState extends State<HospitalSignUpScreen> {
                 TextFormField(
                   controller: instance.txtEmail,
                   validator: MultiValidator([
-                    RequiredValidator(errorText: 'Email is required'),
-                    EmailValidator(
-                        errorText: 'Email is not a valid format'),
+                    RequiredValidator(errorText: 'emailIsReq'.tr),
+                    EmailValidator(errorText: 'validEmail'.tr),
                   ]).call,
                   expands: false,
                   decoration: InputDecoration(
@@ -148,11 +144,11 @@ class _HospitalSignUpScreenState extends State<HospitalSignUpScreen> {
                   () => TextFormField(
                     validator: (value) {
                       if (value == null) {
-                        return 'Passowrd is required';
+                        return 'passReq'.tr;
                       }
-            
+
                       if (value.length <= 6) {
-                        return 'Minimum 6 character password is required';
+                        return 'validPass'.tr;
                       }
                       return null;
                     },
@@ -218,8 +214,7 @@ class _HospitalSignUpScreenState extends State<HospitalSignUpScreen> {
                               ),
                               Text(
                                 'hospital'.tr,
-                                style:
-                                    const TextStyle(color: Colors.black87),
+                                style: const TextStyle(color: Colors.black87),
                               ),
                             ],
                           ),
@@ -269,14 +264,13 @@ class _HospitalSignUpScreenState extends State<HospitalSignUpScreen> {
                     child: ElevatedButton(
                         onPressed: () {
                           if (instance.key.currentState!.validate()) {
-                            if (CommonValues
-                                    .pickHospitalImageLink.isEmpty ||
-                                CommonValues
-                                    .pickHospitalCertiLink.isEmpty) {
-                              FlutterToast().showMessage(
-                                  "Please Upload Image First...");
+                            if (CommonValues.pickHospitalImageLink.isEmpty ||
+                                CommonValues.pickHospitalCertiLink.isEmpty) {
+                              FlutterToast()
+                                  .showMessage("Please Upload Image First...");
                               return;
                             } else {
+                              HapticFeedback.heavyImpact();
                               instance.hospitalSignup();
                             }
                           }

@@ -5,13 +5,16 @@ import 'package:care_and_cure/Common/Widgets/no_data.dart';
 import 'package:care_and_cure/Data/FirebaseData/patient_firebase_api.dart';
 import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
+import 'package:care_and_cure/Presentation/PresentationHospital/BillData/Widget/bill_filtering.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/BillData/Widget/common_bill_card.dart';
 import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/hotmail.dart';
 
@@ -26,6 +29,7 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen> {
   @override
   void initState() {
     CommonValues.search = "";
+    CommonValues.filterData = "name";
     super.initState();
   }
 
@@ -53,7 +57,7 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen> {
                 child: TextField(
                   controller: _txtSearch,
                   decoration: InputDecoration(
-                    hintText: "Search",
+                    hintText: 'search'.tr,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -67,12 +71,12 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen> {
               ),
               IconButton(
                   onPressed: () {
-                    // showModalBottomSheet(
-                    //   context: context,
-                    //   enableDrag: true,
-                    //   isScrollControlled: true,
-                    //   builder: (contex) => doctorFiltering(context),
-                    // );
+                    showModalBottomSheet(
+                      context: context,
+                      enableDrag: true,
+                      isScrollControlled: true,
+                      builder: (contex) => billFiltering(context),
+                    );
                   },
                   icon: const Icon(
                     Icons.filter_alt_outlined,
@@ -117,6 +121,7 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen> {
                               icon: Icons.article_outlined,
                               backgroundColor: ConstrainColor.bgAppBarColor,
                               onPressed: (context) {
+                                HapticFeedback.heavyImpact();
                                 sendMailFromOutlook(
                                     name: storedocs[index]['name'],
                                     email: storedocs[index]['email'],
@@ -131,6 +136,7 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen> {
                           name: storedocs[index]['name'],
                           mobileNumber: storedocs[index]['mobileNumber'],
                           amt: storedocs[index]['payAmount'],
+                          patientProfile: storedocs[index]['pickImage'],
                         ),
                       );
                     } else if (storedocs[index][CommonValues.filterData]
@@ -145,7 +151,11 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen> {
                               icon: Icons.article_outlined,
                               backgroundColor: ConstrainColor.bgAppBarColor,
                               onPressed: (context) {
-                                //
+                                sendMailFromOutlook(
+                                    name: storedocs[index]['name'],
+                                    email: storedocs[index]['email'],
+                                    payableAmount: storedocs[index]
+                                        ['payAmount']);
                               },
                             ),
                           ],
@@ -155,6 +165,7 @@ class _PaymentPendingScreenState extends State<PaymentPendingScreen> {
                           name: storedocs[index]['name'],
                           mobileNumber: storedocs[index]['mobileNumber'],
                           amt: storedocs[index]['payAmount'],
+                          patientProfile: storedocs[index]['pickImage'],
                         ),
                       );
                     } else {

@@ -3,6 +3,7 @@ import 'package:care_and_cure/Data/FirebaseData/patient_firebase_api.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class AddDieasePage extends StatefulWidget {
@@ -30,12 +31,12 @@ class _AddDieasePageState extends State<AddDieasePage> {
           children: [
             commonTextFormField(
               icon: Icons.medication_liquid_outlined,
-              nameOfField: "Disease",
+              nameOfField: 'disease'.tr,
               textEditingController: _txtDiseaseController,
             ),
             commonTextFormField(
               icon: Icons.payment,
-              nameOfField: "Payable Amount",
+              nameOfField: 'payableAmount'.tr,
               textEditingController: _txtPaymentController,
             ),
             ElevatedButton(
@@ -49,6 +50,7 @@ class _AddDieasePageState extends State<AddDieasePage> {
               ),
               onPressed: () async {
                 if (globalKey.currentState!.validate()) {
+                  HapticFeedback.heavyImpact();
                   await PatientApi.updateBillAndDisease(
                           amount: _txtPaymentController.text,
                           disease: _txtDiseaseController.text,
@@ -56,7 +58,7 @@ class _AddDieasePageState extends State<AddDieasePage> {
                       .then((value) => Get.back());
                 }
               },
-              child: const Text("Update"),
+              child: Text('update'.tr),
             ),
             const SizedBox(
               height: 20,

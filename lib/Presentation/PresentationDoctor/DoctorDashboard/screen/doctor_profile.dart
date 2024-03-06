@@ -8,6 +8,7 @@ import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DoctorProfile extends StatefulWidget {
   const DoctorProfile({super.key});
@@ -86,15 +87,15 @@ class _DoctorProfileState extends State<DoctorProfile> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              commonText(data: "Doctor Name", size: 17),
-                              commonText(data: "Mobile No", size: 17),
-                              commonText(data: "Email", size: 17),
-                              commonText(data: "Gender", size: 17),
-                              commonText(data: "Age", size: 17),
-                              commonText(data: "Aadhar Number", size: 17),
-                              commonText(data: "Address", size: 17),
-                              commonText(data: "Specialist", size: 17),
-                              commonText(data: "Qualification", size: 17),
+                              commonText(data: 'doctorName'.tr, size: 17),
+                              commonText(data: 'mobileNo'.tr, size: 17),
+                              commonText(data: 'email'.tr, size: 17),
+                              commonText(data: 'gender'.tr, size: 17),
+                              commonText(data: 'age'.tr, size: 17),
+                              commonText(data: 'adharNumber'.tr, size: 17),
+                              commonText(data: 'address'.tr, size: 17),
+                              commonText(data: 'specialist'.tr, size: 17),
+                              commonText(data: 'qualification'.tr, size: 17),
                             ],
                           ),
                           Column(

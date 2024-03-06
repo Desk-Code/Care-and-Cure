@@ -23,8 +23,8 @@ Widget patientFiltering(BuildContext context) => AnimatedContainer(
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Sort Patient by",
-                  style: TextStyle(
+              Text('sortPatient'.tr,
+                  style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   )),
@@ -42,7 +42,7 @@ Widget patientFiltering(BuildContext context) => AnimatedContainer(
               Get.back();
             },
             child: Text(
-              "Name",
+              'name'.tr,
               style: TextStyle(
                 color: (CommonValues.filterData == "name")
                     ? Colors.blue
@@ -56,7 +56,7 @@ Widget patientFiltering(BuildContext context) => AnimatedContainer(
               Get.back();
             },
             child: Text(
-              "Mobile Number",
+              'mobileNo'.tr,
               style: TextStyle(
                 color: (CommonValues.filterData == "mobileNumber")
                     ? Colors.blue
@@ -70,7 +70,7 @@ Widget patientFiltering(BuildContext context) => AnimatedContainer(
               Get.back();
             },
             child: Text(
-              "Age",
+              'age'.tr,
               style: TextStyle(
                 color: (CommonValues.filterData == "age")
                     ? Colors.blue
@@ -84,7 +84,7 @@ Widget patientFiltering(BuildContext context) => AnimatedContainer(
               Get.back();
             },
             child: Text(
-              "Disease",
+              'disease'.tr,
               style: TextStyle(
                 color: (CommonValues.filterData == "disease")
                     ? Colors.blue
@@ -98,7 +98,7 @@ Widget patientFiltering(BuildContext context) => AnimatedContainer(
               Get.back();
             },
             child: Text(
-              "Email",
+              'email'.tr,
               style: TextStyle(
                 color: (CommonValues.filterData == "email")
                     ? Colors.blue

@@ -8,6 +8,7 @@ import 'package:care_and_cure/Presentation/PresentationDoctor/DoctorLoginScreen/
 import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -79,6 +80,7 @@ class _DoctorLoginScreenState extends State<DoctorLoginScreen> {
                 loginPhoneWidget(
                   context: context,
                   onTap: () async {
+                    HapticFeedback.heavyImpact();
                     List isRegister = await DoctorApi.doctorIsRegister();
                     if (isRegister.isNotEmpty) {
                       setState(() {

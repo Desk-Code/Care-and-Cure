@@ -82,22 +82,22 @@ class _PatientControllerState extends State<PatientController> {
               duration: const Duration(milliseconds: 400),
               tabBackgroundColor: ConstrainColor.bgAppBarColor,
               color: Colors.black,
-              tabs: const [
+              tabs: [
                 GButton(
                   icon: Icons.person_outline_rounded,
-                  text: 'Profile',
+                  text: 'profile'.tr,
                 ),
                 GButton(
                   icon: Icons.payment,
-                  text: 'payment',
+                  text: 'payment'.tr,
                 ),
                 GButton(
                   icon: Icons.medical_services_outlined,
-                  text: 'Medicine',
+                  text: 'medicine'.tr,
                 ),
                 GButton(
                   icon: Icons.logout_outlined,
-                  text: 'Log Out',
+                  text: 'logout'.tr,
                 ),
               ],
               selectedIndex: _selectedIndex,
@@ -108,20 +108,20 @@ class _PatientControllerState extends State<PatientController> {
                   : showDialog(
                       context: context,
                       builder: (context) => CupertinoAlertDialog(
-                        title: const Text('Please Confirm'),
-                        content: const Text("Do you want to logout ?"),
+                        title: Text('confirm'.tr),
+                        content: Text('logoutAlert'.tr),
                         actions: [
                           MaterialButton(
                             onPressed: () {
                               Get.back();
                             },
-                            child: const Text("No"),
+                            child:  Text('no'.tr),
                           ),
                           MaterialButton(
                             onPressed: () async {
                               await PatientApi.signOutMethod();
                             },
-                            child: const Text("Yes"),
+                            child: Text('yes'.tr),
                           ),
                         ],
                       ),

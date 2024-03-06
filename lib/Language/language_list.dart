@@ -60,7 +60,7 @@ Widget languageList() => AnimatedContainer(
                     LanguageConstants.languages[index].countryCode;
                 SharedPref.setSelectedIndex = index;
                 Get.updateLocale(Locale(
-                     SharedPref.getLanguageCode, SharedPref.getLanguageCode));
+                    SharedPref.getLanguageCode, SharedPref.getCountryCode));
                 Get.back();
               },
               textColor: SharedPref.getSelectedIndex == index
