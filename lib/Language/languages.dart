@@ -142,6 +142,10 @@ class Languages extends Translations {
           'doctorDetail': 'Doctor Detail',
           'sortDocBy': 'Sort Doctor by',
           'sortbillby': 'Sort Bill By',
+          'twoFactor': 'Two Factor Auth',
+          'on': 'ON',
+          'off': 'OFF',
+          'deviceSupport': 'This Device is Not Supported',
 
           //medicine data
           'name1': 'Aciclovir (Zovirax)',
@@ -1235,6 +1239,10 @@ class Languages extends Translations {
           'staffDetail': 'स्टाफ विवरण',
           'doctorDetail': 'डॉक्टर विवरण',
           'sortDocBy': 'डॉक्टर को इसके अनुसार क्रमबद्ध करें',
+          'twoFactor': 'अतिरिक्त सुरक्षा',
+          'on': 'चालू',
+          'off': 'बंद',
+          'deviceSupport': 'यह उपकरण समर्थित नहीं है',
 
           //medicine data
           'name1': 'एसाइक्लोविर (ज़ोविराक्स)',
@@ -2153,7 +2161,7 @@ class Languages extends Translations {
           'dieases314': "कीटाणुनाशक और एंटीसेप्टिक्स",
           'name315': 'हाइड्रोजन पेरोक्साइड सोलुशन 6%',
           'dieases315': "कीटाणुनाशक और एंटीसेप्टिक्स",
-          'sortbillby': 'Sort Bill By',
+          'sortbillby': 'बिल को क्रमबद्ध करें',
         },
         'gu_IN': {
           'appName': 'કેર ઍન્ડ ક્યોર ',
@@ -2283,6 +2291,10 @@ class Languages extends Translations {
           'staffDetail': 'સ્ટાફ વિગતો',
           'doctorDetail': 'ડોક્ટર વિગતો',
           'sortDocBy': 'ડૉક્ટર દ્વારા સૉર્ટ કરો',
+          'twoFactor': 'અતિરિક્ત સુરક્ષા',
+          'on': 'ચાલુ',
+          'off': 'બંધ',
+          'deviceSupport': 'આ ઉપકરણ સપોર્ટેડ નથી',
 
           //medicine data
           'name1': 'અકીકલોવિરા(ઝોવિરક્સ)',
@@ -3199,7 +3211,7 @@ class Languages extends Translations {
           'dieases314': "જંતુનાશક અને એન્ટિસેપ્ટિક્સ",
           'name315': 'હાઇડ્રોજન પેરોક્સાઇડ સોલ્યુશન 6%',
           'dieases315': "જંતુનાશક અને એન્ટિસેપ્ટિક્સ",
-          'sortbillby': 'Sort Bill By',
+          'sortbillby': 'આ પ્રમાણે બિલને સૉર્ટ કરો',
         },
       };
 }

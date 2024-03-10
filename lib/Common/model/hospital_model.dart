@@ -15,6 +15,7 @@ class Hospital {
   String password;
   String hospitalImage;
   String hospitalCertificate;
+  String twoFactor;
 
   Hospital({
     required this.hID,
@@ -26,6 +27,7 @@ class Hospital {
     required this.password,
     required this.hospitalImage,
     required this.hospitalCertificate,
+    required this.twoFactor,
   });
 
   factory Hospital.fromJson(Map<String, dynamic> json) => Hospital(
@@ -38,6 +40,7 @@ class Hospital {
         hospitalImage: json["hospitalImage"],
         hospitalCertificate: json["hospitalCertificate"],
         hID: json['hId'],
+        twoFactor: json['twoFactor'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,5 +53,6 @@ class Hospital {
         "password": password,
         "hospitalImage": hospitalImage,
         "hospitalCertificate": hospitalCertificate,
+        "twoFactor": twoFactor,
       };
 }

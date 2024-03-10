@@ -58,9 +58,9 @@ class _MedicineProfileState extends State<MedicineProfile> {
           SizedBox(
             height: context.screenHeight * 0.05,
           ),
-       
           Text(
             widget.medicineName,
+            textAlign: TextAlign.center,
             style: GoogleFonts.lato(
               color: Colors.black,
               fontSize: 25,

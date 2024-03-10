@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:otp_text_field/otp_field.dart';
+import 'package:pull_to_refresh_new/pull_to_refresh.dart';
 
 class CommonValues extends GetxController {
   static CommonValues get cinstance => Get.find();
@@ -16,6 +17,10 @@ class CommonValues extends GetxController {
 
   static final OtpFieldController _otpFeildController = OtpFieldController();
   static OtpFieldController get otpController => _otpFeildController;
+
+  //refresh controller
+  static RefreshController refreshController =
+      RefreshController(initialRefresh: false);
 
   // pick file value
   static RxString pickHospitalImageLink = "".obs;

@@ -64,7 +64,7 @@ class _HospitalDashBoardState extends State<HospitalDashBoard> {
         ),
         centerTitle: true,
       ),
-      drawer: dashDrawer(context),
+      drawer: const DashDrawer(),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

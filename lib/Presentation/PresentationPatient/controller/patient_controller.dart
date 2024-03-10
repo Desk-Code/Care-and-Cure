@@ -46,15 +46,16 @@ class _PatientControllerState extends State<PatientController> {
         backgroundColor: ConstrainColor.bgAppBarColor,
         actions: [
           IconButton(
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  enableDrag: true,
-                  isScrollControlled: true,
-                  builder: (context) => languageList(),
-                );
-              },
-              icon: const Icon(Icons.language))
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                enableDrag: true,
+                isScrollControlled: true,
+                builder: (context) => languageList(),
+              );
+            },
+            icon: const Icon(Icons.language),
+          ),
         ],
         // elevation: 20,
         title: Text(

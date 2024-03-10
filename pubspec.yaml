@@ -69,6 +69,8 @@ dependencies:
   flutter_tts: ^3.8.5
   shimmer: ^3.0.0
   pull_to_refresh_new: ^2.0.5
+  expandable: ^5.0.1
+  local_auth: ^2.2.0
 
 dev_dependencies:
   flutter_test:

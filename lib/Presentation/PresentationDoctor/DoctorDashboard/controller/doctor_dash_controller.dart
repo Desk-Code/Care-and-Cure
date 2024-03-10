@@ -1,5 +1,6 @@
 import 'package:care_and_cure/Data/FirebaseData/doctor_firebase_api.dart';
 import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
+import 'package:care_and_cure/Language/language_list.dart';
 import 'package:care_and_cure/Presentation/PresentationDoctor/DoctorDashboard/screen/doctor_dashboard.dart';
 import 'package:care_and_cure/Presentation/PresentationDoctor/DoctorDashboard/screen/doctor_profile.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
@@ -48,6 +49,19 @@ class _DoctorDashControllerState extends State<DoctorDashController> {
           ),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                enableDrag: true,
+                isScrollControlled: true,
+                builder: (context) => languageList(),
+              );
+            },
+            icon: const Icon(Icons.language),
+          ),
+        ],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

@@ -1,4 +1,9 @@
+import 'dart:developer';
+
+import 'package:care_and_cure/Common/Widgets/common_toast.dart';
 import 'package:care_and_cure/Data/FirebaseData/hospital_firebase_api.dart';
+import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
+import 'package:care_and_cure/Language/language_constants.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/BillData/Controller/bill_data.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/DashboardScreen/Widgets/common_drawer_tile.dart';
 import 'package:care_and_cure/Presentation/PresentationHospital/DoctorData/Screen/doctor_search_screen.dart';
@@ -9,8 +14,33 @@ import 'package:care_and_cure/Presentation/login_dash/screen/login_dash_screen.d
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:local_auth/local_auth.dart';
 
-Widget dashDrawer(BuildContext context) => Drawer(
+class DashDrawer extends StatefulWidget {
+  const DashDrawer({super.key});
+
+  @override
+  State<DashDrawer> createState() => _DashDrawerState();
+}
+
+class _DashDrawerState extends State<DashDrawer> {
+  String trueVal = "True";
+  String falseVal = "False";
+  late final LocalAuthentication auth;
+  bool _supportState = false;
+
+  @override
+  void initState() {
+    super.initState();
+    auth = LocalAuthentication();
+    auth.isDeviceSupported().then((bool isSupported) => setState(() {
+          _supportState = isSupported;
+        }));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
       child: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -63,6 +93,40 @@ Widget dashDrawer(BuildContext context) => Drawer(
                 },
               ),
               const Divider(),
+              commonDrawerText(text: "Language"),
+              ExpansionTile(
+                title: Row(
+                  children: [
+                    const Icon(Icons.language),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    Text('select'.tr),
+                  ],
+                ),
+                children: List.generate(
+                  LanguageConstants.languages.length,
+                  (index) => ListTile(
+                    leading: Text(LanguageConstants.languages[index].imageUrl),
+                    title:
+                        Text(LanguageConstants.languages[index].languageName),
+                    onTap: () {
+                      SharedPref.setLanguageCode =
+                          LanguageConstants.languages[index].languageCode;
+                      SharedPref.setCountryCode =
+                          LanguageConstants.languages[index].countryCode;
+                      SharedPref.setSelectedIndex = index;
+                      Get.updateLocale(Locale(SharedPref.getLanguageCode,
+                          SharedPref.getCountryCode));
+                      Get.back();
+                    },
+                    textColor: SharedPref.getSelectedIndex == index
+                        ? Colors.blue
+                        : Colors.black,
+                  ),
+                ),
+              ),
+              const Divider(),
               commonDrawerText(text: "Profile"),
               commonDrawerTile(
                 icon: Icons.person,
@@ -102,6 +166,67 @@ Widget dashDrawer(BuildContext context) => Drawer(
               ),
               const Divider(),
               commonDrawerText(text: "Other"),
+              ExpansionTile(
+                title: Row(
+                  children: [
+                    const Icon(Icons.security),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    Text('twoFactor'.tr),
+                  ],
+                ),
+                onExpansionChanged: (value) {
+                  (_supportState)
+                      ? log("This Device is Supported")
+                      : {
+                          FlutterToast().showMessage('deviceSupport'.tr),
+                          Get.back()
+                        };
+                },
+                children: [
+                  RadioListTile(
+                    title: Text('on'.tr),
+                    value: trueVal,
+                    groupValue: SharedPref.getTwoFactor,
+                    onChanged: (value) {
+                      setState(() {
+                        SharedPref.setTwoFactor = value!;
+                        HospitalFirebaseApi.users
+                            .doc(SharedPref.getHospitalHId)
+                            .update({
+                          'twoFactor': SharedPref.getTwoFactor,
+                        }).then((value) {
+                          Get.back();
+                          log("Two Factor On");
+                        }).catchError((onError) {
+                          log("Fail to Start Two Factor");
+                        });
+                      });
+                    },
+                  ),
+                  RadioListTile(
+                    title: Text('off'.tr),
+                    value: falseVal,
+                    groupValue: SharedPref.getTwoFactor,
+                    onChanged: (value) {
+                      setState(() {
+                        SharedPref.setTwoFactor = value!;
+                        HospitalFirebaseApi.users
+                            .doc(SharedPref.getHospitalHId)
+                            .update({
+                          'twoFactor': SharedPref.getTwoFactor,
+                        }).then((value) {
+                          Get.back();
+                          log("Two Factor Off");
+                        }).catchError((onError) {
+                          log("Fail to off Two Factor");
+                        });
+                      });
+                    },
+                  ),
+                ],
+              ),
               commonDrawerTile(
                 icon: Icons.delete,
                 name: "Delete Account",
@@ -138,3 +263,5 @@ Widget dashDrawer(BuildContext context) => Drawer(
         ),
       ),
     );
+  }
+}

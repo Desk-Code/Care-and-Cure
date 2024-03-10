@@ -67,6 +67,7 @@ class HospitalSignupController extends GetxController {
       hospitalImage: CommonValues.pickHospitalImageLink.value,
       hospitalCertificate: CommonValues.pickHospitalCertiLink.value,
       hID: docKey,
+      twoFactor: "false",
     );
 
     DocumentReference store = FirebaseFirestore.instance

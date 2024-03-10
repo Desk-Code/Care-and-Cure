@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:care_and_cure/Common/Services/doctor_services.dart';
 import 'package:care_and_cure/Common/Services/hospital_services.dart';
 import 'package:care_and_cure/Common/Services/patient_services.dart';
+import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Presentation/login_dash/widgets/login_dashes.dart';
 import 'package:care_and_cure/Presentation/login_dash/widgets/login_info.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
@@ -8,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_auth/local_auth.dart';
 
 class LoginDashScreen extends StatefulWidget {
   const LoginDashScreen({super.key});
@@ -17,6 +21,13 @@ class LoginDashScreen extends StatefulWidget {
 }
 
 class _LoginDashScreenState extends State<LoginDashScreen> {
+  late final LocalAuthentication auth;
+  @override
+  void initState() {
+    super.initState();
+    auth = LocalAuthentication();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,12 +85,44 @@ class _LoginDashScreenState extends State<LoginDashScreen> {
             nameOfLogin: 'hospitalLogin'.tr,
             onTap: () {
               HapticFeedback.heavyImpact();
-              SplashServiciesForHospital.isLogin();
-              // Get.to(() => const HospitalLoginScreen());
+              (SharedPref.getTwoFactor == "True")
+                  ? {
+                      _getAvailableBiometrics(),
+                      _authenticate(),
+                    }
+                  : {
+                      SplashServiciesForHospital.isLogin(),
+                    };
             },
           ),
         ],
       ),
     );
+  }
+
+  Future<void> _getAvailableBiometrics() async {
+    List<BiometricType> availableBiometrics =
+        await auth.getAvailableBiometrics();
+    log("List of availableBiometrics : $availableBiometrics");
+    if (!mounted) {
+      SplashServiciesForHospital.isLogin();
+    }
+  }
+
+  Future<void> _authenticate() async {
+    try {
+      bool authenticated = await auth.authenticate(
+        localizedReason: 'For Login to Hospital Login Security Perpose',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+          biometricOnly: false,
+        ),
+      );
+      if (authenticated) {
+        SplashServiciesForHospital.isLogin();
+      }
+    } on PlatformException catch (e) {
+      log(e.toString());
+    }
   }
 }

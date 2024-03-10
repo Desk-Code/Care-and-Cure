@@ -81,55 +81,59 @@ class _DoctorProfileState extends State<DoctorProfile> {
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              commonText(data: 'doctorName'.tr, size: 17),
-                              commonText(data: 'mobileNo'.tr, size: 17),
-                              commonText(data: 'email'.tr, size: 17),
-                              commonText(data: 'gender'.tr, size: 17),
-                              commonText(data: 'age'.tr, size: 17),
-                              commonText(data: 'adharNumber'.tr, size: 17),
-                              commonText(data: 'address'.tr, size: 17),
-                              commonText(data: 'specialist'.tr, size: 17),
-                              commonText(data: 'qualification'.tr, size: 17),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              commonText(
-                                  data: ":- ${storedocs[0]['fullName']}",
-                                  size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['mobileNumber']}",
-                                  size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['email']}",
-                                  size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['gender']}",
-                                  size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['age']}", size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['aadharNumber']}",
-                                  size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['address']}",
-                                  size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['specialist']}",
-                                  size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['qualification']}",
-                                  size: 17),
-                            ],
-                          ),
-                        ],
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                commonText(data: 'doctorName'.tr, size: 17),
+                                commonText(data: 'mobileNo'.tr, size: 17),
+                                commonText(data: 'email'.tr, size: 17),
+                                commonText(data: 'gender'.tr, size: 17),
+                                commonText(data: 'age'.tr, size: 17),
+                                commonText(data: 'adharNumber'.tr, size: 17),
+                                commonText(data: 'address'.tr, size: 17),
+                                commonText(data: 'specialist'.tr, size: 17),
+                                commonText(data: 'qualification'.tr, size: 17),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                commonText(
+                                    data: ":- ${storedocs[0]['fullName']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['mobileNumber']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['email']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['gender']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['age']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['aadharNumber']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['address']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['specialist']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['qualification']}",
+                                    size: 17),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

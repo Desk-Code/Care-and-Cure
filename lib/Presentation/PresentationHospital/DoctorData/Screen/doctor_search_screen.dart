@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:care_and_cure/Common/Widgets/common_refresh_indicator.dart';
+import 'package:care_and_cure/Common/Widgets/common_skeleton.dart';
 import 'package:care_and_cure/Common/Widgets/no_data.dart';
 import 'package:care_and_cure/Common/model/doctor_model.dart';
 import 'package:care_and_cure/Data/FirebaseData/doctor_firebase_api.dart';
@@ -16,6 +18,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
 
 class DoctorSearchScreen extends StatefulWidget {
   const DoctorSearchScreen({super.key});
@@ -25,8 +28,31 @@ class DoctorSearchScreen extends StatefulWidget {
 }
 
 class _DoctorSearchScreenState extends State<DoctorSearchScreen> {
+  //
+  bool shimmer = false;
+
+  void _onRefresh() async {
+    setState(() {
+      shimmer = true;
+    });
+    await Future.delayed(const Duration(seconds: 2)).then(
+      (value) => setState(
+        () {
+          shimmer = false;
+        },
+      ),
+    );
+    CommonValues.refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async {
+    await Future.delayed(const Duration(seconds: 2));
+    CommonValues.refreshController.loadComplete();
+  }
+
   @override
   void initState() {
+    _onRefresh();
     CommonValues.search = "";
     super.initState();
   }
@@ -63,156 +89,234 @@ class _DoctorSearchScreenState extends State<DoctorSearchScreen> {
         },
         child: const Icon(Icons.add),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 10, left: 10, bottom: 7),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: context.screenWidth * 0.82,
-                  child: TextField(
-                    controller: DoctorController.txtSearchController,
-                    decoration: InputDecoration(
-                      hintText: 'search'.tr,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
+      body: refreshIndicator(
+        onRefresh: _onRefresh,
+        onLoading: _onLoading,
+        home: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10, left: 10, bottom: 7),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: context.screenWidth * 0.82,
+                    child: TextField(
+                      controller: DoctorController.txtSearchController,
+                      decoration: InputDecoration(
+                        hintText: 'search'.tr,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        prefixIcon: const Icon(Icons.search),
                       ),
-                      prefixIcon: const Icon(Icons.search),
+                      onChanged: (value) {
+                        CommonValues.search = value;
+                        setState(() {});
+                      },
                     ),
-                    onChanged: (value) {
-                      CommonValues.search = value;
-                      setState(() {});
-                    },
                   ),
-                ),
-                IconButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                        context: context,
-                        enableDrag: true,
-                        isScrollControlled: true,
-                        builder: (contex) => doctorFiltering(context),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.filter_alt_outlined,
-                      size: 40,
-                    )),
-              ],
+                  IconButton(
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          enableDrag: true,
+                          isScrollControlled: true,
+                          builder: (contex) => doctorFiltering(context),
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.filter_alt_outlined,
+                        size: 40,
+                      )),
+                ],
+              ),
             ),
-          ),
-          StreamBuilder<QuerySnapshot>(
-            stream: doctorStream,
-            builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasError) {
-                log('Something went Wrong');
-              }
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return noData();
-              }
+            StreamBuilder<QuerySnapshot>(
+              stream: doctorStream,
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  log('Something went Wrong');
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return noData();
+                }
 
-              final List storedocs = [];
-              snapshot.data!.docs.map((DocumentSnapshot document) {
-                Map a = document.data() as Map<String, dynamic>;
-                storedocs.add(a);
-                a['id'] = document.id;
-              }).toList();
+                final List storedocs = [];
+                snapshot.data!.docs.map((DocumentSnapshot document) {
+                  Map a = document.data() as Map<String, dynamic>;
+                  storedocs.add(a);
+                  a['id'] = document.id;
+                }).toList();
 
-              if (snapshot.hasData && storedocs.isNotEmpty) {
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: (storedocs.length),
-                    itemBuilder: (context, index) {
-                      if (CommonValues.search.isEmpty) {
-                        return GestureDetector(
-                          onTap: () {
-                            Get.to(
-                              () => DoctorProfileScreen(
-                                profileDoctorData: Doctor(
-                                  dId: storedocs[index]['dId'],
-                                  hospitalRef: storedocs[index]['hospitalRef'],
-                                  fullName: storedocs[index]['fullName'],
-                                  mobileNumber: storedocs[index]
-                                      ['mobileNumber'],
-                                  email: storedocs[index]['email'],
-                                  age: storedocs[index]['age'],
-                                  gender: storedocs[index]['gender'],
-                                  address: storedocs[index]['address'],
-                                  aadharNumber: storedocs[index]
-                                      ['aadharNumber'],
-                                  qualification: storedocs[index]
-                                      ['qualification'],
-                                  specialist: storedocs[index]['specialist'],
-                                  profileLink: storedocs[index]['profileLink'],
+                if (snapshot.hasData && storedocs.isNotEmpty) {
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: (storedocs.length),
+                      itemBuilder: (context, index) {
+                        if (CommonValues.search.isEmpty) {
+                          return GestureDetector(
+                            onTap: () {
+                              Get.to(
+                                () => DoctorProfileScreen(
+                                  profileDoctorData: Doctor(
+                                    dId: storedocs[index]['dId'],
+                                    hospitalRef: storedocs[index]
+                                        ['hospitalRef'],
+                                    fullName: storedocs[index]['fullName'],
+                                    mobileNumber: storedocs[index]
+                                        ['mobileNumber'],
+                                    email: storedocs[index]['email'],
+                                    age: storedocs[index]['age'],
+                                    gender: storedocs[index]['gender'],
+                                    address: storedocs[index]['address'],
+                                    aadharNumber: storedocs[index]
+                                        ['aadharNumber'],
+                                    qualification: storedocs[index]
+                                        ['qualification'],
+                                    specialist: storedocs[index]['specialist'],
+                                    profileLink: storedocs[index]
+                                        ['profileLink'],
+                                  ),
                                 ),
-                              ),
-                            );
+                              );
 
-                            CommonValues.search = "";
-                            CommonValues.filterData = "fullName";
-                          },
-                          child: commonDoctorCard(
-                            context,
-                            key: storedocs[index]['dId'],
-                            name: storedocs[index]['fullName'],
-                            mobNum: storedocs[index]['mobileNumber'],
-                            doctorProfile: storedocs[index]['profileLink'],
-                            qualification: storedocs[index]['qualification'],
-                          ),
-                        );
-                      } else if (storedocs[index][CommonValues.filterData]
-                          .toString()
-                          .toLowerCase()
-                          .contains(CommonValues.search.toLowerCase())) {
-                        return GestureDetector(
-                          onTap: () {
-                            Get.to(
-                              () => DoctorProfileScreen(
-                                profileDoctorData: Doctor(
-                                  dId: storedocs[index]['dId'],
-                                  hospitalRef: storedocs[index]['hospitalRef'],
-                                  fullName: storedocs[index]['fullName'],
-                                  mobileNumber: storedocs[index]
-                                      ['mobileNumber'],
-                                  email: storedocs[index]['email'],
-                                  age: storedocs[index]['age'],
-                                  gender: storedocs[index]['gender'],
-                                  address: storedocs[index]['address'],
-                                  aadharNumber: storedocs[index]
-                                      ['aadharNumber'],
-                                  qualification: storedocs[index]
-                                      ['qualification'],
-                                  specialist: storedocs[index]['specialist'],
-                                  profileLink: storedocs[index]['profileLink'],
+                              CommonValues.search = "";
+                              CommonValues.filterData = "fullName";
+                            },
+                            child: shimmer
+                                ? Shimmer.fromColors(
+                                    baseColor: Colors.black,
+                                    highlightColor: Colors.white,
+                                    child: skeleton(
+                                      height: context.screenHeight * 0.2,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            height: 60,
+                                            width: 60,
+                                            margin: const EdgeInsets.all(11),
+                                            decoration: const BoxDecoration(
+                                              color: Colors.black26,
+                                              shape: BoxShape.circle,
+                                            ),
+                                          ),
+                                          skeleton(
+                                            height: 18,
+                                            width: 225,
+                                          ),
+                                          skeleton(
+                                            height: 18,
+                                            width: 225,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                : commonDoctorCard(
+                                    context,
+                                    key: storedocs[index]['dId'],
+                                    name: storedocs[index]['fullName'],
+                                    mobNum: storedocs[index]['mobileNumber'],
+                                    doctorProfile: storedocs[index]
+                                        ['profileLink'],
+                                    qualification: storedocs[index]
+                                        ['qualification'],
+                                  ),
+                          );
+                        } else if (storedocs[index][CommonValues.filterData]
+                            .toString()
+                            .toLowerCase()
+                            .contains(CommonValues.search.toLowerCase())) {
+                          return GestureDetector(
+                            onTap: () {
+                              Get.to(
+                                () => DoctorProfileScreen(
+                                  profileDoctorData: Doctor(
+                                    dId: storedocs[index]['dId'],
+                                    hospitalRef: storedocs[index]
+                                        ['hospitalRef'],
+                                    fullName: storedocs[index]['fullName'],
+                                    mobileNumber: storedocs[index]
+                                        ['mobileNumber'],
+                                    email: storedocs[index]['email'],
+                                    age: storedocs[index]['age'],
+                                    gender: storedocs[index]['gender'],
+                                    address: storedocs[index]['address'],
+                                    aadharNumber: storedocs[index]
+                                        ['aadharNumber'],
+                                    qualification: storedocs[index]
+                                        ['qualification'],
+                                    specialist: storedocs[index]['specialist'],
+                                    profileLink: storedocs[index]
+                                        ['profileLink'],
+                                  ),
                                 ),
-                              ),
-                            );
-                            CommonValues.search = "";
-                            CommonValues.filterData = "fullName";
-                          },
-                          child: commonDoctorCard(
-                            context,
-                            key: storedocs[index]['dId'],
-                            name: storedocs[index]['fullName'],
-                            mobNum: storedocs[index]['mobileNumber'],
-                            doctorProfile: storedocs[index]['profileLink'],
-                            qualification: storedocs[index]['qualification'],
-                          ),
-                        );
-                      } else {
-                        return const SizedBox();
-                      }
-                    },
-                  ),
-                );
-              } else {
-                return noData();
-              }
-            },
-          ),
-        ],
+                              );
+                              CommonValues.search = "";
+                              CommonValues.filterData = "fullName";
+                            },
+                            child: shimmer
+                                ? Shimmer.fromColors(
+                                    baseColor: Colors.black,
+                                    highlightColor: Colors.white,
+                                    child: skeleton(
+                                      height: context.screenHeight * 0.2,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            height: 60,
+                                            width: 60,
+                                            margin: const EdgeInsets.all(11),
+                                            decoration: const BoxDecoration(
+                                              color: Colors.black26,
+                                              shape: BoxShape.circle,
+                                            ),
+                                          ),
+                                          skeleton(
+                                            height: 18,
+                                            width: 225,
+                                          ),
+                                          skeleton(
+                                            height: 18,
+                                            width: 225,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                : commonDoctorCard(
+                                    context,
+                                    key: storedocs[index]['dId'],
+                                    name: storedocs[index]['fullName'],
+                                    mobNum: storedocs[index]['mobileNumber'],
+                                    doctorProfile: storedocs[index]
+                                        ['profileLink'],
+                                    qualification: storedocs[index]
+                                        ['qualification'],
+                                  ),
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      },
+                    ),
+                  );
+                } else {
+                  return noData();
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

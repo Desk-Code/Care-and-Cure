@@ -70,50 +70,55 @@ class _DocPatientProfileState extends State<DocPatientProfile> {
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        commonText(data: 'patientName'.tr, size: 17),
-                        commonText(data: 'mobileNo'.tr, size: 17),
-                        commonText(data: 'email'.tr, size: 17),
-                        commonText(data: 'gender'.tr, size: 17),
-                        commonText(data: 'bloodGroup'.tr, size: 17),
-                        commonText(data: 'age'.tr, size: 17),
-                        commonText(data: 'address'.tr, size: 17),
-                        commonText(data: 'admitDate'.tr, size: 17),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        commonText(
-                            data: ":- ${widget.patientData['name']}", size: 17),
-                        commonText(
-                            data: ":- ${widget.patientData['mobileNumber']}",
-                            size: 17),
-                        commonText(
-                            data: ":- ${widget.patientData['email']}",
-                            size: 17),
-                        commonText(
-                            data: ":- ${widget.patientData['gender']}",
-                            size: 17),
-                        commonText(
-                            data: ":- ${widget.patientData['bloodGroup']}",
-                            size: 17),
-                        commonText(
-                            data: ":- ${widget.patientData['age']}", size: 17),
-                        commonText(
-                            data: ":- ${widget.patientData['address']}",
-                            size: 17),
-                        commonText(
-                            data: ":- ${widget.patientData['adminDate']}",
-                            size: 17),
-                      ],
-                    ),
-                  ],
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          commonText(data: 'patientName'.tr, size: 17),
+                          commonText(data: 'mobileNo'.tr, size: 17),
+                          commonText(data: 'email'.tr, size: 17),
+                          commonText(data: 'gender'.tr, size: 17),
+                          commonText(data: 'bloodGroup'.tr, size: 17),
+                          commonText(data: 'age'.tr, size: 17),
+                          commonText(data: 'address'.tr, size: 17),
+                          commonText(data: 'admitDate'.tr, size: 17),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          commonText(
+                              data: ":- ${widget.patientData['name']}",
+                              size: 17),
+                          commonText(
+                              data: ":- ${widget.patientData['mobileNumber']}",
+                              size: 17),
+                          commonText(
+                              data: ":- ${widget.patientData['email']}",
+                              size: 17),
+                          commonText(
+                              data: ":- ${widget.patientData['gender']}",
+                              size: 17),
+                          commonText(
+                              data: ":- ${widget.patientData['bloodGroup']}",
+                              size: 17),
+                          commonText(
+                              data: ":- ${widget.patientData['age']}",
+                              size: 17),
+                          commonText(
+                              data: ":- ${widget.patientData['address']}",
+                              size: 17),
+                          commonText(
+                              data: ":- ${widget.patientData['adminDate']}",
+                              size: 17),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

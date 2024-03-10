@@ -46,6 +46,7 @@ class HospitalFirebaseApi {
                   SharedPref.setHospitalPasssword = doc['password'];
                   SharedPref.setHospitalUpiId = doc['upiId'];
                   SharedPref.setHospitalHId = doc['hId'];
+                  SharedPref.setTwoFactor = doc['twoFactor'];
                 }),
               });
       // log("${SharedPref.getHospitalAddress} \n ${SharedPref.getHospitalEmail} \n ${SharedPref.getHospitalCertificate} \n ${SharedPref.getHospitalImage} \n ${SharedPref.getHospitalName} \n ${SharedPref.getHospitalMobileNumber} \n ${SharedPref.getHospitalPassword} \n ${SharedPref.getHospitalUpiId} \n");
@@ -74,6 +75,7 @@ class HospitalFirebaseApi {
     SharedPref.setHospitalMobileNumber = "";
     SharedPref.setHospitalPasssword = "";
     SharedPref.setHospitalUpiId = "";
+    SharedPref.setTwoFactor = "False";
     await FirebaseAuth.instance.signOut();
     Get.back();
   }

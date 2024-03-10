@@ -1,15 +1,16 @@
+import 'package:care_and_cure/Common/Widgets/common_refresh_indicator.dart';
+import 'package:care_and_cure/Common/Widgets/common_skeleton.dart';
 import 'package:care_and_cure/Common/Widgets/no_data.dart';
 import 'package:care_and_cure/Extention/media_query_extention.dart';
 import 'package:care_and_cure/Presentation/PresentationPatient/controller/medicine_data_fetch.dart';
 import 'package:care_and_cure/Presentation/PresentationPatient/screen/medicine_profile.dart';
 import 'package:care_and_cure/Util/common_values.dart';
-import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:care_and_cure/Util/medicine_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pull_to_refresh_new/pull_to_refresh.dart';
+import 'package:shimmer/shimmer.dart';
 
 class PatientMedicineScreen extends StatefulWidget {
   const PatientMedicineScreen({super.key});
@@ -22,17 +23,9 @@ class _PatientMedicineScreenState extends State<PatientMedicineScreen> {
   //
   final TextEditingController _txtSearch = TextEditingController();
 
-  RefreshController refreshController =
-      RefreshController(initialRefresh: false);
-
   bool shimmer = false;
 
   void _onRefresh() async {
-    await Future.delayed(const Duration(seconds: 2));
-    refreshController.refreshCompleted();
-  }
-
-  void _onLoading() async {
     setState(() {
       shimmer = true;
     });
@@ -43,11 +36,17 @@ class _PatientMedicineScreenState extends State<PatientMedicineScreen> {
         },
       ),
     );
-    refreshController.loadComplete();
+    CommonValues.refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async {
+    await Future.delayed(const Duration(seconds: 2));
+    CommonValues.refreshController.loadComplete();
   }
 
   @override
   void initState() {
+    _onRefresh();
     CommonValues.searchData = [];
     super.initState();
   }
@@ -64,17 +63,10 @@ class _PatientMedicineScreenState extends State<PatientMedicineScreen> {
     CommonValues.searchData = MedicineData.searchDataList();
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: SmartRefresher(
-        controller: refreshController,
+      body: refreshIndicator(
         onRefresh: _onRefresh,
         onLoading: _onLoading,
-        enablePullDown: true,
-        enablePullUp: true,
-        header: WaterDropMaterialHeader(
-          backgroundColor: ConstrainColor.bgAppBarColor,
-          color: Colors.black38,
-        ),
-        child: Column(
+        home: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
@@ -112,27 +104,36 @@ class _PatientMedicineScreenState extends State<PatientMedicineScreen> {
                                   '${medicineData[index]['dieases']}'.tr,
                             ));
                       },
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 13),
-                            child: Text(
-                              '${medicineData[index]['name']}'.tr,
-                              textAlign: TextAlign.start,
-                              style: GoogleFonts.lato(
-                                color: Colors.black,
-                                fontSize: 17,
+                      child: shimmer
+                          ? Shimmer.fromColors(
+                              baseColor: Colors.black,
+                              highlightColor: Colors.white,
+                              child: skeleton(
+                                height: 30,
                               ),
+                            )
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 13),
+                                  child: Text(
+                                    '${medicineData[index]['name']}'.tr,
+                                    textAlign: TextAlign.start,
+                                    style: GoogleFonts.lato(
+                                      color: Colors.black,
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                ),
+                                const Divider(
+                                  indent: 11,
+                                  endIndent: 11,
+                                ),
+                              ],
                             ),
-                          ),
-                          const Divider(
-                            indent: 11,
-                            endIndent: 11,
-                          ),
-                        ],
-                      ),
                     );
                   } else if (CommonValues.search != "" &&
                       CommonValues.searchData.isNotEmpty) {
@@ -148,24 +149,34 @@ class _PatientMedicineScreenState extends State<PatientMedicineScreen> {
                                       .tr,
                             ));
                       },
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 13),
-                            child: Text(
-                              '${CommonValues.searchData[index]['name']}'.tr,
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.lato(
-                                color: Colors.black,
-                                fontSize: 17,
+                      child: shimmer
+                          ? Shimmer.fromColors(
+                              baseColor: Colors.black,
+                              highlightColor: Colors.white,
+                              child: skeleton(
+                                height: 30,
                               ),
+                            )
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 13),
+                                  child: Text(
+                                    '${CommonValues.searchData[index]['name']}'
+                                        .tr,
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.lato(
+                                      color: Colors.black,
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                ),
+                                const Divider(),
+                              ],
                             ),
-                          ),
-                          const Divider(),
-                        ],
-                      ),
                     );
                   }
                   return noData();
