@@ -119,7 +119,7 @@ class _PatientPaymentScreenState extends State<PatientPaymentScreen> {
                         text: 'slidePay'.tr,
                         textStyle: const TextStyle(
                             color: Colors.black,
-                            fontSize: 20,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold),
                         onSubmit: () {
                           if (_globalKey.currentState!.validate()) {

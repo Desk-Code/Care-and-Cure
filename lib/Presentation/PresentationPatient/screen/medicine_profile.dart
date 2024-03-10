@@ -35,6 +35,17 @@ class _MedicineProfileState extends State<MedicineProfile> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: ConstrainColor.bgAppBarColor,
+        actions: [
+          IconButton(
+            onPressed: () {
+              textToSpeech(widget.medicineDescription);
+            },
+            icon: const Icon(Icons.volume_up_rounded),
+          ),
+          const SizedBox(
+            width: 7,
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -47,25 +58,14 @@ class _MedicineProfileState extends State<MedicineProfile> {
           SizedBox(
             height: context.screenHeight * 0.05,
           ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                widget.medicineName,
-                style: GoogleFonts.lato(
-                  color: Colors.black,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  textToSpeech(widget.medicineDescription);
-                },
-                icon: const Icon(Icons.volume_up_rounded),
-              )
-            ],
+       
+          Text(
+            widget.medicineName,
+            style: GoogleFonts.lato(
+              color: Colors.black,
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           SizedBox(
             height: context.screenHeight * 0.02,
@@ -79,7 +79,6 @@ class _MedicineProfileState extends State<MedicineProfile> {
               style: GoogleFonts.lato(
                 color: Colors.black,
                 fontSize: 22,
-                // fontWeight: FontWeight.w500,
               ),
             ),
           ),

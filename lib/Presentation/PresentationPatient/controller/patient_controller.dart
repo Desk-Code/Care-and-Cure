@@ -1,8 +1,11 @@
 import 'package:care_and_cure/Data/FirebaseData/patient_firebase_api.dart';
 import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
+import 'package:care_and_cure/Language/language_list.dart';
+import 'package:care_and_cure/Presentation/PresentationPatient/controller/medicine_data_fetch.dart';
 import 'package:care_and_cure/Presentation/PresentationPatient/screen/patient_medicine_screen.dart';
 import 'package:care_and_cure/Presentation/PresentationPatient/screen/patient_payment_screen.dart';
 import 'package:care_and_cure/Presentation/PresentationPatient/screen/patient_profile_screen.dart';
+import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,7 +29,6 @@ class _PatientControllerState extends State<PatientController> {
   static final List _widgetOptions = [
     const PatientProfileScreen(),
     const PatientPaymentScreen(),
-    // const MedicineProfile(),
     const PatientMedicineScreen(),
     Container(),
   ];
@@ -42,6 +44,18 @@ class _PatientControllerState extends State<PatientController> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ConstrainColor.bgAppBarColor,
+        actions: [
+          IconButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  enableDrag: true,
+                  isScrollControlled: true,
+                  builder: (context) => languageList(),
+                );
+              },
+              icon: const Icon(Icons.language))
+        ],
         // elevation: 20,
         title: Text(
           'appName'.tr,
@@ -94,6 +108,11 @@ class _PatientControllerState extends State<PatientController> {
                 GButton(
                   icon: Icons.medical_services_outlined,
                   text: 'medicine'.tr,
+                  onPressed: () {
+                    setState(() {
+                      CommonValues.searchData = MedicineData.searchDataList();
+                    });
+                  },
                 ),
                 GButton(
                   icon: Icons.logout_outlined,
@@ -115,7 +134,7 @@ class _PatientControllerState extends State<PatientController> {
                             onPressed: () {
                               Get.back();
                             },
-                            child:  Text('no'.tr),
+                            child: Text('no'.tr),
                           ),
                           MaterialButton(
                             onPressed: () async {

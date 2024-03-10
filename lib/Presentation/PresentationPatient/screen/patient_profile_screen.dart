@@ -83,66 +83,71 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              commonText(data: 'patientName'.tr, size: 17),
-                              commonText(data: 'mobileNo'.tr, size: 17),
-                              commonText(data: 'email'.tr, size: 17),
-                              commonText(data: 'gender'.tr, size: 17),
-                              commonText(data: 'age'.tr, size: 17),
-                              commonText(data: 'bloodGroup'.tr, size: 17),
-                              commonText(data: 'disease'.tr, size: 17),
-                              commonText(data: 'address'.tr, size: 17),
-                              commonText(data: 'admitDate'.tr, size: 17),
-                              commonText(data: 'payAmount'.tr, size: 17),
-                              commonText(data: 'roomNo'.tr, size: 17),
-                              commonText(data: 'wardNo'.tr, size: 17),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              commonText(
-                                  data: ":- ${storedocs[0]['name']}", size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['mobileNumber']}",
-                                  size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['email']}",
-                                  size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['gender']}",
-                                  size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['age']}", size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['bloodGroup']}",
-                                  size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['disease']}",
-                                  size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['address']}",
-                                  size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['adminDate']}",
-                                  size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['payAmount']}",
-                                  size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['roomNo']}",
-                                  size: 17),
-                              commonText(
-                                  data: ":- ${storedocs[0]['wardNo']}",
-                                  size: 17),
-                            ],
-                          ),
-                        ],
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                commonText(data: 'patientName'.tr, size: 17),
+                                commonText(data: 'mobileNo'.tr, size: 17),
+                                commonText(data: 'email'.tr, size: 17),
+                                commonText(data: 'gender'.tr, size: 17),
+                                commonText(data: 'age'.tr, size: 17),
+                                commonText(data: 'bloodGroup'.tr, size: 17),
+                                commonText(data: 'disease'.tr, size: 17),
+                                commonText(data: 'address'.tr, size: 17),
+                                commonText(data: 'admitDate'.tr, size: 17),
+                                commonText(data: 'payAmount'.tr, size: 17),
+                                commonText(data: 'roomNo'.tr, size: 17),
+                                commonText(data: 'wardNo'.tr, size: 17),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                commonText(
+                                    data: ":- ${storedocs[0]['name']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['mobileNumber']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['email']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['gender']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['age']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['bloodGroup']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['disease']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['address']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['adminDate']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['payAmount']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['roomNo']}",
+                                    size: 17),
+                                commonText(
+                                    data: ":- ${storedocs[0]['wardNo']}",
+                                    size: 17),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

@@ -10,6 +10,7 @@ class CommonValues extends GetxController {
 
   static String search = "";
   static String filterData = "fullName";
+  static List<Map<String, dynamic>> searchData = [];
 
   static int payableAmount = 0;
 
