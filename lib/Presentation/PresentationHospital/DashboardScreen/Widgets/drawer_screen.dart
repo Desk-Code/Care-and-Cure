@@ -232,7 +232,8 @@ class _DashDrawerState extends State<DashDrawer> {
                 icon: Icons.share,
                 name: 'share'.tr,
                 onTap: () {
-                  Share.share('com.example.care_and_cure');
+                  Share.share(
+                      'Download Care and Cure application using this link https://drive.google.com/file/d/1DeJfK1SQ89UDe7jN5rc5fCHvdbvpVMSe/view?usp=drive_link');
                 },
               ),
               commonDrawerTile(
@@ -256,7 +257,7 @@ class _DashDrawerState extends State<DashDrawer> {
                         ),
                         MaterialButton(
                           onPressed: () async {
-                            //
+                            await HospitalFirebaseApi.perDeleteAccount();
                           },
                           child: Text('yes'.tr),
                         ),

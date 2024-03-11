@@ -99,6 +99,7 @@ flutter:
   assets:
     - assets/animation/
     - assets/images/
+    - build\app\outputs\flutter-apk\app-release.apk
     - .env
   #   - images/a_dot_ham.jpeg
 
