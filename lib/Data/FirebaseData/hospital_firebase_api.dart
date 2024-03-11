@@ -3,7 +3,9 @@
 import 'dart:developer';
 
 import 'package:care_and_cure/Common/Widgets/common_loader.dart';
+import 'package:care_and_cure/Common/Widgets/common_toast.dart';
 import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
+import 'package:care_and_cure/Presentation/login_dash/screen/login_dash_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -78,5 +80,33 @@ class HospitalFirebaseApi {
     SharedPref.setTwoFactor = "False";
     await FirebaseAuth.instance.signOut();
     Get.back();
+  }
+
+  static Future<void> perDeleteAccount() async {
+    Get.dialog(
+      Dialog(
+        child: Center(
+          child: loadingIndicator(),
+        ),
+      ),
+    );
+
+    await FirebaseAuth.instance.signOut();
+    users.doc(SharedPref.getHospitalHId).delete().then((value) {
+      FlutterToast().showMessage("Acount Delete Successfully");
+    });
+
+    SharedPref.setHospitalUser = "";
+    SharedPref.setHospitalAddress = "";
+    SharedPref.setHospitalEmail = "";
+    SharedPref.setHospitalCertificate = "";
+    SharedPref.setHospitalImage = "";
+    SharedPref.setHospitalName = "";
+    SharedPref.setHospitalMobileNumber = "";
+    SharedPref.setHospitalPasssword = "";
+    SharedPref.setHospitalUpiId = "";
+    SharedPref.setTwoFactor = "False";
+
+    Get.offAll(() => const LoginDashScreen());
   }
 }

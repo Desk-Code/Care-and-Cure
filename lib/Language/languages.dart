@@ -146,6 +146,11 @@ class Languages extends Translations {
           'on': 'ON',
           'off': 'OFF',
           'deviceSupport': 'This Device is Not Supported',
+          'deleteAccount': 'Delete Account',
+          'share': 'Share',
+          'alert': '!Alert',
+          'deleteAccError':
+              'Do you want to delete account and lose all the data permently are you sure ?',
 
           //medicine data
           'name1': 'Aciclovir (Zovirax)',
@@ -1243,6 +1248,11 @@ class Languages extends Translations {
           'on': 'चालू',
           'off': 'बंद',
           'deviceSupport': 'यह उपकरण समर्थित नहीं है',
+          'deleteAccount': 'अकाउंट डिलीट करें',
+          'share': 'शेयर',
+          'alert': '!चेतावनी',
+          'deleteAccError':
+              'क्या आप खाता हटाना चाहते हैं और सारा डेटा स्थायी रूप से खोना चाहते हैं, क्या आप निश्चित हैं?',
 
           //medicine data
           'name1': 'एसाइक्लोविर (ज़ोविराक्स)',
@@ -2295,6 +2305,11 @@ class Languages extends Translations {
           'on': 'ચાલુ',
           'off': 'બંધ',
           'deviceSupport': 'આ ઉપકરણ સપોર્ટેડ નથી',
+          'deleteAccount': 'એકાઉન્ટ ડિલીટ કરો',
+          'share': 'શેર કરો',
+          'alert': '!ચેતવણી',
+          'deleteAccError':
+              'શું તમે ખાતું કાઢી નાખવા માંગો છો અને તમામ ડેટા કાયમી ધોરણે ગુમાવો છો?',
 
           //medicine data
           'name1': 'અકીકલોવિરા(ઝોવિરક્સ)',

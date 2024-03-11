@@ -1,6 +1,6 @@
 import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Presentation/PresentationPatient/PatientLoginScreen/patient_login_screen.dart';
-import 'package:care_and_cure/Presentation/PresentationPatient/controller/patient_controller.dart';
+import 'package:care_and_cure/Presentation/PresentationPatient/PatientDashboard/controller/patient_controller.dart';
 import 'package:get/get.dart';
 
 class SplashServiciesForPatient {

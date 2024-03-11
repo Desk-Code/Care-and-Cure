@@ -1,10 +1,10 @@
 import 'package:care_and_cure/Data/FirebaseData/patient_firebase_api.dart';
 import 'package:care_and_cure/Data/sharedPref/shared_pref.dart';
 import 'package:care_and_cure/Language/language_list.dart';
-import 'package:care_and_cure/Presentation/PresentationPatient/controller/medicine_data_fetch.dart';
-import 'package:care_and_cure/Presentation/PresentationPatient/screen/patient_medicine_screen.dart';
-import 'package:care_and_cure/Presentation/PresentationPatient/screen/patient_payment_screen.dart';
-import 'package:care_and_cure/Presentation/PresentationPatient/screen/patient_profile_screen.dart';
+import 'package:care_and_cure/Presentation/PresentationPatient/PatientDashboard/controller/medicine_data_fetch.dart';
+import 'package:care_and_cure/Presentation/PresentationPatient/PatientDashboard/screen/patient_medicine_screen.dart';
+import 'package:care_and_cure/Presentation/PresentationPatient/PatientDashboard/screen/patient_payment_screen.dart';
+import 'package:care_and_cure/Presentation/PresentationPatient/PatientDashboard/screen/patient_profile_screen.dart';
 import 'package:care_and_cure/Util/common_values.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:firebase_auth/firebase_auth.dart';

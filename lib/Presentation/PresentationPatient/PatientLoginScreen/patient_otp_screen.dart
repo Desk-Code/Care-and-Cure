@@ -1,6 +1,6 @@
 import 'package:care_and_cure/Common/Widgets/otp_screen.dart';
 import 'package:care_and_cure/Data/FirebaseData/firebase_auth_api.dart';
-import 'package:care_and_cure/Presentation/PresentationPatient/controller/patient_controller.dart';
+import 'package:care_and_cure/Presentation/PresentationPatient/PatientDashboard/controller/patient_controller.dart';
 import 'package:care_and_cure/Util/constrain_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

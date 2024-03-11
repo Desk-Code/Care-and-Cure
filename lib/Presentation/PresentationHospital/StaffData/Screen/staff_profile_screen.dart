@@ -61,24 +61,24 @@ class _StaffProfileScreenState extends State<StaffProfileScreen> {
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      commonText(data: 'fullName'.tr, size: 17),
-                      commonText(data: 'mobileNo'.tr, size: 17),
-                      commonText(data: 'gender'.tr, size: 17),
-                      commonText(data: 'age'.tr, size: 17),
-                      commonText(data: 'staffSection'.tr, size: 17),
-                      commonText(data: 'adharNumber'.tr, size: 17),
-                      commonText(data: 'address'.tr, size: 17),
-                    ],
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Column(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        commonText(data: 'fullName'.tr, size: 17),
+                        commonText(data: 'mobileNo'.tr, size: 17),
+                        commonText(data: 'gender'.tr, size: 17),
+                        commonText(data: 'age'.tr, size: 17),
+                        commonText(data: 'staffSection'.tr, size: 17),
+                        commonText(data: 'adharNumber'.tr, size: 17),
+                        commonText(data: 'address'.tr, size: 17),
+                      ],
+                    ),
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         commonText(
@@ -104,8 +104,8 @@ class _StaffProfileScreenState extends State<StaffProfileScreen> {
                             size: 17),
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -136,7 +136,7 @@ class _StaffProfileScreenState extends State<StaffProfileScreen> {
                   widget.profileStaffData.address;
               Get.to(() => StaffUpdateData(staffData: widget.profileStaffData));
             },
-            child:  Text('update'.tr),
+            child: Text('update'.tr),
           ),
           const SizedBox(
             height: 20,
@@ -155,7 +155,7 @@ class _StaffProfileScreenState extends State<StaffProfileScreen> {
               await StaffFirebaseApi.deleteUser(
                   id: widget.profileStaffData.sId);
             },
-            child:  Text('fire'.tr),
+            child: Text('fire'.tr),
           ),
           const SizedBox(
             height: 20,

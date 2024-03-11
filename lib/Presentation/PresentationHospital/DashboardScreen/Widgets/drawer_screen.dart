@@ -15,6 +15,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DashDrawer extends StatefulWidget {
   const DashDrawer({super.key});
@@ -142,8 +143,8 @@ class _DashDrawerState extends State<DashDrawer> {
                   showDialog(
                     context: context,
                     builder: (context) => CupertinoAlertDialog(
-                      title: const Text('Please Confirm'),
-                      content: const Text("Do you want to logout ?"),
+                      title: Text('confirm'.tr),
+                      content: Text('logoutAlert'.tr),
                       actions: [
                         MaterialButton(
                           onPressed: () {
@@ -228,30 +229,36 @@ class _DashDrawerState extends State<DashDrawer> {
                 ],
               ),
               commonDrawerTile(
+                icon: Icons.share,
+                name: 'share'.tr,
+                onTap: () {
+                  Share.share('com.example.care_and_cure');
+                },
+              ),
+              commonDrawerTile(
                 icon: Icons.delete,
-                name: "Delete Account",
+                name: 'deleteAccount'.tr,
                 onTap: () async {
                   showDialog(
                     context: context,
                     builder: (context) => CupertinoAlertDialog(
-                      title: const Text(
-                        '!Alert',
-                        style: TextStyle(color: Colors.red),
+                      title: Text(
+                        'alert'.tr,
+                        style: const TextStyle(color: Colors.red),
                       ),
-                      content: const Text(
-                          "Do you want to delete account and lose all the data permently are you sure ?"),
+                      content: Text('deleteAccError'.tr),
                       actions: [
                         MaterialButton(
                           onPressed: () {
-                            Navigator.pop(context);
+                            Get.back();
                           },
-                          child: const Text("No"),
+                          child: Text('no'.tr),
                         ),
                         MaterialButton(
                           onPressed: () async {
                             //
                           },
-                          child: const Text("Yes"),
+                          child: Text('yes'.tr),
                         ),
                       ],
                     ),

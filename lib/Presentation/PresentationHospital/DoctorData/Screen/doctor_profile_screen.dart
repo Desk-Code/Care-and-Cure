@@ -59,26 +59,26 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      commonText(data: 'fullName'.tr, size: 17),
-                      commonText(data: 'mobileNo'.tr, size: 17),
-                      commonText(data: 'gender'.tr, size: 17),
-                      commonText(data: 'age'.tr, size: 17),
-                      commonText(data: 'email'.tr, size: 17),
-                      commonText(data: 'adharNumber'.tr, size: 17),
-                      commonText(data: 'address'.tr, size: 17),
-                      commonText(data: 'qualification'.tr, size: 17),
-                      commonText(data: 'specialist'.tr, size: 17),
-                    ],
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Column(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        commonText(data: 'fullName'.tr, size: 17),
+                        commonText(data: 'mobileNo'.tr, size: 17),
+                        commonText(data: 'gender'.tr, size: 17),
+                        commonText(data: 'age'.tr, size: 17),
+                        commonText(data: 'email'.tr, size: 17),
+                        commonText(data: 'adharNumber'.tr, size: 17),
+                        commonText(data: 'address'.tr, size: 17),
+                        commonText(data: 'qualification'.tr, size: 17),
+                        commonText(data: 'specialist'.tr, size: 17),
+                      ],
+                    ),
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         commonText(
@@ -111,8 +111,8 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                             size: 17),
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
